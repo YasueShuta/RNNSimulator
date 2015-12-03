@@ -1,4 +1,4 @@
-classdef RNNManager
+classdef RNNManager_ < handle
     %RNNManager Methods to manage RNN Properties.
     %   Ú×à–¾‚ð‚±‚±‚É‹Lq
    

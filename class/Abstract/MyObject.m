@@ -1,0 +1,2 @@
+classdef MyObject < handle
+end
