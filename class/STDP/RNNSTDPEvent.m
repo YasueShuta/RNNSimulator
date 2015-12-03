@@ -1,4 +1,4 @@
-classdef RNNSTDPManager < handle & STDPManager
+classdef RNNSTDPEvent < handle & STDPEvent
     properties (Constant)
         deltaT = 0.1;
     end
@@ -11,17 +11,18 @@ classdef RNNSTDPManager < handle & STDPManager
         function SpikeTimeRecord(R, t, n)
             R.SpikeTimeRecord = updateLast2Spike(R.SpikeRecord, R.SpikeTimeRecord, t, n);
         end
+    end
+    
+    methods
+        function obj = RNNSTDPEvent(R, state)
+            obj.target = R;
+            obj.dM = zeros(R.n);
+            obj.trigger = state;
+        end
         
         function UpdateTarget(obj, t, n)
             obj.dM = dotM(obj.target.NetworkMatrix, obj.target.SpikeRecord, obj.target.SpikeTimeRecord, t, n);
             obj.target.NetworkMatrix = obj.target.NetworkMatrix + obj.dM;
-        end
-    end
-    
-    methods
-        function obj = RNNSTDPManager(R)
-            obj.target = R;
-            obj.dM = zeros(R.n);
         end
     end
 end

@@ -14,42 +14,23 @@ classdef RNNManager < handle
             obj.Readout = tanh(obj.Potential);
         end
         
+        %% for RNNSTDPEvent
         function notify_stateUpdated(RP, t, nRec2Out)
-            notify(RP, 'stateUpdated', STDPEventData(t, nRec2Out));
+            notify(RP, 'TargetChanged', STDPEventData(t, nRec2Out));
         end
-                
-        function obj = createListener(RP)
-            obj = RP;
-            obj.lh = RP.createListener_inner();
-        end
-        
-        function obj = deleteListener(RP)
-            obj = RP;
-            delete(obj.lh);
-            obj.lh = [];
-        end
-        
+
         function obj = setMode(RP)
             obj = RP;
             obj.isPlastic = bitget(obj.mode, 1);
-            if obj.isPlastic == true && isempty(obj.lh)
-                obj = RNNManager.createListener(RP);
-            elseif obj.isPlastic == false && ~isempty(obj.lh)
-                obj = RNNManager.deleteListener(RP);
-            end
+%            if obj.isPlastic == true && isempty(obj.lh)
+%                obj = RNNManager.createListener(RP);
+%            elseif obj.isPlastic == false && ~isempty(obj.lh)
+%                obj = RNNManager.deleteListener(RP);
+%            end
             obj.isLoadedNetwork = bitget(obj.mode, 2);
         end
-        
-        function obj = defaultRNNProperties()
-            if exist('default\rnn.mat', 'file')
-                load('default\rnn.mat');
-                obj = default_rnn;
-            else
-                error('defaultRNNProperties: default_rnn does not exist');
-            end
-        end
-        
     end
+    
     methods
         function reset(obj, RI)
             % obj = RNN, RI = RNNInitializer
@@ -62,30 +43,22 @@ classdef RNNManager < handle
             obj.NetworkMatrix = RI.M0;
             obj.Potential = RI.x0;
             obj.readout();
-            if RI.isPlastic
-                obj.setPlastic();
-            else
-                obj.resetPlastic();
-            end
         end
         
         function setPlastic(obj)
-            if isempty(obj.STDP)
-                e = events('RNNSTDPManager');
-                obj.STDP = RNNSTDPManager(obj, e(1));
-            end
-            obj.STDP.createListener();
+        	if obj.isPlastic == false
+        		obj.isPlastic = true;
+        	end
         end
         
         function resetPlastic(obj)
-            if ~isempty(obj.STDP)
-                obj.STDP.deleteListener();
-            end
+        	if obj.isPlastic == true
+        		obj.isPlastic = false;
+        	end
         end
+        
         function readout(obj)
             obj.Readout = tanh(obj.Potential);
         end
-            
- 
     end
 end

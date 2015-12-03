@@ -4,31 +4,21 @@ classdef STDPManager < ObjectManager
     end
     properties
         target;
-        trigger;
         dM;
-        lh;
     end
     
     methods (Abstract, Static)
-        SpikeRecord;
-        SpikeTimeRecord;
-        Update(t);
-    end
-    
-    methods (Abstract)
-        createListener(obj);
+        SpikeRecord(target);
+        SpikeTimeRecord(target, t, n);
+        UpdateTarget(target, t, n);
     end
     methods
-        function UpdatedCallback(eventSrc, eventData)
-            eventSrc.SpikeRecord(eventSrc.target);
-            eventSrc.SpikeTimeRecord(eventSrc.target, eventData.t, eventData.n);
-            if mod(eventData.t, eventSrc.deltaT) == 0
-                eventSrc.Update(eventData.n);
-            end
-        end
-        function deleteListener(obj)
-            delete(obj.lh);
-            obj.lh = [];
-        end
+    	function Update(obj, t, n)
+    		obj.SpikeRecord(obj.target);
+    		obj.SpikeTimeRecord(obj.target, t, n);
+    		if mod(t, obj.deltaT) == 0
+    			obj.UpdateTarget(n);
+    		end
+    	end
     end
 end
