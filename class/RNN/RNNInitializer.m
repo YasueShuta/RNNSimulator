@@ -16,6 +16,7 @@ classdef RNNInitializer < ObjectInitializer & RNNDefault
         flag;
         option;
     end
+    
     methods
         function obj = RNNInitializer(argv)
             if nargin == 0
@@ -30,6 +31,16 @@ classdef RNNInitializer < ObjectInitializer & RNNDefault
             obj.p = obj.default_p;
             obj.g = obj.default_g;
             obj.th = obj.default_th;
+        end
+        
+        function setMode(obj)
+            obj.isPlastic = bitget(obj.mode, 1);
+            if obj.isPlastic == true
+				obj.setPlastic();
+            elseif obj.isPlastic == false
+				obj.resetPlastic();
+            end
+            obj.isLoadedNetwork = bitget(obj.mode, 2);
         end
         
         function set_inner(obj, argv)
@@ -63,7 +74,14 @@ classdef RNNInitializer < ObjectInitializer & RNNDefault
         end
     end
     
-    methods (Static)        
+    methods (Static)
+    	function obj = init(varargin)
+    		obj = RNN();
+    		obj.set_inner(varargin);
+    		obj.setMode();
+    		obj.reset();
+    	end
+    	
         function obj = init6(n, p, g, th, M0, x0)
             obj = RNN();
             obj.setDefault();

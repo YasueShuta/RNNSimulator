@@ -34,6 +34,5 @@ classdef RNN < handle & RNNInitializer & RNNManager
             obj = obj.init6(n, p, g, th, M0, x0);
         end
     end
-            
 end
         

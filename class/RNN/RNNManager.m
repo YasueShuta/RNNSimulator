@@ -18,17 +18,6 @@ classdef RNNManager < handle
         function notify_stateUpdated(RP, t, nRec2Out)
             notify(RP, 'TargetChanged', STDPEventData(t, nRec2Out));
         end
-
-        function obj = setMode(RP)
-            obj = RP;
-            obj.isPlastic = bitget(obj.mode, 1);
-%            if obj.isPlastic == true && isempty(obj.lh)
-%                obj = RNNManager.createListener(RP);
-%            elseif obj.isPlastic == false && ~isempty(obj.lh)
-%                obj = RNNManager.deleteListener(RP);
-%            end
-            obj.isLoadedNetwork = bitget(obj.mode, 2);
-        end
     end
     
     methods
@@ -43,7 +32,7 @@ classdef RNNManager < handle
             obj.NetworkMatrix = RI.M0;
             obj.Potential = RI.x0;
             obj.readout();
-        end
+        end        
         
         function setPlastic(obj)
         	if obj.isPlastic == false
