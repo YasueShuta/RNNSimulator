@@ -1,4 +1,4 @@
-classdef RNN < handle & RNNInitializer & RNNFinalizer & RNNManager 
+classdef RNN < handle & RNNInitializer & RNNFinalizer & RNNFunction & RNNConnectable 
 	% RNN: Handle object for
 	%      Recurrent Neural Network.
 	

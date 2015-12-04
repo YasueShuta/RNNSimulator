@@ -1,4 +1,4 @@
-classdef RNNSTDPEvent < handle & STDPEvent
+classdef RNNSTDPEvent < RNNProperties & STDPEvent
     properties (Constant)
         deltaT = 0.1;
     end

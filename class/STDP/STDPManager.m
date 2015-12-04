@@ -8,16 +8,16 @@ classdef STDPManager < ObjectManager
     end
     
     methods (Abstract, Static)
-        SpikeRecord(target);
-        SpikeTimeRecord(target, t, n);
-        UpdateTarget(target, t, n);
+        recordSpike(target);
+        recordSpikeTime(target, t, n);
+        updateTarget(target, t, n);
     end
     methods
     	function Update(obj, t, n)
-    		obj.SpikeRecord(obj.target);
-    		obj.SpikeTimeRecord(obj.target, t, n);
+    		obj.recordSpike(obj.target);
+    		obj.recordSpikeTime(obj.target, t, n);
     		if mod(t, obj.deltaT) == 0
-    			obj.UpdateTarget(n);
+    			obj.updateTarget(n);
     		end
     	end
     end

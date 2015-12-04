@@ -1,11 +1,6 @@
-classdef RNNFunction < handle
+classdef RNNFunction < RNNProperties
     %RNNManager Methods to manage RNN Properties.
     %   Ú×à–¾‚ð‚±‚±‚É‹Lq
-    properties (Abstract)
-        Potential;
-        Readout;
-        STDP;
-    end
     
     methods (Static)   
         function obj = updateRNN(RP, dt, feedback)

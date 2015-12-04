@@ -84,24 +84,24 @@ classdef RNNInitializer < ObjectInitializer & RNNDefault
         
         function setNetwork(obj)           
         	if ~obj.isLoadedNetwork
-                obj.M0 = initNetwork(obj.n, obj.p, obj.g);
+                obj.M0 = obj.initNetwork(obj.n, obj.p, obj.g);
             else
-            	obj.M0 = loadNetwork(obj.load_net);
+            	obj.M0 = obj.loadNetwork(obj.load_net);
             	if isempty(obj.M0) || size(obj.M0, 1) ~= obj.n || size(obj.M0, 2) ~= obj.n
             		warning('Invalid Loading(M0):');
-            		obj.M0 = initNetwork(obj.n, obj.p, obj.g);
+            		obj.M0 = obj.initNetwork(obj.n, obj.p, obj.g);
             	end
             end
         end
         
         function setPotential(obj)           
         	if ~obj.isLoadedPotential
-                obj.x0 = initPotential(obj.n, obj.p, obj.g);
+                obj.x0 = obj.initPotential(obj.n);
             else
-            	obj.x0 = loadPotential(obj.load_x);
+            	obj.x0 = obj.loadPotential(obj.load_x);
             	if isempty(obj.x0) || size(obj.x0, 1) ~= obj.n || size(obj.x0, 2) ~= 1
             		warning('Invalid Loading(x0):');
-            		obj.x0 = initPotential(obj.n);
+            		obj.x0 = obj.initPotential(obj.n);
             	end
             end
         end
@@ -110,6 +110,7 @@ classdef RNNInitializer < ObjectInitializer & RNNDefault
     methods (Static)
     	function obj = init(varargin)
     		obj = RNN();
+            obj.setDefault();
     		obj.set_inner(varargin);
     		obj.setMode();
     		obj.reset();
@@ -131,14 +132,14 @@ classdef RNNInitializer < ObjectInitializer & RNNDefault
                 obj.th = th;
             end
             if isempty(M0)
-                obj.M0 = RNNInitializer.initNetwork(obj.n, obj.p, obj.g);
+                obj.M0 = obj.initNetwork(obj.n, obj.p, obj.g);
             elseif size(M0, 1) ~= n || size(M0, 2) ~= n
                 error('Invalid Argument(M0):');
             else
                 obj.M0 = M0;
             end
             if isempty(x0)
-                obj.x0 = RNNInitializer.initPotential(obj.n);
+                obj.x0 = obj.initPotential(obj.n);
             elseif isempty(x0) || size(x0, 1) ~= n || size(x0, 2) ~= 1
                 error('Invalid Argument(x0):');
             else
@@ -185,8 +186,10 @@ classdef RNNInitializer < ObjectInitializer & RNNDefault
             obj.mode = src.mode;  
             obj.isPlastic = src.isPlastic;
             obj.isLoadedNetwork = src.isLoadedNetwork;
-            obj.load_name = src.load_name;
-        
+            obj.load_net = src.load_net;
+            obj.isLoadedPotential = src.isLoadedPotential;
+            obj.load_x = src.load_x;
+            
             obj.flag = src.flag;
             obj.option = src.option;
         end
