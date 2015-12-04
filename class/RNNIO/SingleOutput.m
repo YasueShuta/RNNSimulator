@@ -12,6 +12,7 @@ classdef SingleOutput < RNNIO
         
         function reset(obj)
             obj.Potential = 0;
+            obj.update();
         end
         
         function len = length_out(obj)

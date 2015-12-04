@@ -8,7 +8,7 @@ classdef RNNInitializer < ObjectInitializer & RNNDefault
         M0;
         x0;
         
-        mode = 0;  % Network Initialization Mode (0: Random Sparse)
+        mode;  % Network Initialization Mode (0: Random Sparse)
         isPlastic = false;
         isLoadedNetwork = false;
         load_net;
@@ -161,7 +161,6 @@ classdef RNNInitializer < ObjectInitializer & RNNDefault
             if ~ischar(filename) || ~exist(filename, 'file')
                 warning('Load Error: Potential File does not exist.');
                 x = [];
-                return;
             end
             tmp = load(filename, 'x');
             x = tmp{1};
@@ -171,7 +170,6 @@ classdef RNNInitializer < ObjectInitializer & RNNDefault
             if ~ischar(filename) || ~exist(filename, 'file')
                 warning('Load Error: Network File does not exist.');
                 M = [];
-                return;
             end
             tmp = load(filename, 'M');
             M = tmp{1};

@@ -22,6 +22,22 @@ ri = RNNInitializer({'n', n, 'th', th, 'isPlastic', true})
 obj = RNN;
 obj.reset(ri)
 %}
+
+%%% Output from RNN
+%{
 obj = RNN.init('n', 24)
 output = SingleOutput()
 con = Connector(obj, output)
+dt = 0.1
+con.transmit(dt)
+output.update()
+disp(['Output: ', num2str(output.Output)]);
+
+for i = 1:10
+    obj.update(dt);
+    con.transmit(dt);
+    output.update();
+    disp(['Output: ', num2str(output.Output)]);
+    input('');
+end
+%}

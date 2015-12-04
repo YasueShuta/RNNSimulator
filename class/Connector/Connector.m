@@ -13,11 +13,11 @@ classdef Connector < handle & MyObject
 			if nargin < 2 || ~Connectable.check(in) || ~Connectable.check(out)
 				error('Invalid Argument');
 			elseif nargin >= 3 && ~isempty(weight)
-				if size(weight, 1) ~= out.length() || size(weight, 2) ~= in.length()
+				if size(weight, 1) ~= out.length_in() || size(weight, 2) ~= in.length_out()
 					error('Invalid Argument(weight)');
 				end
 			else
-				weight = 2.0*(randn(length(out), length(in)) - 0.5);
+				weight = 2.0*(randn(out.length_in(), in.length_out()) - 0.5);
 			end
 			obj.in = in;
 			obj.out = out;
