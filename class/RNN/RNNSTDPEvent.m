@@ -1,10 +1,6 @@
-classdef RNNSTDPManager < handle & STDPManager
+classdef RNNSTDPEvent < RNNProperties & STDPEvent
     properties (Constant)
         deltaT = 0.1;
-    end
-    
-    events
-        TargetChange
     end
     
     methods (Static)
@@ -18,17 +14,13 @@ classdef RNNSTDPManager < handle & STDPManager
     end
     
     methods
-        function obj = RNNSTDPManager(R, state)
+        function obj = RNNSTDPEvent(R, state)
             obj.target = R;
             obj.dM = zeros(R.n);
             obj.trigger = state;
         end
         
-        function createListener(obj)
-            obj.lh = addlistener(obj, obj.trigger,  @UpdatedCallback);
-        end
-        
-        function Update(obj, t, n)
+        function UpdateTarget(obj, t, n)
             obj.dM = dotM(obj.target.NetworkMatrix, obj.target.SpikeRecord, obj.target.SpikeTimeRecord, t, n);
             obj.target.NetworkMatrix = obj.target.NetworkMatrix + obj.dM;
         end

@@ -1,4 +1,4 @@
-classdef RNN < handle & RNNInitializer & RNNManager 
+classdef RNN < handle & RNNInitializer & RNNFinalizer & RNNFunction & RNNConnectable 
 	% RNN: Handle object for
 	%      Recurrent Neural Network.
 	
@@ -34,6 +34,5 @@ classdef RNN < handle & RNNInitializer & RNNManager
             obj = obj.init6(n, p, g, th, M0, x0);
         end
     end
-            
 end
         

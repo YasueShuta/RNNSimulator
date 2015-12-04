@@ -1,26 +1,20 @@
-classdef RNNFunction < handle
+classdef RNNFunction < RNNProperties
     %RNNManager Methods to manage RNN Properties.
     %   Ú×à–¾‚ð‚±‚±‚É‹Lq
-    properties (Abstract)
-        Potential;
-        Readout;
-        STDP;
-    end
     
-    methods (Static)   
-        function obj = updateRNN(RP, dt, feedback)
-            obj = RP;
-            obj.Potential = (1.0-dt)*RP.Potential + RP.NetworkMatrix*(RP.Readout*dt) + feedback*dt;
+    methods   
+        function update(obj, dt, t)
+            obj.Potential = (1.0-dt)*obj.Potential + obj.NetworkMatrix*(obj.Readout*dt);
             obj.Readout = tanh(obj.Potential);
-        end
-        
-        %% for RNNSTDPEvent
+            if obj.isPlastic && ~isempty(obj.STDP) && nargin == 3
+                obj.STDP.update(t, obj.n)
+            end
+        end        
+       %% for RNNSTDPEvent
         function notify_stateUpdated(RP, t, nRec2Out)
             notify(RP, 'TargetChanged', STDPEventData(t, nRec2Out));
         end
-    end
-    
-    methods
+        
         function reset(obj, RI)
             % obj = RNN, RI = RNNInitializer
             if nargin < 2

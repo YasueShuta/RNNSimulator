@@ -5,3 +5,5 @@ master is written in C++
 MATLAB is written in MATLAB code
 
 execute on MATLAB
+
+delete addlistener and reshape STDPManager.
