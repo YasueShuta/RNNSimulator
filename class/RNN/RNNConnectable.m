@@ -5,7 +5,7 @@ classdef RNNConnectable < Connectable & RNNProperties
         end
         
         function len = length_out(obj)
-            len = length(obj.Potential);
+            len = length(obj.Input);
         end
         
         function flow = outflow(obj)
@@ -13,7 +13,7 @@ classdef RNNConnectable < Connectable & RNNProperties
         end
         
         function inflow(obj, flow)
-            obj.Potential = obj.Potential + flow;
+            obj.Input = flow;
         end
 	end
 end

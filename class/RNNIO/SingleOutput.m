@@ -23,7 +23,7 @@ classdef SingleOutput < RNNIO
             flow = [];
         end
         
-        function update(obj)
+        function readout(obj)
             obj.Output = obj.Potential;
         end
     end

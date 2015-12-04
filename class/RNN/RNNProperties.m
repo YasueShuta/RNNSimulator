@@ -3,6 +3,7 @@ classdef RNNProperties < handle
     %   
     properties (Abstract)
         NetworkMatrix;
+        Input;
         Potential;
         Readout;
         STDP;
