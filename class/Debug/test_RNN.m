@@ -23,3 +23,5 @@ obj = RNN;
 obj.reset(ri)
 %}
 obj = RNN.init('n', 24)
+output = SingleOutput()
+con = Connector(obj, output)

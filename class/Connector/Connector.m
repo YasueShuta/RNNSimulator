@@ -10,7 +10,7 @@ classdef Connector < handle & MyObject
 	methods
 		function obj = Connector(in, out, weight)
 			% in, out: Connectable 
-			if nargin < 2
+			if nargin < 2 || ~Connectable.check(in) || ~Connectable.check(out)
 				error('Invalid Argument');
 			elseif nargin >= 3 && ~isempty(weight)
 				if size(weight, 1) ~= out.length() || size(weight, 2) ~= in.length()

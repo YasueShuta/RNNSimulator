@@ -90,8 +90,8 @@ classdef RNNInitializer < ObjectInitializer & RNNDefault
             	if isempty(obj.M0) || size(obj.M0, 1) ~= obj.n || size(obj.M0, 2) ~= obj.n
             		warning('Invalid Loading(M0):');
             		obj.M0 = obj.initNetwork(obj.n, obj.p, obj.g);
-            	end
-            end
+                end
+            end                
         end
         
         function setPotential(obj)           

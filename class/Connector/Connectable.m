@@ -5,8 +5,15 @@ classdef Connectable < handle
 	end
 	
 	methods (Abstract)
-		length(obj);
+		length_in(obj);
+        length_out(obj);
 		outflow(obj);
 		inflow(obj, flow);
-	end
+    end
+    
+    methods (Static)
+        function ret = check(obj)
+            ret = ~isempty(findprop(obj, 'isConnectableObject'));
+        end
+    end
 end	

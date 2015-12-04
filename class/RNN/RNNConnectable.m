@@ -1,6 +1,10 @@
 classdef RNNConnectable < Connectable & RNNProperties
 	methods
-        function len = length(obj)
+        function len = length_in(obj)
+            len = length(obj.Readout);
+        end
+        
+        function len = length_out(obj)
             len = length(obj.Potential);
         end
         

@@ -13,7 +13,7 @@ classdef STDPManager < ObjectManager
         updateTarget(target, t, n);
     end
     methods
-    	function Update(obj, t, n)
+    	function update(obj, t, n)
     		obj.recordSpike(obj.target);
     		obj.recordSpikeTime(obj.target, t, n);
     		if mod(t, obj.deltaT) == 0
