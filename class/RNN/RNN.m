@@ -5,6 +5,7 @@ classdef RNN < handle & RNNInitializer & RNNFinalizer & RNNFunction & RNNConnect
 	properties
 		Scale;				% scale: 1/sqrt(n*p)
 		NetworkMatrix;		% M: Connection between neurons.
+        Input;              % input:
 		Potential;			% x: electrical potential of neurons.
 		Readout;			% r: tanh x
         

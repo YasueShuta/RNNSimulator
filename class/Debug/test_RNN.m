@@ -24,20 +24,30 @@ obj.reset(ri)
 %}
 
 %%% Output from RNN
-%{
+
 obj = RNN.init('n', 24)
-output = SingleOutput()
-con = Connector(obj, output)
 dt = 0.1
-con.transmit(dt)
+simtime = 0:dt:10-dt;
+len = length(simtime);
+record = zeros(len, 1);
+fi = sin(2*pi*simtime)
+input = SingleInput(fi)
+output = SingleOutput()
+ci = Connector(input, obj)
+co = Connector(obj, output)
+co.transmit(dt)
 output.update()
 disp(['Output: ', num2str(output.Output)]);
-
-for i = 1:10
+ti = 0;
+for i = simtime
+    ti = ti + 1;
+    input.update();
+    ci.transmit(dt);
     obj.update(dt);
-    con.transmit(dt);
+    co.transmit(dt);
     output.update();
     disp(['Output: ', num2str(output.Output)]);
-    input('');
+    record(ti) = output.Output;
 end
-%}
+figure;
+plot(simtime, record);
