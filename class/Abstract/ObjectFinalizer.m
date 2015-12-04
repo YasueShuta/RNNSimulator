@@ -1,0 +1,2 @@
+classdef ObjectFinalizer < handle
+end

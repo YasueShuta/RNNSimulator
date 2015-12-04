@@ -11,7 +11,9 @@ classdef RNNInitializer < ObjectInitializer & RNNDefault
         mode;  % Network Initialization Mode (0: Random Sparse)
         isPlastic = false;
         isLoadedNetwork = false;
-        load_name;
+        load_net;
+        isLoadedPotential = false;
+        load_x;
         
         flag;
         option;
@@ -62,14 +64,45 @@ classdef RNNInitializer < ObjectInitializer & RNNDefault
                         obj.mode = argvdata{i};
                     case 'isPlastic'
                         obj.isPlastic = argvdata{i};
-                    case {'load_name', 'load'}
-                        obj.load_name = argvdata{i};
-                        if ~isempty(obj.load_name)
-                            RNNManager.setState(obj, 'isLoadedNetwork', 1);
+                    case {'load_net', 'l_net', 'ln'}
+                        obj.load_net = argvdata{i};
+                        if ~isempty(obj.load_net)
+                            obj.isLoadedNetwork = true;
                         end
+                    case {'load_x', 'l_x', 'lx'}
+                    	obj.load_x = argvdata{i};
+                    	if ~isempty(obj.load_x)
+                    		obj.isLoadedPotential = true;
+                    	end
                     otherwise
                         warning('RNNProperties: Invalid Argument.');
                 end
+            end
+            obj.setNetwork();
+            obj.setPotential();
+        end
+        
+        function setNetwork(obj)           
+        	if ~obj.isLoadedNetwork
+                obj.M0 = initNetwork(obj.n, obj.p, obj.g);
+            else
+            	obj.M0 = loadNetwork(obj.load_net);
+            	if isempty(obj.M0) || size(obj.M0, 1) ~= obj.n || size(obj.M0, 2) ~= obj.n
+            		warning('Invalid Loading(M0):');
+            		obj.M0 = initNetwork(obj.n, obj.p, obj.g);
+            	end
+            end
+        end
+        
+        function setPotential(obj)           
+        	if ~obj.isLoadedPotential
+                obj.x0 = initPotential(obj.n, obj.p, obj.g);
+            else
+            	obj.x0 = loadPotential(obj.load_x);
+            	if isempty(obj.x0) || size(obj.x0, 1) ~= obj.n || size(obj.x0, 2) ~= 1
+            		warning('Invalid Loading(x0):');
+            		obj.x0 = initPotential(obj.n);
+            	end
             end
         end
     end
@@ -121,6 +154,24 @@ classdef RNNInitializer < ObjectInitializer & RNNDefault
         function M = initNetwork(n, p, g)
             M = sprandn(n, n, p)*g/sqrt(n*p);
             M = full(M);
+        end
+        
+        function x = loadPotential(filename)
+            if ~ischar(filename) || ~exist(filename, 'file')
+                warning('Load Error: Potential File does not exist.');
+                x = [];
+            end
+            tmp = load(filename, 'x');
+            x = tmp{1};
+        end
+        
+        function M = loadNetwork(filename)
+            if ~ischar(filename) || ~exist(filename, 'file')
+                warning('Load Error: Network File does not exist.');
+                M = [];
+            end
+            tmp = load(filename, 'M');
+            M = tmp{1};
         end
         
         function copyRNNInitializer(obj, src)
