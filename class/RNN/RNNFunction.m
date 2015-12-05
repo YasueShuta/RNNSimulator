@@ -5,7 +5,7 @@ classdef RNNFunction < RNNProperties
     methods   
         function update(obj, dt, t)
             obj.Potential = (1.0-dt)*obj.Potential + obj.NetworkMatrix*(obj.Readout*dt) + obj.Input;
-            obj.Readout = tanh(obj.Potential);
+            obj.readout();
             if obj.isPlastic && ~isempty(obj.STDP) && nargin == 3
                 obj.STDP.update(t, obj.n)
             end
