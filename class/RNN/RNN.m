@@ -1,7 +1,6 @@
 classdef RNN < handle & RNNInitializer & RNNFinalizer & RNNFunction & RNNConnectable 
 	% RNN: Handle object for
 	%      Recurrent Neural Network.
-	
 	properties
 		Scale;				% scale: 1/sqrt(n*p)
 		NetworkMatrix;		% M: Connection between neurons.
@@ -11,8 +10,7 @@ classdef RNN < handle & RNNInitializer & RNNFinalizer & RNNFunction & RNNConnect
         
         STDP;
     end
-    
-    
+        
     methods
         function obj = RNN(n, p, g, th, M0, x0)
             if nargin == 0
