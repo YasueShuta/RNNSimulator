@@ -1,3 +1,6 @@
-./testFile/*.*
+testFile/
+
+/*.asv
+
 */*.asv
 
