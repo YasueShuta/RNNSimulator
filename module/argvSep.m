@@ -1,5 +1,6 @@
 function [argvstr argvdata argvnum] = argvSep(argv)
     if mod(length(argv), 2) == 1
+        argv
         error('argvSep: Invalid Argument.');
     end
     
@@ -14,6 +15,7 @@ function [argvstr argvdata argvnum] = argvSep(argv)
             argvstr{i} = arg;
             argvdata{i} = argv{2*i};
         else
+            arg
             error('argvManager: Invalid Argument.');
         end
     end

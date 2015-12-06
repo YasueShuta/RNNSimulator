@@ -15,12 +15,13 @@ classdef RNNFunction < RNNProperties
             notify(RP, 'TargetChanged', STDPEventData(t, nRec2Out));
         end
         
+       %% 
         function reset(obj, RI)
             % obj = RNN, RI = RNNInitializer
             if nargin < 2
                 RI = obj;
             elseif obj ~= RI
-                obj.copyRNNInitializer(obj, RI);
+                RNNInitializer.copy(obj, RI);
             end
             obj.Scale = 1/sqrt(RI.n*RI.p);
             obj.Input = zeros(RI.n, 1);

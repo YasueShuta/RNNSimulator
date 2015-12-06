@@ -1,4 +1,4 @@
-classdef RNNInitializer < ObjectInitializer & RNNDefault
+classdef RNNInitializer < ObjectInitializer
     properties
         n;     % number of neurons.
         p;     % percentage of connecting.
@@ -25,14 +25,14 @@ classdef RNNInitializer < ObjectInitializer & RNNDefault
                 return;
             end
             obj.setDefault();
-            obj.set_inner(varargin);
+            obj.set(varargin);
         end
         
         function setDefault(obj)
-            obj.n = obj.default_n;
-            obj.p = obj.default_p;
-            obj.g = obj.default_g;
-            obj.th = obj.default_th;
+            obj.n = RNNDefault.n;
+            obj.p = RNNDefault.p;
+            obj.g = RNNDefault.g;
+            obj.th = RNNDefault.th;
         end
         
         function setMode(obj)
@@ -173,7 +173,7 @@ classdef RNNInitializer < ObjectInitializer & RNNDefault
             M = tmp{1};
         end
         
-        function copyRNNInitializer(obj, src)
+        function copy(obj, src)
             obj.n = src.n;
             obj.p = src.p;  
             obj.g = src.g; 
