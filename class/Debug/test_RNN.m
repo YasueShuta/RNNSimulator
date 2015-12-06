@@ -25,16 +25,18 @@ obj.reset(ri)
 
 %%% Output from RNN
 
-obj = RNN.init('n', 24)
+rnn = RNN.init('n', 24)
+ro = RNNObserver.init(rnn)
 dt = 0.1
-simtime = 0:dt:10-dt;
+simtime = 0:dt:30-dt;
 len = length(simtime);
 record = zeros(len, 1);
-fi = sin(2*pi*simtime)
+recRNN = zeros(len, ro.cellNum);
+fi = sin(0.2*pi*simtime)
 input = SingleInput(fi)
 output = SingleOutput()
-ci = Connector(input, obj)
-co = Connector(obj, output)
+ci = Connector(input, rnn)
+co = Connector(rnn, output)
 co.transmit(dt)
 output.update()
 disp(['Output: ', num2str(output.Output)]);
@@ -43,11 +45,22 @@ for i = simtime
     ti = ti + 1;
     input.update();
     ci.transmit(dt);
-    obj.update(dt);
+    rnn.update(dt);
     co.transmit(dt);
     output.update();
     disp(['Output: ', num2str(output.Output)]);
     record(ti) = output.Output;
+    ro.print()
+    recRNN(ti,:) = ro.data();
 end
 figure;
+subplot 211
 plot(simtime, record);
+hold on;
+plot(simtime, fi, 'color', 'red')
+subplot 212
+plot(simtime, recRNN(:, 1));
+hold on;
+for i = 2:ro.cellNum
+    plot(simtime, recRNN(:,i));
+end

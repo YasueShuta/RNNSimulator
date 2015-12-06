@@ -17,6 +17,9 @@ classdef Observer < ObjectInitializer
 	end
 	
 	methods
+        function setId(obj)
+            obj.id = IdManager.getObserverCount();
+        end
 		function set_inner(obj, argvnum, argvstr, argvdata)
 			for i = 1:argvnum
 				switch argvstr{i}

@@ -1,4 +1,5 @@
 classdef RNNDefault < handle
+    % default value is set.
     properties (Constant)
         default_n = 32;
         default_p = 0.1;
