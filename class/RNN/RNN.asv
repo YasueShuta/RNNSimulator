@@ -11,8 +11,7 @@ classdef RNN < handle & RNNInitializer & RNNFinalizer & RNNFunction & RNNConnect
         
         STDP;
     end
-    
-    
+        
     methods
         function obj = RNN(n, p, g, th, M0, x0)
             if nargin == 0
