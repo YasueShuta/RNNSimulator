@@ -74,5 +74,15 @@ classdef Observer < ObjectInitializer
 				rec = rec_;
 			end
 		end
+		
+		function print(obj)
+			switch(obj.output_mode)
+				case 'invalid'
+					return;
+				case 'console'
+					obj.print_console(obj.sprint());
+				otherwise;
+			end
+		end
 	end
 end

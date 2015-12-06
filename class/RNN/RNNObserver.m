@@ -17,5 +17,7 @@ classdef RNNObserver < ObjectObserver
 			target = target_;
 			obj.isRNNConnected = true;
 		end
+		
+		
 	end
 end
