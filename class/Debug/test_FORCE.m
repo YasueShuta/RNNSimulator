@@ -20,7 +20,7 @@ rnn = RNN.init('n', 256);
 ro = RNNObserver.init(rnn);
 recRNN = zeros(len, ro.cellNum);
 fb = SingleFeedback();
-co = Connector(rnn, fb, zeros(1, rnn.n));
+co = Connector(rnn, fb);%, zeros(1, rnn.n));
 cb = Connector(fb, rnn);
 
 %% Apply FORCE
@@ -29,12 +29,12 @@ force = FORCE.init(co, ft)
 force.set('alpha', 1.0)
 force
 
-%{
+
 %% Input Small Signal
-fi = FORCEDefault.target(simtime);
+fi = 0.2*FORCEDefault.target(simtime);
 input = SingleInput(fi);
 ci = Connector(input, rnn);
-%}
+
 
 %% simulation
 figure;
@@ -54,8 +54,8 @@ for i = simtime
         
         pause(0.5);
     end
-%    input.update();
-%    ci.transmit(dt);
+    input.update();
+    ci.transmit(dt);
     
     rnn.update(dt);
     co.transmit(dt);
@@ -68,18 +68,27 @@ for i = simtime
     zt(ti) = fb.Output;
     wo_len(ti) = sqrt(co.weight*co.weight');
     
-%    recRNN(ti, :) = ro.data();
+    recRNN(ti, :) = ro.data();
 end
 
-figure;
-subplot 211
-plot(simtime, zt);
+subplot 311
+plot(simtime, force.target, 'color', 'green');
 hold on;
-plot(simtime, force.target, 'color', 'red');
+plot(simtime, fi, 'color', 'blue');
+plot(simtime, zt, 'color', 'red');
+subplot 312
+plot(simtime, wo_len);
+subplot 313
+plot(simtime, recRNN(:, 1));
+hold on;
+for i = 2:ro.cellNum
+    plot(simtime, recRNN(:,i));
+end
+
 
 figure;
 subplot 311
-%bar(ci.weight, 'b');
+bar(ci.weight, 'b');
 subplot 312
 bar(co.weight, 'r');
 subplot 313
