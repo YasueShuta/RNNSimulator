@@ -20,12 +20,12 @@ classdef RNNInitializer < ObjectInitializer & RNNDefault
     end
     
     methods
-        function obj = RNNInitializer(argv)
+        function obj = RNNInitializer(varargin)
             if nargin == 0
                 return;
             end
             obj.setDefault();
-            obj.set_inner(argv);
+            obj.set_inner(varargin);
         end
         
         function setDefault(obj)
@@ -45,11 +45,7 @@ classdef RNNInitializer < ObjectInitializer & RNNDefault
             obj.isLoadedNetwork = bitget(obj.mode, 2);
         end
         
-        function set_inner(obj, argv)
-            argvnum = 0;
-            if nargin > 0
-                [argvstr, argvdata, argvnum] = argvSep(argv);
-            end
+        function set_inner(obj, argvnum, argvstr, argvdata)
             for i = 1:argvnum
                 switch argvstr{i}
                     case {'N', 'n', 'nRec2Out'}
@@ -111,7 +107,7 @@ classdef RNNInitializer < ObjectInitializer & RNNDefault
     	function obj = init(varargin)
     		obj = RNN();
             obj.setDefault();
-    		obj.set_inner(varargin);
+    		obj.set(varargin);
     		obj.setMode();
     		obj.reset();
     	end

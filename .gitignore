@@ -1,2 +1,13 @@
-./testFile/*.*
+# For Update
+# $ git rm -r --cache .
+# $ git add .
+# $ git commit -m ".gitignore updated."
+# $ git push origin [branch name] 
+
+
+testFile/
+
+*.asv
+*/*.asv
+*/*/*.asv
 

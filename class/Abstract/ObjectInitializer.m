@@ -6,12 +6,26 @@ classdef ObjectInitializer < MyObject
     end
     
     methods (Abstract)
-        set_inner(obj, argv);
+        set_inner(obj, argvnum, argvstr, argvdata);
     end
     methods
-        function obj = ObjectInitializer()
-            return;
-        end
+    	function set(obj, varargin)
+    		if nargin < 2
+                obj.set_inner(0);
+                return;
+            elseif iscell(varargin{1})
+                isempty(varargin{1})
+                varargin{1}
+                if isempty(varargin{1})
+                    obj.set_inner(0);
+                    return;
+                end
+    			[argvstr, argvdata, argvnum] = argvSep(varargin{1});
+            else
+                [argvstr, argvdata, argvnum] = argvSep(varargin);
+            end
+            obj.set_inner(argvnum, argvstr, argvdata);
+    	end
     end
 end
 

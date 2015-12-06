@@ -1,5 +1,5 @@
 classdef RNNConnectable < Connectable & RNNProperties
-	methods
+       methods
         function len = length_in(obj)
             len = length(obj.Readout);
         end

@@ -1,7 +1,7 @@
 classdef RNNFunction < RNNProperties
+    
     %RNNManager Methods to manage RNN Properties.
     %   Ú×à–¾‚ð‚±‚±‚É‹Lq
-    
     methods   
         function update(obj, dt, t)
             obj.Potential = (1.0-dt)*obj.Potential + obj.NetworkMatrix*(obj.Readout*dt) + obj.Input;
