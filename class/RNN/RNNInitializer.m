@@ -107,7 +107,7 @@ classdef RNNInitializer < ObjectInitializer & RNNDefault
     	function obj = init(varargin)
     		obj = RNN();
             obj.setDefault();
-    		obj.set_inner(varargin);
+    		obj.set(varargin);
     		obj.setMode();
     		obj.reset();
     	end

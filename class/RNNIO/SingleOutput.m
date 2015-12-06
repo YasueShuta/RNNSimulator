@@ -19,6 +19,10 @@ classdef SingleOutput < RNNIO
             len = [];
         end
         
+        function inflow(obj, flow)
+            obj.Potential = flow;
+        end
+        
         function flow = outflow(obj)
             flow = [];
         end

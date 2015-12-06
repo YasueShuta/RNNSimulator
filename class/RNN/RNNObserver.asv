@@ -21,8 +21,6 @@ classdef RNNObserver < Observer
 			obj.isRNNConnected = true;
 		end
 		
-        function str = sprint(obj)
-            str = 'undefined';
-        end
+        function str = sprint(
 	end
 end

@@ -86,7 +86,7 @@ classdef Observer < ObjectInitializer
         end
         
         function print_console(obj, str)
-            disp([sprintf('[%02d] ',obj.id), str]);
+            disp([sprintf('[%02d] ',obj.id), str);
         end
         
         function print_recorder(obj, str)
@@ -96,7 +96,7 @@ classdef Observer < ObjectInitializer
         
         function print_file(obj, str)
             if ~exist(obj.file, 'file')
-                fid = obj.file_init();
+                fid = obj.file_init()
             else
                 fid = fopen(obj.file, 'a');
             end
@@ -106,13 +106,9 @@ classdef Observer < ObjectInitializer
         
         function fid = file_init(obj)
             fid = fopen(obj.file, 'w');
-            fprintf(fid, obj.timeStamp());
-        end
-    end
-    
-    methods (Static)
-        function str = timeStamp()
-            str = datestr(now);
-        end
-    end     
+            vec = datevec(date);
+            
+            
+            fprintf(
+	end
 end
