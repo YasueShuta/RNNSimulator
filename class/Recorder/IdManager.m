@@ -1,6 +1,6 @@
 classdef IdManager < handle
     properties (Constant)
-        basedir = 'C:\Users\mech-user\Documents\MATLAB\RNNSimulatior';
+        basedir = 'C:\Users\mech-user\Documents\MATLAB\RNNSimulator';
         folder = 'testFile';
         file = 'id.mat';
     end
@@ -16,7 +16,7 @@ classdef IdManager < handle
             str = strcat(IdManager.basedir, '\', IdManager.folder);
         end
         function str = filename()
-            str = strcat(IdManager.basedir, '\', IdManager.file);
+            str = strcat(IdManager.basedir, '\', IdManager.folder, '\', IdManager.file);
         end
         function reset()
             IdManager.idSave();
