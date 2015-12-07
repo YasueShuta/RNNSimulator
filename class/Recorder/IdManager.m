@@ -19,6 +19,10 @@ classdef IdManager
 			folder = IdManagerDefault.folder;
 			idfile = IdManagerDefault.idfile;
 			
+            if ~exist(strcat(basedir, '\', folder), 'dir')
+                mkdir(strcat(basedir, '\', folder));
+            end
+            
 			save(IdManager.setupfile, 'basedir', 'folder', 'idfile');
 		end
 		
@@ -32,12 +36,15 @@ classdef IdManager
 			folder = record.folder;
 			idfile = record.idfile;
 			
+            if ~exist(strcat(basedir, '\', folder), 'dir')
+                mkdir(strcat(basedir, '\', folder));
+            end
 			save(IdManager.setupfile, 'basedir', 'folder', 'idfile');
 		end
 		    	
         function str = dirname(record)
-        	if nargin == 0
-        		[basedir, folder, idfile] = getSetup();
+        	if nargin == 0 || isempty(record) || ~record.isValid
+        		[basedir, folder, idfile] = IdManager.getSetup();
 	            str = strcat(basedir, '\', folder);
 	            return;
 	        end
@@ -45,16 +52,20 @@ classdef IdManager
 	    end
 
         function str = filename(record)
-        	if nargin == 0 || isempty(record)
-        		[basedir, folder, idfile] = getSetup();
+        	if nargin == 0 || isempty(record) || ~record.isValid
+        		[basedir, folder, idfile] = IdManager.getSetup();
 	            str = strcat(basedir, '\', folder, '\', idfile);
 	            return;
 	        end
 	        str = strcat(record.basedir, '\', record.folder, '\', record.idfile);
 	    end
 	    
-        function reset()
-            IdManager.idSave();
+        function reset(record)
+            if nargin < 1 || isempty(record)
+                record = [];
+            end
+            IdManager.setupReset(record);
+            IdManager.idSave([], [], record);
         end 
         
         function data = getData(record)
@@ -142,7 +153,27 @@ classdef IdManager
                     otherwise
                 end
             end
-            save(IdManager.filename(record), 'id', 'file_count', 'figure_count', 'observer_count');
+            IdManager.save_safe(IdManager.dirname(record), IdManager.filename(record), ...
+                id, file_count, figure_count, observer_count);
+        end
+        
+        function save_safe(dirname, filename, id, file_count, figure_count, observer_count)
+           if ~exist(dirname, 'dir')
+               warning('Invalid Access to directory;');
+               mkdir(dirname);
+           end
+           save(filename, 'id', 'file_count', 'figure_count', 'observer_count');
+        end
+        
+        function delete_idfile(record)
+            if nargin == 0 || isempty(record) || ~record.isValid
+                record = [];
+            end
+            delete(IdManager.filename(record));
+        end
+        
+        function delete_setup()
+            delete(IdManager.setupfile);
         end
     end
 end

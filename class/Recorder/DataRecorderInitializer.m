@@ -6,7 +6,7 @@ classdef DataRecorderInitializer < ObjectInitializer
 		folder;
 		idfile;
 		
-		isValid;
+		isValid=false;
 	end
 	
 	methods
@@ -20,18 +20,21 @@ classdef DataRecorderInitializer < ObjectInitializer
 		function set_inner(obj, argvnum, argvstr, argvdata)
 			if nargin < 2 || argvnum == 0
 				return;
-			end
+            end
 			for i = 1:argvnum
 				switch argvstr{i}
 					case {'basedir', 'base', 'b'}
 						obj.basedir = argvdata{i};
+                        obj.id = [];
 					case {'folder', 'dir', 'd'}
 						obj.folder = argvdata{i};
+                        obj.id = [];
 					case {'idfile', 'file', 'f'}
 						obj.idfile = argvdata{i};
+                        obj.id = [];
 					otherwise
 				end
-			end
+            end
 			IdManager.reset(obj);
 		end
 		
@@ -39,6 +42,13 @@ classdef DataRecorderInitializer < ObjectInitializer
 			obj.basedir = IdManagerDefault.basedir;
 			obj.folder = IdManagerDefault.folder;
 			obj.idfile = IdManagerDefault.idfile;
+            obj.isValid = true;
 		end
-	end
+    end
+    
+    methods (Static)
+        function obj = init(basedir)
+            obj = DataRecorder('basedir', basedir);
+        end
+    end
 end

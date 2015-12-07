@@ -3,34 +3,28 @@ classdef DataRecorder < DataRecorderInitializer
 	%
 	properties
 		id;
-		isValid;
 	
 		flag;
 		mode = 0;
 		savePin;
 		
-		saveDir;
-		currDir;
-		dateStr;
-		
-		recordName;
+        dateStr;
+		recordName='data';
 	end
 	
 	methods
 		function obj = DataRecorder(varargin)
 			if nargin == 0
-				return;
-			end
-			obj.setDefault();
-			obj.isValid = true;
+				obj.set();
+            end
 			obj.set(varargin);
-			
-		end
-		
+        end
+        
 		function set_inner(obj, argvnum, argvstr, argvdata)
+            obj.setDefault();
 			if nargin < 2 || argvnum == 0
 				obj.set_inner@DataRecorderInitializer(0);
-			else
+            else
 				obj.set_inner@DataRecorderInitializer(argvnum, argvstr, argvdata);
 				for i = 1:argvnum
 					switch argvstr{i}
@@ -38,26 +32,31 @@ classdef DataRecorder < DataRecorderInitializer
 							obj.flag = argvdata{i};
 						case {'mode'}
 							obj.mode = argvdata{i};
+                        case {'name', 'recordName', 'n'}
+                            obj.recordName = argvdata{i};
 						otherwise
 					end
 				end
 			end
-			obj.setId();
 			obj.setMode();
 			obj.reset();
-			end
 		end
 
 		function setId(obj)
-			obj.id = IdManager.getId(obj);
+   			obj.id = IdManager.getId(obj);
 		end
 		
 		function setMode(obj)
-		
+            obj.savePin = DataRecorderPin(obj.mode);
 		end
 		
 		function reset(obj)
-			
-		end		
-	end	
+            if isempty(obj.id)
+    			obj.setId();
+            end
+        end
+        
+        
+    end	
 end
+
