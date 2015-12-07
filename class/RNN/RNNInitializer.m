@@ -124,7 +124,7 @@ classdef RNNInitializer < ObjectInitializer
             if nargin < 2 || isempty(p)
                 p = [];
             end
-            obj = obj.init6(n, p, g, th, M0, x0);
+            obj = RNNInitializer.init6(n, p, g, th, M0, x0);
     	end
     	
         function obj = init6(n, p, g, th, M0, x0)

@@ -2,9 +2,10 @@ classdef IdManager
 	properties (Constant)
 		setupfile = 'C:\Users\mech-user\Documents\MATLAB\RNNSimulator\testFile\setup.mat';
 	end
+
     methods (Static)
     	function [basedir, folder, idfile] = getSetup()
-    		if ~exist(IdManager.setupfile)
+    		if ~exist(IdManager.setupfile, 'file')
     			IdManager.setupInit();
     		end
     		setup = importdata(IdManager.setupfile);
@@ -12,7 +13,28 @@ classdef IdManager
     		folder = setup.folder;
     		idfile = setup.idfile;
     	end
-    	
+
+		function setupInit()
+			basedir = IdManagerDefault.basedir;
+			folder = IdManagerDefault.folder;
+			idfile = IdManagerDefault.idfile;
+			
+			save(IdManager.setupfile, 'basedir', 'folder', 'idfile');
+		end
+		
+		function setupReset(record)
+			if nargin < 1 || isempty(record)
+				IdManager.setupInit();
+			elseif ~record.isValid
+				error('Invalid DataRecorder:');
+			end
+			basedir = record.basedir;
+			folder = record.folder;
+			idfile = record.idfile;
+			
+			save(IdManager.setupfile, 'basedir', 'folder', 'idfile');
+		end
+		    	
         function str = dirname(record)
         	if nargin == 0
         		[basedir, folder, idfile] = getSetup();
@@ -23,12 +45,12 @@ classdef IdManager
 	    end
 
         function str = filename(record)
-        	if nargin == 0
+        	if nargin == 0 || isempty(record)
         		[basedir, folder, idfile] = getSetup();
 	            str = strcat(basedir, '\', folder, '\', idfile);
 	            return;
 	        end
-	        str = strcat(record.basedir, '\', folder, '\', record.idfile);
+	        str = strcat(record.basedir, '\', record.folder, '\', record.idfile);
 	    end
 	    
         function reset()
@@ -36,37 +58,67 @@ classdef IdManager
         end 
         
         function data = getData(record)
-            if ~exist(IdManager.dirname, 'dir')
-                mkdir(IdManager.dirname);
-            elseif ~exist(IdManager.filename, 'file')
+            if nargin == 0 || isempty(record)
+                record = [];
+            end
+            dirname = IdManager.dirname(record);
+            filename = IdManager.filename(record);
+            
+            if ~exist(dirname, 'dir')
+                mkdir(dirname);
+            elseif ~exist(filename, 'file')
                 IdManager.reset();
             end
-            data = importdata(IdManager.filename);
-        end
-        function id = getId()
-            obj = IdManager.getData();
-            id = obj.id + 1;
-            IdManager.idSave(obj, 'id');
-        end
-        function ret = getFileCount()
-            obj = IdManager.getData();
-            ret = obj.file_count + 1;
-            IdManager.idSave(obj, 'file');
-        end
-        function ret = getFigureCount()
-            obj = IdManager.getData();
-            ret = obj.figure_count + 1;
-            IdManager.idSave(obj, 'figure');
-        end
-        function ret = getObserverCount()
-            obj = IdManager.getData();
-            ret = obj.observer_count + 1;
-            IdManager.idSave(obj, 'observer');
+            data = importdata(filename);
         end
         
-        function idSave(data, str)
-            if nargin > 0 && ~isempty(data)
-                id = data.id;
+        function id = getId(record)
+            if nargin == 0 || isempty(record)
+                record = [];
+            end
+            obj = IdManager.getData(record);
+            id = obj.id + 1;
+            IdManager.idSave(obj, 'id', record);
+        end
+        function ret = getFileCount(record)
+            if nargin == 0 || isempty(record)
+                record = [];
+            end
+            obj = IdManager.getData(record);
+            ret = obj.file_count + 1;
+            IdManager.idSave(obj, 'file', record);
+        end
+        function ret = getFigureCount(record)
+            if nargin == 0 || isempty(record)
+                record = [];
+            end            
+            obj = IdManager.getData(record);
+            ret = obj.figure_count + 1;
+            IdManager.idSave(obj, 'figure', record);
+        end
+        function ret = getObserverCount(record)
+            if nargin == 0 || isempty(record)
+                record = [];
+            end
+            obj = IdManager.getData(record);
+            ret = obj.observer_count + 1;
+            IdManager.idSave(obj, 'observer', record);
+        end
+        
+        function idSave(data, str, record)
+            if nargin < 3 || isempty(record) 
+            	record = [];
+           	end
+           	if nargin < 2 || isempty(str)
+           		str = 'reset';
+           	end
+           	if nargin < 1 || isempty(data)           	
+                id = 0;
+                file_count = 0;
+                figure_count = 0;
+                observer_count = 0;
+            else
+            	id = data.id;
                 file_count = data.file_count;
                 figure_count = data.figure_count;
                 observer_count = data.observer_count;
@@ -89,15 +141,8 @@ classdef IdManager
                         observer_count = 0;
                     otherwise
                 end
-            else
-                id = 0;
-                file_count = 0;
-                figure_count = 0;
-                observer_count = 0;
             end
-            save(IdManager.filename, 'id', 'file_count', 'figure_count', 'observer_count');
+            save(IdManager.filename(record), 'id', 'file_count', 'figure_count', 'observer_count');
         end
     end
 end
-                    
-        

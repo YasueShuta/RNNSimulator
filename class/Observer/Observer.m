@@ -17,8 +17,11 @@ classdef Observer < ObjectInitializer
 	end
 	
 	methods
-        function setId(obj)
-            obj.id = IdManager.getObserverCount();
+        function setId(obj, record)
+        	if nargin == 0 || isempty(record)
+        		record = [];
+        	end
+            obj.id = IdManager.getObserverCount(record);
         end
 		function set_inner(obj, argvnum, argvstr, argvdata)
 			for i = 1:argvnum
