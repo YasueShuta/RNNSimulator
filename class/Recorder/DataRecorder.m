@@ -5,9 +5,7 @@ classdef DataRecorder < DataRecorderInitializer
 		id;
 	
 		flag;
-		mode = 0;
-		savePin;
-		
+        
         dateStr;
 		recordName='data';
 	end
@@ -37,26 +35,25 @@ classdef DataRecorder < DataRecorderInitializer
 						otherwise
 					end
 				end
-			end
-			obj.setMode();
+            end
 			obj.reset();
 		end
 
 		function setId(obj)
    			obj.id = IdManager.getId(obj);
-		end
-		
-		function setMode(obj)
-            obj.savePin = DataRecorderPin(obj.mode);
-		end
+        end
 		
 		function reset(obj)
             if isempty(obj.id)
     			obj.setId();
             end
+            vec = datevec(date);
+            obj.dateStr = sprintf('%4d_%02d%02', vec(1), vec(2), vec(3));
         end
         
-        
-    end	
+        function dir = dirname(obj)
+            dir = strcat(obj.basedir, '\', obj.folder, '\', obj.dateStr);
+        end
+    end
 end
 
