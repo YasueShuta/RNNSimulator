@@ -21,11 +21,19 @@ classdef FORCEProperties < handle
    end
    
    methods
-       function n = n(obj)
+       function col = col(obj)
            if ~obj.isConnect
-               n = [];
+               col = [];
            else
-               n = obj.connector.in.length_in;
+               col = obj.connector.in.length_in;
+           end
+       end
+       
+       function row = row(obj)
+           if ~obj.isConnect
+               row = [];
+           else
+               row = obj.connector.out.length_out;
            end
        end
    end

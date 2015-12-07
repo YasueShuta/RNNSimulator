@@ -104,12 +104,27 @@ classdef RNNInitializer < ObjectInitializer
     end
     
     methods (Static)
-    	function obj = init(varargin)
-    		obj = RNN();
-            obj.setDefault();
-    		obj.set(varargin);
-    		obj.setMode();
-    		obj.reset();
+    	function obj = init(n, p, g, th, M0, x0)
+    		if nargin == 0
+    			obj = RNN();
+    			return;
+    		end
+            if nargin < 6
+                x0 = [];
+            end
+            if nargin < 5
+                M0 = [];
+            end
+            if nargin < 4
+                th = [];
+            end
+            if nargin < 3
+                g = [];
+            end
+            if nargin < 2 || isempty(p)
+                p = [];
+            end
+            obj = RNNInitializer.init6(n, p, g, th, M0, x0);
     	end
     	
         function obj = init6(n, p, g, th, M0, x0)

@@ -15,7 +15,7 @@ classdef FORCEFunction < FORCEProperties
         end
         
         function updateError(obj, ti)
-            obj.error = obj.connector.out.Output - obj.target(ti);
+            obj.error = obj.connector.out.Readout - obj.target(:, ti);
         end    
     end
 end

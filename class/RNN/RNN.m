@@ -12,26 +12,46 @@ classdef RNN < handle & RNNInitializer & RNNFinalizer & RNNFunction & RNNConnect
     end
         
     methods
-        function obj = RNN(n, p, g, th, M0, x0)
+        function obj = RNN(varargin)
             if nargin == 0
                 return;
             end
-            if nargin < 6
-                x0 = [];
+            
+    		obj = RNN();
+            obj.setDefault();
+    		obj.set(varargin);
+    		obj.setMode();
+    		obj.reset();
+        end
+        
+        function reset(obj, RI)
+            % obj = RNN, RI = RNNInitializer
+            if nargin < 2
+                RI = obj;
+            elseif obj ~= RI
+                RNNInitializer.copy(obj, RI);
             end
-            if nargin < 5
-                M0 = [];
-            end
-            if nargin < 4
-                th = [];
-            end
-            if nargin < 3
-                g = [];
-            end
-            if nargin < 2 || isempty(p)
-                p = [];
-            end
-            obj = obj.init6(n, p, g, th, M0, x0);
+            obj.Scale = 1/sqrt(RI.n*RI.p);
+            obj.Input = zeros(RI.n, 1);
+            obj.NetworkMatrix = RI.M0;
+            obj.Potential = RI.x0;
+            obj.readout();
+        end        
+        
+        function setPlastic(obj)
+        	if obj.isPlastic == false
+        		obj.isPlastic = true;
+        	end
+        end
+        
+        function resetPlastic(obj)
+        	if obj.isPlastic == true
+        		obj.isPlastic = false;
+        	end
+        end
+        
+        function readout(obj)
+            obj.Readout = tanh(obj.Potential);
         end
     end
 end
