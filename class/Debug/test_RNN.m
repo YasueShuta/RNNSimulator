@@ -5,14 +5,14 @@ clear classes;
 %% RNN Initialize
 obj = RNN()
 n = 5; p = 0.5; g = 1.0, th = 0.8;
-obj = RNN(n)
-obj = RNN(n, p, g)
-obj = RNN(n, p, g, th)
+obj = RNN.init(n)
+obj = RNN.init(n, p, g)
+obj = RNN.init(n, p, g, th)
 M = ones(n, n); M_ = ones(n, 1);
 x = ones(n, 1); x_ = ones(n, n);
-obj = RNN(n, p, g, th, M)
-obj = RNN(n, p, g, th, [], x)
-obj = RNN(n, p, g, th, M, x)
+obj = RNN.init(n, p, g, th, M)
+obj = RNN.init(n, p, g, th, [], x)
+obj = RNN.init(n, p, g, th, M, x)
 
 ri = RNNInitializer()
 ri = RNNInitializer('n', n)
@@ -23,7 +23,7 @@ obj.reset(ri)
 
 %% Output from RNN
 
-rnn = RNN.init('n', 24)
+rnn = RNN('n', 24)
 ro = RNNObserver.init(rnn)
 dt = 0.1
 simtime = 0:dt:30-dt;

@@ -16,7 +16,7 @@ force
 zt = zeros(len, 1);
 wo_len = zeros(len, 1);
 
-rnn = RNN.init('n', 256);
+rnn = RNN('n', 256);
 ro = RNNObserver.init(rnn);
 recRNN = zeros(len, ro.cellNum);
 fb = SingleFeedback();
