@@ -17,7 +17,7 @@ classdef Connector < handle & MyObject
 					error('Invalid Argument(weight)');
 				end
 			else
-				weight = 2.0*(randn(out.length_in(), in.length_out()) - 0.5);
+				weight = 2.0 * (rand(out.length_in(), in.length_out()) - 0.5);
 			end
 			obj.in = in;
 			obj.out = out;
@@ -29,9 +29,9 @@ classdef Connector < handle & MyObject
 			obj.weight = obj.w0;
 		end
 		
-		function transmit(obj, dt)
-			flowin = obj.weight * obj.in.outflow * dt;
-			obj.out.inflow(flowin);
+		function flow = transmit(obj, dt)
+			flow = obj.weight * obj.in.outflow * dt;
+			obj.out.inflow(flow);
 		end
 	end
 end

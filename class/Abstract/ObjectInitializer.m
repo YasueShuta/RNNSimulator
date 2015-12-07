@@ -14,8 +14,6 @@ classdef ObjectInitializer < MyObject
                 obj.set_inner(0);
                 return;
             elseif iscell(varargin{1})
-                isempty(varargin{1})
-                varargin{1}
                 if isempty(varargin{1})
                     obj.set_inner(0);
                     return;

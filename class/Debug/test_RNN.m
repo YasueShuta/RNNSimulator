@@ -2,8 +2,7 @@
 clear;
 clear classes;
 
-%%% RNN Initialize
-%{
+%% RNN Initialize
 obj = RNN()
 n = 5; p = 0.5; g = 1.0, th = 0.8;
 obj = RNN(n)
@@ -16,14 +15,13 @@ obj = RNN(n, p, g, th, [], x)
 obj = RNN(n, p, g, th, M, x)
 
 ri = RNNInitializer()
-ri = RNNInitializer({'n', n})
-ri = RNNInitializer({'n', n, 'th', th, 'isPlastic', true})
+ri = RNNInitializer('n', n)
+ri = RNNInitializer('n', n, 'th', th, 'isPlastic', true)
 
 obj = RNN;
 obj.reset(ri)
-%}
 
-%%% Output from RNN
+%% Output from RNN
 
 rnn = RNN.init('n', 24)
 ro = RNNObserver.init(rnn)
