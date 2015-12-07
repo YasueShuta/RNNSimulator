@@ -23,14 +23,14 @@ classdef FORCE < handle & FORCEInitializer & FORCEProperties & FORCEFunction
             if nargin == 2 && obj ~= FI 
                 FORCEInitializer.copy(obj, FI);
             end
-            if ~isempty(obj.connector) && ~isempty(obj.connector.in) && isa(obj.connector.in, 'RNN')
+            if ~isempty(obj.connector) && ~isempty(obj.connector.in)
                 obj.isConnect = true;
                 if ~isempty(obj.r_alpha)
-                    obj.alpha = obj.n * obj.r_alpha;
+                    obj.alpha = obj.col * obj.r_alpha;
                 end
-                obj.error = 0;
-                obj.P = (1.0/obj.alpha)*eye(obj.n);
-                obj.dw = zeros(1, obj.n);
+                obj.error = zeros(obj.row, 1);
+                obj.P = (1.0/obj.alpha)*eye(obj.col);
+                obj.dw = zeros(obj.row, obj.col);
             end
         end
         

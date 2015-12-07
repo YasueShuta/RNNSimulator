@@ -1,28 +1,41 @@
-classdef IdManager < handle
-    properties (Constant)
-        basedir = 'C:\Users\mech-user\Documents\MATLAB\RNNSimulator';
-        folder = 'testFile';
-        file = 'id.mat';
-    end
-    properties
-        id=0;
-        file_count=0;
-        figure_count=0;
-        observer_count=0;
-    end
-    
+classdef IdManager
+	properties (Constant)
+		setupfile = 'C:\Users\mech-user\Documents\MATLAB\RNNSimulator\testFile\setup.mat';
+	end
     methods (Static)
-        function str = dirname()
-            str = strcat(IdManager.basedir, '\', IdManager.folder);
-        end
-        function str = filename()
-            str = strcat(IdManager.basedir, '\', IdManager.folder, '\', IdManager.file);
-        end
+    	function [basedir, folder, idfile] = getSetup()
+    		if ~exist(IdManager.setupfile)
+    			IdManager.setupInit();
+    		end
+    		setup = importdata(IdManager.setupfile);
+    		basedir = setup.basedir;
+    		folder = setup.folder;
+    		idfile = setup.idfile;
+    	end
+    	
+        function str = dirname(record)
+        	if nargin == 0
+        		[basedir, folder, idfile] = getSetup();
+	            str = strcat(basedir, '\', folder);
+	            return;
+	        end
+	        str = strcat(record.basedir, '\', record.folder);
+	    end
+
+        function str = filename(record)
+        	if nargin == 0
+        		[basedir, folder, idfile] = getSetup();
+	            str = strcat(basedir, '\', folder, '\', idfile);
+	            return;
+	        end
+	        str = strcat(record.basedir, '\', folder, '\', record.idfile);
+	    end
+	    
         function reset()
             IdManager.idSave();
         end 
         
-        function data = getData()
+        function data = getData(record)
             if ~exist(IdManager.dirname, 'dir')
                 mkdir(IdManager.dirname);
             elseif ~exist(IdManager.filename, 'file')

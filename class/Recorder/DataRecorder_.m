@@ -1,4 +1,4 @@
-classdef DataRecorder < handle
+classdef DataRecorder_ < handle
     %SaveManager このクラスの概要をここに記述
     %   詳細説明をここに記述
     
