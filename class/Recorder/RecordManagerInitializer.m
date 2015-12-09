@@ -6,17 +6,22 @@ classdef RecordManagerInitializer < ObjectInitializer
 		folder;
 		idfile;
 		
+        flag = '';
 		isValid=false;
-	end
+    end
 	
 	methods
 		function obj = RecordManagerInitializer(varargin)
-			if nargin == 0
-                obj.set();
-				return;
-			end
-			obj.set(varargin);
-		end
+            if strcmp(class(obj), 'RecordManagerInitializer')
+                if nargin == 0
+                    obj.set();
+                    return;
+                end
+                obj.set(varargin);
+            else
+                return;
+            end
+        end
 		
 		function set_inner(obj, argvnum, argvstr, argvdata)
 			if nargin < 2 || argvnum == 0
@@ -25,18 +30,23 @@ classdef RecordManagerInitializer < ObjectInitializer
 			for i = 1:argvnum
 				switch argvstr{i}
 					case {'basedir', 'base', 'b'}
+                        if ~isempty(obj.basedir) && ~strcmp(obj.basedir, argvdata{i})
+                            obj.flag = 'updateId';
+                        end
 						obj.basedir = argvdata{i};
-                        obj.id = [];
-					case {'folder', 'dir', 'd'}
-						obj.folder = argvdata{i};
-                        obj.id = [];
-					case {'idfile', 'file', 'f'}
+                    case {'folder', 'dir', 'd'}
+                        if ~isempty(obj.folder) && ~strcmp(obj.folder, argvdata{i})
+                            obj.flag = 'updateId';
+                        end
+						obj.folder = argvdata{i};    
+                    case {'idfile', 'file', 'f'}
+                        if ~isempty(obj.folder) && ~strcmp(obj.idfile, argvdata{i})
+                            obj.flag = 'updateId';
+                        end
 						obj.idfile = argvdata{i};
-                        obj.id = [];
-					otherwise
-				end
+                    otherwise
+                end
             end
-			IdManager.reset(obj);
 		end
 		
 		function setDefault(obj)
@@ -44,11 +54,14 @@ classdef RecordManagerInitializer < ObjectInitializer
 			obj.folder = IdManagerDefault.folder;
 			obj.idfile = IdManagerDefault.idfile;
             obj.isValid = true;
-		end
+        end 
     end
     
     methods (Static)
         function obj = init(basedir)
+            if nargin < 1
+                obj = RecordManager();
+            end
             obj = RecordManager('basedir', basedir);
         end
     end

@@ -81,8 +81,9 @@ classdef IdManager
             
             if ~exist(dirname, 'dir')
                 mkdir(dirname);
-            elseif ~exist(filename, 'file')
-                IdManager.reset();
+            end
+            if ~exist(filename, 'file')
+                IdManager.reset(rm);
             end
             data = importdata(filename);
         end

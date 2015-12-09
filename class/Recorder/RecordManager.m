@@ -3,35 +3,55 @@ classdef RecordManager < ObjectManager & RecordManagerInitializer
 		id;
 	    recorder_count;
 	    
-		flag;
-        
         dateStr;
+        timeStr;
 	end
 	
 	methods
 		function obj = RecordManager(varargin)
-            list = RecordManager.getObject();
-            if ~isempty(list)
-                obj = list{1};
-                return;
+            tmp = RecordManager.getObject();
+            if isempty(tmp)
+                % create new RecordManager
+                obj.flag = 'updateId';
+                if nargin == 0
+                    % default RecordManager
+                    obj.set();
+                else
+                    % setup RecordManager
+                    obj.set(varargin);
+                end
+            else
+                % modify current RecordManager
+                obj = tmp;
+                if nargin == 0
+                    % defulat RecordManager
+                    if ~strcmp(tmp.basedir, IdManagerDefault.basedir) || ...
+                            ~strcmp(tmp.folder, IdManagerDefault.folder) || ~strcmp(tmp.idfile, IdManagerDefault.idfile)
+                        % ID require updating
+                        obj.flag = 'updateId';
+                        obj.set();
+                    else                     
+                         % Copy RecordManager
+                    end
+                else
+                    % if parameter changed, ID require updating
+                    obj.set(varargin);
+                end 
             end
-			if nargin == 0
-				obj.set();
-            end
-			obj.set(varargin);
         end
         
 		function set_inner(obj, argvnum, argvstr, argvdata)
+            % called after set, set_inner@RecordManagerInitializer
             obj.setDefault();
 			if nargin < 2 || argvnum == 0
 				obj.set_inner@RecordManagerInitializer(0);
             else
-				obj.set_inner@DataRecorderInitializer(argvnum, argvstr, argvdata);
+				obj.set_inner@RecordManagerInitializer(argvnum, argvstr, argvdata);
 				for i = 1:argvnum
 					switch argvstr{i}
 						case {'flag'}
 							obj.flag = argvdata{i};
-						case {'mode'}
+						case {'mode', 'm'}
 							obj.mode = argvdata{i};
 						otherwise
 					end
@@ -41,15 +61,18 @@ classdef RecordManager < ObjectManager & RecordManagerInitializer
 		end
 
 		function setId(obj)
+            % update id
    			obj.id = IdManager.getId(obj);
         end
 		
 		function reset(obj)
-            if isempty(obj.id)
+            if strcmp(obj.flag, 'updateId')
     			obj.setId();
+                obj.flag = '';
             end
             vec = datevec(date);
             obj.dateStr = sprintf('%4d_%02d%02d', vec(1), vec(2), vec(3));
+            obj.timeStr = datestr(now);
         end
         
         function dir = dirname(obj)
@@ -62,8 +85,15 @@ classdef RecordManager < ObjectManager & RecordManagerInitializer
     end
 
    methods (Static)
-       function list = getObject()
-           list = RecordManager.findObjects('RecordManager');
+       function ret = getObject(tmp)
+           if nargin == 0
+               tmp = RecordManager.findObjects('RecordManager');
+           end
+           if isempty(tmp)
+               ret = [];
+               return;
+           end
+           ret = tmp{1};
        end
    end
 end
