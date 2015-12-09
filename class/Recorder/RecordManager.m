@@ -59,16 +59,13 @@ classdef RecordManager < ObjectManager & RecordManagerInitializer
         end
         
         function dir = dirname(obj)
-            dir = strcat(obj.basedir, '\', obj.folder, '\', obj.dateStr);
+            dir = strcat(obj.basedir, '\', obj.folder);
         end
         
         function file = filename(obj)
             file = strcat(obj.dirname(), '\', obj.idfile);
         end
         
-        function str = timeStr(obj)
-            str = datestr(now);
-        end
     end
 
    methods (Static)

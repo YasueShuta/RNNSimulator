@@ -1,4 +1,4 @@
-classdef Observer < ObjectInitializer
+classdef Observer < ObjectInitializer & ObserverFunction
 	properties
         id;
         
@@ -12,11 +12,6 @@ classdef Observer < ObjectInitializer
 		recorder;
 		dstfile;
 		dstdir;
-	end
-	
-	methods (Abstract)
-        sprint(obj);
-        data(obj);
 	end
 	
 	methods
@@ -43,8 +38,6 @@ classdef Observer < ObjectInitializer
                         obj.flag = 'registerRecorder';
 					case {'dstfile', 'file', 'f'}
 						obj.dstfile = argvdata{i};
-					case {'dstdir', 'dir', 'd'}
-						obj.dstdir = argvdata{i};
 					otherwise
 				end
 			end
@@ -94,50 +87,5 @@ classdef Observer < ObjectInitializer
 			target = target_;
 			obj.isTargetConnected = true;
         end
-		
-		function print(obj)
-			switch(obj.output_mode)
-				case 'invalid'
-                    warning('Invalid Observer:');
-					return;
-				case 'console'
-					obj.print_console(obj.sprint());
-                case 'recorder'
-                    obj.print_recorder(obj.sprint());
-                case 'file'
-                    obj.print_file(obj.sprint());
-				otherwise;
-            end
-        end
-        
-        function print_console(obj, str)
-            disp([sprintf('[%02d] ',obj.id), str]);
-        end
-        
-        function print_recorder(obj, str)
-            % obj.recorder.print(str);
-            print_console(obj, strcat('recorder:', str));
-        end
-        
-        function print_file(obj, str)
-            if ~exist(obj.file, 'file')
-                fid = obj.file_init();
-            else
-                fid = fopen(obj.file, 'a');
-            end
-            fprintf(str);
-            fclose(fid);
-        end
-        
-        function fid = file_init(obj)
-            fid = fopen(obj.file, 'w');
-            fprintf(fid, obj.timeStamp());
-        end
     end
-    
-    methods (Static)
-        function str = timeStamp()
-            str = datestr(now);
-        end
-    end     
 end

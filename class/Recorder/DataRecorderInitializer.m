@@ -38,11 +38,14 @@ classdef DataRecorderInitializer < ObjectInitializer
     end
     
     methods (Static)
-        function obj = init(observer)
+        function obj = init(observer, name)
+            if nargin < 2 || isempty(name)
+                name = [];
+            end
             if nargin < 1 || isempty(observer)
                 obj = DataRecorder();
             else
-                obj = DataRecorder('observer', observer);
+                obj = DataRecorder('observer', observer, 'name', name);
             end
         end
     end
