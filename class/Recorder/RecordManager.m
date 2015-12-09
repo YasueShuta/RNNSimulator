@@ -1,11 +1,8 @@
-classdef DataRecorder < DataRecorderInitializer
-	% DATARECORDER
-	%
+classdef RecordManager < ObjectManager & RecordManagerInitializer
 	properties
-		recordId;
-		manager;
-		observer;
-	
+		id;
+	    recorder_count;
+	    
 		flag;
         
         dateStr;
@@ -57,5 +54,7 @@ classdef DataRecorder < DataRecorderInitializer
             dir = strcat(obj.basedir, '\', obj.folder, '\', obj.dateStr);
         end
     end
-end
 
+
+
+end

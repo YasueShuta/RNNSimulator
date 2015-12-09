@@ -48,7 +48,7 @@ classdef RecordManagerInitializer < ObjectInitializer
     
     methods (Static)
         function obj = init(basedir)
-            obj = DataRecorder('basedir', basedir);
+            obj = RecordManager('basedir', basedir);
         end
     end
 end

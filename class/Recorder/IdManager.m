@@ -4,9 +4,13 @@ classdef IdManager
 	end
 
     methods (Static)
-    	function [basedir, folder, idfile] = getSetup()
+    	function [basedir, folder, idfile] = getSetup(rm)
     		if ~exist(IdManager.setupfile, 'file')
-    			IdManager.setupInit();
+    			if nargin < 1
+    				IdManager.setupInit();
+    			else
+    				IdManager.setupReset(rm);
+    			end
     		end
     		setup = importdata(IdManager.setupfile);
     		basedir = setup.basedir;
@@ -26,15 +30,15 @@ classdef IdManager
 			save(IdManager.setupfile, 'basedir', 'folder', 'idfile');
 		end
 		
-		function setupReset(record)
-			if nargin < 1 || isempty(record)
+		function setupReset(rm)
+			if nargin < 1 || isempty(rm) || ~rm.isValid
 				IdManager.setupInit();
-			elseif ~record.isValid
-				error('Invalid DataRecorder:');
+				return;
 			end
-			basedir = record.basedir;
-			folder = record.folder;
-			idfile = record.idfile;
+			
+			basedir = rm.basedir;
+			folder = rm.folder;
+			idfile = rm.idfile;
 			
             if ~exist(strcat(basedir, '\', folder), 'dir')
                 mkdir(strcat(basedir, '\', folder));
@@ -42,38 +46,38 @@ classdef IdManager
 			save(IdManager.setupfile, 'basedir', 'folder', 'idfile');
 		end
 		    	
-        function str = dirname(record)
-        	if nargin == 0 || isempty(record) || ~record.isValid
-        		[basedir, folder, idfile] = IdManager.getSetup();
+        function str = dirname(rm)
+        	if nargin == 0 || isempty(rm) || ~rm.isValid
+        		[basedir, folder, idfile] = IdManager.getSetup(rm);
 	            str = strcat(basedir, '\', folder);
 	            return;
 	        end
 	        str = strcat(record.basedir, '\', record.folder);
 	    end
 
-        function str = filename(record)
-        	if nargin == 0 || isempty(record) || ~record.isValid
-        		[basedir, folder, idfile] = IdManager.getSetup();
+        function str = filename(rm)
+        	if nargin == 0 || isempty(rm) || ~record.isValid
+        		[basedir, folder, idfile] = IdManager.getSetup(rm);
 	            str = strcat(basedir, '\', folder, '\', idfile);
 	            return;
 	        end
 	        str = strcat(record.basedir, '\', record.folder, '\', record.idfile);
 	    end
 	    
-        function reset(record)
-            if nargin < 1 || isempty(record)
-                record = [];
+        function reset(rm)
+            if nargin < 1 || isempty(rm)
+                rm = [];
             end
-            IdManager.setupReset(record);
-            IdManager.idSave([], [], record);
+            IdManager.setupReset(rm);
+            IdManager.idSave([], [], rm);
         end 
         
-        function data = getData(record)
-            if nargin == 0 || isempty(record)
-                record = [];
+        function data = getData(rm)
+            if nargin == 0 || isempty(rm)
+                rm = [];
             end
-            dirname = IdManager.dirname(record);
-            filename = IdManager.filename(record);
+            dirname = IdManager.dirname(rm);
+            filename = IdManager.filename(rm);
             
             if ~exist(dirname, 'dir')
                 mkdir(dirname);
@@ -83,37 +87,45 @@ classdef IdManager
             data = importdata(filename);
         end
         
-        function id = getId(record)
-            if nargin == 0 || isempty(record)
+        function id = getId(rm)
+            if nargin == 0 || isempty(rm)
                 record = [];
             end
-            obj = IdManager.getData(record);
+            obj = IdManager.getData(rm);
             id = obj.id + 1;
-            IdManager.idSave(obj, 'id', record);
+            IdManager.idSave(obj, 'id', rm);
         end
-        function ret = getFileCount(record)
-            if nargin == 0 || isempty(record)
+        function ret = getFileCount(rm
+            if nargin == 0 || isempty(rm
                 record = [];
             end
-            obj = IdManager.getData(record);
+            obj = IdManager.getData(rm)
             ret = obj.file_count + 1;
-            IdManager.idSave(obj, 'file', record);
+            IdManager.idSave(obj, 'file',rm);
         end
-        function ret = getFigureCount(record)
-            if nargin == 0 || isempty(record)
+        function ret = getFigureCount(rm)
+            if nargin == 0 || isempty(rm)
                 record = [];
             end            
-            obj = IdManager.getData(record);
+            obj = IdManager.getData(rm)
             ret = obj.figure_count + 1;
-            IdManager.idSave(obj, 'figure', record);
+            IdManager.idSave(obj, 'figure', rm;
         end
-        function ret = getObserverCount(record)
-            if nargin == 0 || isempty(record)
+        function ret = getObserverCount(rm)
+            if nargin == 0 || isempty(rm
                 record = [];
             end
-            obj = IdManager.getData(record);
+            obj = IdManager.getData(rm)
             ret = obj.observer_count + 1;
-            IdManager.idSave(obj, 'observer', record);
+            IdManager.idSave(obj, 'observer', rm;
+        end
+        function ret = getRecorderCount(rm)
+        	if nargin == 0 || isempty(rm)
+        		rm = [];
+        	end
+        	obj = IdManager.getData(rm);
+        	ret = obj.recorder_count + 1;
+        	IdManager.idSave(obj, 'observer', rm);
         end
         
         function idSave(data, str, record)
@@ -128,41 +140,47 @@ classdef IdManager
                 file_count = 0;
                 figure_count = 0;
                 observer_count = 0;
+                recorder_count = 0;
             else
             	id = data.id;
                 file_count = data.file_count;
                 figure_count = data.figure_count;
                 observer_count = data.observer_count;
+                recorder_count = data.recorder_count;
                 switch str
                     case 'id'
                         id = id + 1;
                         file_count = 0;
                         figure_count = 0;
                         observer_count = 0;
+                        recorder_count = 0;
                     case 'file'
                         file_count = file_count + 1;
                     case 'figure'
                         figure_count = figure_count + 1;
                     case 'observer'
                         observer_count = observer_count + 1;
+                    case 'recorder'
+                    	recorder_count = recorder_count + 1;
                     case 'reset'
                         id = 0;
                         file_count = 0;
                         figure_count = 0;
                         observer_count = 0;
+                        recorder_count = 0;
                     otherwise
                 end
             end
             IdManager.save_safe(IdManager.dirname(record), IdManager.filename(record), ...
-                id, file_count, figure_count, observer_count);
+                id, file_count, figure_count, observer_count, recorder_count);
         end
         
-        function save_safe(dirname, filename, id, file_count, figure_count, observer_count)
+        function save_safe(dirname, filename, id, file_count, figure_count, observer_count, recorder_count)
            if ~exist(dirname, 'dir')
                warning('Invalid Access to directory;');
                mkdir(dirname);
            end
-           save(filename, 'id', 'file_count', 'figure_count', 'observer_count');
+           save(filename, 'id', 'file_count', 'figure_count', 'observer_count', 'recorder_count');
         end
         
         function delete_idfile(record)
