@@ -12,6 +12,7 @@ classdef RecordManagerInitializer < ObjectInitializer
 	methods
 		function obj = RecordManagerInitializer(varargin)
 			if nargin == 0
+                obj.set();
 				return;
 			end
 			obj.set(varargin);

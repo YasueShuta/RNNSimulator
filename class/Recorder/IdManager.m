@@ -52,16 +52,16 @@ classdef IdManager
 	            str = strcat(basedir, '\', folder);
 	            return;
 	        end
-	        str = strcat(record.basedir, '\', record.folder);
+	        str = strcat(rm.basedir, '\', rm.folder);
 	    end
 
         function str = filename(rm)
-        	if nargin == 0 || isempty(rm) || ~record.isValid
+        	if nargin == 0 || isempty(rm) || ~rm.isValid
         		[basedir, folder, idfile] = IdManager.getSetup(rm);
 	            str = strcat(basedir, '\', folder, '\', idfile);
 	            return;
 	        end
-	        str = strcat(record.basedir, '\', record.folder, '\', record.idfile);
+	        str = strcat(rm.basedir, '\', rm.folder, '\', rm.idfile);
 	    end
 	    
         function reset(rm)
@@ -95,8 +95,8 @@ classdef IdManager
             id = obj.id + 1;
             IdManager.idSave(obj, 'id', rm);
         end
-        function ret = getFileCount(rm
-            if nargin == 0 || isempty(rm
+        function ret = getFileCount(rm)
+            if nargin == 0 || isempty(rm)
                 record = [];
             end
             obj = IdManager.getData(rm)
@@ -109,15 +109,15 @@ classdef IdManager
             end            
             obj = IdManager.getData(rm)
             ret = obj.figure_count + 1;
-            IdManager.idSave(obj, 'figure', rm;
+            IdManager.idSave(obj, 'figure', rm);
         end
         function ret = getObserverCount(rm)
-            if nargin == 0 || isempty(rm
+            if nargin == 0 || isempty(rm)
                 record = [];
             end
             obj = IdManager.getData(rm)
             ret = obj.observer_count + 1;
-            IdManager.idSave(obj, 'observer', rm;
+            IdManager.idSave(obj, 'observer', rm);
         end
         function ret = getRecorderCount(rm)
         	if nargin == 0 || isempty(rm)
@@ -128,8 +128,8 @@ classdef IdManager
         	IdManager.idSave(obj, 'observer', rm);
         end
         
-        function idSave(data, str, record)
-            if nargin < 3 || isempty(record) 
+        function idSave(data, str, rm)
+            if nargin < 3 || isempty(rm) 
             	record = [];
            	end
            	if nargin < 2 || isempty(str)
@@ -171,7 +171,7 @@ classdef IdManager
                     otherwise
                 end
             end
-            IdManager.save_safe(IdManager.dirname(record), IdManager.filename(record), ...
+            IdManager.save_safe(IdManager.dirname(rm), IdManager.filename(rm), ...
                 id, file_count, figure_count, observer_count, recorder_count);
         end
         
@@ -183,11 +183,11 @@ classdef IdManager
            save(filename, 'id', 'file_count', 'figure_count', 'observer_count', 'recorder_count');
         end
         
-        function delete_idfile(record)
-            if nargin == 0 || isempty(record) || ~record.isValid
-                record = [];
+        function delete_idfile(rm)
+            if nargin == 0 || isempty(rm) || ~rm.isValid
+                rm = [];
             end
-            delete(IdManager.filename(record));
+            delete(IdManager.filename(rm));
         end
         
         function delete_setup()

@@ -6,11 +6,15 @@ classdef RecordManager < ObjectManager & RecordManagerInitializer
 		flag;
         
         dateStr;
-		recordName='data';
 	end
 	
 	methods
-		function obj = DataRecorder(varargin)
+		function obj = RecordManager(varargin)
+            list = RecordManager.getObject();
+            if ~isempty(list)
+                obj = list{1};
+                return;
+            end
 			if nargin == 0
 				obj.set();
             end
@@ -20,7 +24,7 @@ classdef RecordManager < ObjectManager & RecordManagerInitializer
 		function set_inner(obj, argvnum, argvstr, argvdata)
             obj.setDefault();
 			if nargin < 2 || argvnum == 0
-				obj.set_inner@DataRecorderInitializer(0);
+				obj.set_inner@RecordManagerInitializer(0);
             else
 				obj.set_inner@DataRecorderInitializer(argvnum, argvstr, argvdata);
 				for i = 1:argvnum
@@ -29,8 +33,6 @@ classdef RecordManager < ObjectManager & RecordManagerInitializer
 							obj.flag = argvdata{i};
 						case {'mode'}
 							obj.mode = argvdata{i};
-                        case {'name', 'recordName', 'n'}
-                            obj.recordName = argvdata{i};
 						otherwise
 					end
 				end
@@ -47,14 +49,21 @@ classdef RecordManager < ObjectManager & RecordManagerInitializer
     			obj.setId();
             end
             vec = datevec(date);
-            obj.dateStr = sprintf('%4d_%02d%02', vec(1), vec(2), vec(3));
+            obj.dateStr = sprintf('%4d_%02d%02d', vec(1), vec(2), vec(3));
         end
         
         function dir = dirname(obj)
             dir = strcat(obj.basedir, '\', obj.folder, '\', obj.dateStr);
         end
+        
+        function file = filename(obj)
+            file = strcat(obj.dirname(), '\', obj.idfile);
+        end
     end
 
-
-
+   methods (Static)
+       function list = getObject()
+           list = RecordManager.findObjects('RecordManager');
+       end
+   end
 end
