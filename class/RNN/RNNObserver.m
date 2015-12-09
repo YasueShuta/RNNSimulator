@@ -1,64 +1,56 @@
 classdef RNNObserver < Observer
 	properties
-		isRNNConnected = false;
+		isTargetConnected = false;
         cellNum = 5;
         cell;
 	end
 	
 	methods
 		function obj = RNNObserver(varargin)
-            obj.setId();
-            if nargin == 0
-                return;
-            end
             obj.set(varargin);
         end
         
         function set_inner(obj, argvnum, argvstr, argvdata)
-            if nargin < 3
+            if nargin < 2 || argvnum == 0
                 obj.set_inner@Observer(0);
             else
                 obj.set_inner@Observer(argvnum, argvstr, argvdata);
-            end
-            for i = 1:argvnum
-                switch argvstr{i}
-                    case {'cellNum', 'num', 'n'}
-                        obj.cellNum = argvdata{i};
-                    otherwise
+                for i = 1:argvnum
+                    switch argvstr{i}
+                        case {'cellNum', 'num', 'n'}
+                            obj.cellNum = argvdata{i};
+                        otherwise
+                    end
                 end
             end
-            obj.setCell();
-        end
-		
-		function target = check_target(obj, target_)
-			if isempty(target_) 
-				warning('Invalid target: target is not RNN.');
-				target = [];
-				return;
-			end
-			target = target_;
-			obj.isRNNConnected = true;
+            obj.reset();
         end
         
-        function check_cellNum(obj)
-            if ~obj.isRNNConnected
+        function reset(obj)
+            if isempty(obj.id)
+                obj.setId();
+            end
+            if obj.isTargetConnected
+                obj.setCell();
+            end
+            obj.isValid = true; 
+            if strcmp(obj.flag, 'registerRecorder')
+                obj.registerRecorder();
+            end
+        end
+        
+        function setCell(obj)
+            if ~obj.isTargetConnected
                 return;
             end
             if obj.target.n < obj.cellNum
                 obj.cellNum = obj.target.n;
             end
-        end
-        
-        function setCell(obj)
-            if ~obj.isRNNConnected
-                return;
-            end
-            obj.check_cellNum();
             obj.cell = randsample(obj.target.n, obj.cellNum);
         end
         
         function str = sprint(obj)
-            if ~obj.isRNNConnected
+            if ~obj.isTargetConnected
                 str = 'RNN is not connected';
                 return;
             end
@@ -72,7 +64,7 @@ classdef RNNObserver < Observer
         end
         
         function data = data(obj)
-            if ~obj.isRNNConnected
+            if ~obj.isTargetConnected
                 data = [];
                 return;
             end

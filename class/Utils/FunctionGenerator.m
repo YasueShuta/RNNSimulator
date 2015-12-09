@@ -4,7 +4,7 @@ classdef FunctionGenerator
 	
 	methods (Static)
 		function f = constant(value, simtime)
-			f = value * ones(simtime);
+			f = value * ones(1, length(simtime));
 		end
 		
 		function f = sin(amp, freq, phi, simtime)
@@ -12,7 +12,7 @@ classdef FunctionGenerator
 		end
 		
 		function f = zero(simtime)
-			f = zeros(simtime);
+			f = zeros(1, length(simtime));
 		end
 		
 		

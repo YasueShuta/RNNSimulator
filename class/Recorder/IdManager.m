@@ -7,8 +7,12 @@ classdef IdManager
     	function [basedir, folder, idfile] = getSetup(rm)
     		if ~exist(IdManager.setupfile, 'file')
     			if nargin < 1
-    				IdManager.setupInit();
-    			else
+                    rm = RecordManager.getObject();
+                    if isempty(rm)
+        				IdManager.setupInit();
+                    end
+                    IdManager.setupReset(rm);
+                else
     				IdManager.setupReset(rm);
     			end
     		end
@@ -32,10 +36,12 @@ classdef IdManager
 		
 		function setupReset(rm)
 			if nargin < 1 || isempty(rm) || ~rm.isValid
-				IdManager.setupInit();
-				return;
-			end
-			
+                rm = RecordManager.getObject();
+                if isempty(rm)
+                    IdManager.setupInit();
+                    return;
+                end
+            end
 			basedir = rm.basedir;
 			folder = rm.folder;
 			idfile = rm.idfile;
@@ -48,33 +54,43 @@ classdef IdManager
 		    	
         function str = dirname(rm)
         	if nargin == 0 || isempty(rm) || ~rm.isValid
-        		[basedir, folder, idfile] = IdManager.getSetup(rm);
-	            str = strcat(basedir, '\', folder);
-	            return;
-	        end
-	        str = strcat(rm.basedir, '\', rm.folder);
+                rm = RecordManager.getObject();
+                if isempty(rm)
+                    rm = [];
+                end
+            end
+            [basedir, folder, idfile] = IdManager.getSetup(rm);
+	        str = strcat(basedir, '\', folder);
 	    end
 
         function str = filename(rm)
         	if nargin == 0 || isempty(rm) || ~rm.isValid
-        		[basedir, folder, idfile] = IdManager.getSetup(rm);
-	            str = strcat(basedir, '\', folder, '\', idfile);
-	            return;
-	        end
-	        str = strcat(rm.basedir, '\', rm.folder, '\', rm.idfile);
+                rm = RecordManager.getObject();
+                if isempty(rm)
+                    rm = [];
+                end
+            end
+       		[basedir, folder, idfile] = IdManager.getSetup(rm);
+            str = strcat(basedir, '\', folder, '\', idfile);
 	    end
 	    
         function reset(rm)
-            if nargin < 1 || isempty(rm)
-                rm = [];
+            if nargin < 1 || isempty(rm) || ~rm.isValid
+                rm = RecordManager.getObject();
+                if isempty(rm)
+                    rm = [];
+                end
             end
             IdManager.setupReset(rm);
             IdManager.idSave([], [], rm);
         end 
         
         function data = getData(rm)
-            if nargin == 0 || isempty(rm)
-                rm = [];
+            if nargin == 0 || isempty(rm) || ~rm.isValid
+                rm = RecordManager.getObject();
+                if isempty(rm)
+                    rm = [];
+                end
             end
             dirname = IdManager.dirname(rm);
             filename = IdManager.filename(rm);
@@ -89,49 +105,67 @@ classdef IdManager
         end
         
         function id = getId(rm)
-            if nargin == 0 || isempty(rm)
-                record = [];
+            if nargin == 0 || isempty(rm) || ~rm.isValid
+                rm = RecordManager.getObject();
+                if isempty(rm)
+                    rm = [];
+                end
             end
             obj = IdManager.getData(rm);
             id = obj.id + 1;
             IdManager.idSave(obj, 'id', rm);
         end
         function ret = getFileCount(rm)
-            if nargin == 0 || isempty(rm)
-                record = [];
+            if nargin == 0 || isempty(rm) || ~rm.isValid
+                rm = RecordManager.getObject();
+                if isempty(rm)
+                    rm = [];
+                end
             end
-            obj = IdManager.getData(rm)
+            obj = IdManager.getData(rm);
             ret = obj.file_count + 1;
-            IdManager.idSave(obj, 'file',rm);
+            IdManager.idSave(obj, 'file', rm);
         end
         function ret = getFigureCount(rm)
-            if nargin == 0 || isempty(rm)
-                record = [];
+            if nargin == 0 || isempty(rm) || ~rm.isValid
+                rm = RecordManager.getObject();
+                if isempty(rm)
+                    rm = [];
+                end
             end            
             obj = IdManager.getData(rm)
             ret = obj.figure_count + 1;
             IdManager.idSave(obj, 'figure', rm);
         end
         function ret = getObserverCount(rm)
-            if nargin == 0 || isempty(rm)
-                record = [];
+            if nargin == 0 || isempty(rm) || ~rm.isValid
+                rm = RecordManager.getObject();
+                if isempty(rm)
+                    rm = [];
+                end
             end
-            obj = IdManager.getData(rm)
+            obj = IdManager.getData(rm);
             ret = obj.observer_count + 1;
             IdManager.idSave(obj, 'observer', rm);
         end
         function ret = getRecorderCount(rm)
-        	if nargin == 0 || isempty(rm)
-        		rm = [];
-        	end
+        	if nargin == 0 || isempty(rm) || ~rm.isValid
+                rm = RecordManager.getObject();
+                if isempty(rm)
+                    rm = [];
+                end
+            end
         	obj = IdManager.getData(rm);
         	ret = obj.recorder_count + 1;
-        	IdManager.idSave(obj, 'observer', rm);
+        	IdManager.idSave(obj, 'recorder', rm);
         end
         
         function idSave(data, str, rm)
-            if nargin < 3 || isempty(rm) 
-            	record = [];
+            if nargin < 3 || isempty(rm) || ~rm.isValid
+                rm = RecordManager.getObject();
+                if isempty(rm)
+                    rm = [];
+                end
            	end
            	if nargin < 2 || isempty(str)
            		str = 'reset';
@@ -186,7 +220,10 @@ classdef IdManager
         
         function delete_idfile(rm)
             if nargin == 0 || isempty(rm) || ~rm.isValid
-                rm = [];
+                rm = RecordManager.getObject();
+                if isempty(rm)
+                    rm = [];
+                end
             end
             delete(IdManager.filename(rm));
         end

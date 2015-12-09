@@ -1,20 +1,21 @@
-classdef RecordManagerInitializer < ObjectInitializer
+classdef DataRecorderInitializer < ObjectInitializer
 	% DATARECORDERINITIALIZER
 	%
-	properties
-		basedir;
-		folder;
-		idfile;
-		
+	properties		
 		isValid=false;
+        flag = 'initialize';
+        
+		observer;
+		recordName='data';
 	end
 	
 	methods
-		function obj = RecordManagerInitializer(varargin)
-			if nargin == 0
-				return;
-			end
-			obj.set(varargin);
+		function obj = DataRecorderInitializer(varargin)
+            if strcmp(class(obj), 'DataRecorderInitializer')
+                obj.set(varargin);
+            else
+                return;
+            end
 		end
 		
 		function set_inner(obj, argvnum, argvstr, argvdata)
@@ -23,32 +24,26 @@ classdef RecordManagerInitializer < ObjectInitializer
             end
 			for i = 1:argvnum
 				switch argvstr{i}
-					case {'basedir', 'base', 'b'}
-						obj.basedir = argvdata{i};
-                        obj.id = [];
-					case {'folder', 'dir', 'd'}
-						obj.folder = argvdata{i};
-                        obj.id = [];
-					case {'idfile', 'file', 'f'}
-						obj.idfile = argvdata{i};
-                        obj.id = [];
+                    case {'observer', 'o'}
+                        obj.observer = argvdata{i};
+                        obj.flag = 'registerObserver';
+                    case {'recordName', 'name', 'n'}
+                        obj.recordName = argvdata{i};
+                    case {'flag'}
+                        obj.flag = argvdata{i};
 					otherwise
 				end
             end
-			IdManager.reset(obj);
-		end
-		
-		function setDefault(obj)
-			obj.basedir = IdManagerDefault.basedir;
-			obj.folder = IdManagerDefault.folder;
-			obj.idfile = IdManagerDefault.idfile;
-            obj.isValid = true;
-		end
+        end
     end
     
     methods (Static)
-        function obj = init(basedir)
-            obj = DataRecorder('basedir', basedir);
+        function obj = init(observer)
+            if nargin < 1 || isempty(observer)
+                obj = DataRecorder();
+            else
+                obj = DataRecorder('observer', observer);
+            end
         end
     end
 end

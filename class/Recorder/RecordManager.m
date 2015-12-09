@@ -4,7 +4,6 @@ classdef RecordManager < ObjectManager & RecordManagerInitializer
 	    recorder_count;
 	    
         dateStr;
-        timeStr;
 	end
 	
 	methods
@@ -13,26 +12,12 @@ classdef RecordManager < ObjectManager & RecordManagerInitializer
             if isempty(tmp)
                 % create new RecordManager
                 obj.flag = 'updateId';
-                if nargin == 0
-                    % default RecordManager
-                    obj.set();
-                else
-                    % setup RecordManager
-                    obj.set(varargin);
-                end
+                obj.set(varargin);
             else
                 % modify current RecordManager
                 obj = tmp;
                 if nargin == 0
-                    % defulat RecordManager
-                    if ~strcmp(tmp.basedir, IdManagerDefault.basedir) || ...
-                            ~strcmp(tmp.folder, IdManagerDefault.folder) || ~strcmp(tmp.idfile, IdManagerDefault.idfile)
-                        % ID require updating
-                        obj.flag = 'updateId';
-                        obj.set();
-                    else                     
-                         % Copy RecordManager
-                    end
+                    obj.flag = 'updateId';
                 else
                     % if parameter changed, ID require updating
                     obj.set(varargin);
@@ -49,8 +34,6 @@ classdef RecordManager < ObjectManager & RecordManagerInitializer
 				obj.set_inner@RecordManagerInitializer(argvnum, argvstr, argvdata);
 				for i = 1:argvnum
 					switch argvstr{i}
-						case {'flag'}
-							obj.flag = argvdata{i};
 						case {'mode', 'm'}
 							obj.mode = argvdata{i};
 						otherwise
@@ -66,13 +49,13 @@ classdef RecordManager < ObjectManager & RecordManagerInitializer
         end
 		
 		function reset(obj)
+            IdManager.setupReset(obj);
             if strcmp(obj.flag, 'updateId')
     			obj.setId();
                 obj.flag = '';
             end
             vec = datevec(date);
             obj.dateStr = sprintf('%4d_%02d%02d', vec(1), vec(2), vec(3));
-            obj.timeStr = datestr(now);
         end
         
         function dir = dirname(obj)
@@ -81,6 +64,10 @@ classdef RecordManager < ObjectManager & RecordManagerInitializer
         
         function file = filename(obj)
             file = strcat(obj.dirname(), '\', obj.idfile);
+        end
+        
+        function str = timeStr(obj)
+            str = datestr(now);
         end
     end
 

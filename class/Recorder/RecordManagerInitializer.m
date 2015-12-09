@@ -13,10 +13,6 @@ classdef RecordManagerInitializer < ObjectInitializer
 	methods
 		function obj = RecordManagerInitializer(varargin)
             if strcmp(class(obj), 'RecordManagerInitializer')
-                if nargin == 0
-                    obj.set();
-                    return;
-                end
                 obj.set(varargin);
             else
                 return;
@@ -44,15 +40,18 @@ classdef RecordManagerInitializer < ObjectInitializer
                             obj.flag = 'updateId';
                         end
 						obj.idfile = argvdata{i};
+                    case {'flag'}
+    					obj.flag = argvdata{i};
                     otherwise
                 end
             end
 		end
 		
 		function setDefault(obj)
-			obj.basedir = IdManagerDefault.basedir;
-			obj.folder = IdManagerDefault.folder;
-			obj.idfile = IdManagerDefault.idfile;
+            [basedir, folder, idfile] = IdManager.getSetup();
+			obj.basedir = basedir;
+			obj.folder = folder;
+			obj.idfile = idfile;
             obj.isValid = true;
         end 
     end
@@ -61,8 +60,9 @@ classdef RecordManagerInitializer < ObjectInitializer
         function obj = init(basedir)
             if nargin < 1
                 obj = RecordManager();
+            else
+                obj = RecordManager('basedir', basedir);
             end
-            obj = RecordManager('basedir', basedir);
         end
     end
 end

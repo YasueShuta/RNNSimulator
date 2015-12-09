@@ -14,4 +14,6 @@ RecordManager.getObject()
 rm = RecordManager(); rm.id                   % id = 4
 rm = RecordManager('f', 'id2.mat'); rm.id     % id = 2
 
+rm = RecordManager('folder', 'testFile\garbage\RMSample');
 RecordManager.getObject()
+
