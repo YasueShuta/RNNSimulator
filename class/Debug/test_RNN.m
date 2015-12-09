@@ -3,6 +3,7 @@ clear;
 clear classes;
 
 %% RNN Initialize
+%{
 obj = RNN()
 n = 5; p = 0.5; g = 1.0, th = 0.8;
 obj = RNN.init(n)
@@ -20,8 +21,9 @@ ri = RNNInitializer('n', n, 'th', th, 'isPlastic', true)
 
 obj = RNN;
 obj.reset(ri)
+%}
 
-%% Output from RNN
+%% Output from RNN and RNNObserver
 
 rnn = RNN('n', 24)
 ro = RNNObserver.init(rnn)
@@ -38,6 +40,9 @@ co = Connector(rnn, output)
 co.transmit(dt)
 output.update()
 disp(['Output: ', num2str(output.Output)]);
+
+%% Simulation
+%{
 ti = 0;
 for i = simtime
     ti = ti + 1;
@@ -62,3 +67,4 @@ hold on;
 for i = 2:ro.cellNum
     plot(simtime, recRNN(:,i));
 end
+%}

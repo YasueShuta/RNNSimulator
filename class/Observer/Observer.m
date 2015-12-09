@@ -4,7 +4,10 @@ classdef Observer < ObjectInitializer
         
 		target;
 		output_mode = 'invalid';
-		
+        
+        isValid=false;
+		flag = 'initialize';
+        
 		every = 10;
 		recorder;
 		dstfile;
@@ -12,16 +15,19 @@ classdef Observer < ObjectInitializer
 	end
 	
 	methods (Abstract)
-		check_target(obj, target_);
         sprint(obj);
+        data(obj);
 	end
 	
 	methods
-        function setId(obj, record)
-        	if nargin == 0 || isempty(record)
-        		record = [];
+        function setId(obj, rm)
+        	if nargin < 2 || isempty(rm) || ~rm.isValid
+        		rm = RecordManager.getObject();
+                if isempty(rm)
+                    rm = [];
+                end
         	end
-            obj.id = IdManager.getObserverCount(record);
+            obj.id = IdManager.getObserverCount(rm);
         end
 		function set_inner(obj, argvnum, argvstr, argvdata)
 			for i = 1:argvnum
@@ -33,7 +39,8 @@ classdef Observer < ObjectInitializer
 					case {'every', 'e'}
 						obj.every = argvdata{i};
 					case {'recorder', 'r'}
-						obj.recorder = obj.check_recorder(argvdata{i});
+						obj.recorder = argvdata{i};
+                        obj.flag = 'registerRecorder';
 					case {'dstfile', 'file', 'f'}
 						obj.dstfile = argvdata{i};
 					case {'dstdir', 'dir', 'd'}
@@ -66,15 +73,27 @@ classdef Observer < ObjectInitializer
 			end
 		end
 		
-		function rec = check_recorder(obj, rec_)
-			if isempty(rec_) || isempty(findprop(rec_, 'isValid')) || isValid == false
-				warning('Invalid recorder:');
+		function registerRecorder(obj)
+			if isempty(obj.recorder) || ~obj.recorder.isValid
+				warning('recorder is not ready');
 				obj.mode = 'default';
-				rec = [];
-			else
-				rec = rec_;
+                return;
+            end
+            if isempty(obj.recorder.observer) || obj.recorder.observer.id ~= obj.id
+                obj.recorder.set('observer', obj);
+            end
+            obj.flag = '';
+        end
+  		
+		function target = check_target(obj, target_)
+			if isempty(target_) 
+				warning('Invalid target: target is not RNN.');
+				target = [];
+				return;
 			end
-		end
+			target = target_;
+			obj.isTargetConnected = true;
+        end
 		
 		function print(obj)
 			switch(obj.output_mode)

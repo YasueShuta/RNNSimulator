@@ -2,32 +2,24 @@ classdef DataRecorder < DataRecorderInitializer
 	% DATARECORDER
 	%
 	properties
-		id;
-	
-		flag;
-        
-        dateStr;
-		recordName='data';
+		recordId;
+        file_count;
+	    
+		manager;
 	end
 	
 	methods
 		function obj = DataRecorder(varargin)
-			if nargin == 0
-				obj.set();
-            end
 			obj.set(varargin);
         end
         
 		function set_inner(obj, argvnum, argvstr, argvdata)
-            obj.setDefault();
 			if nargin < 2 || argvnum == 0
 				obj.set_inner@DataRecorderInitializer(0);
             else
 				obj.set_inner@DataRecorderInitializer(argvnum, argvstr, argvdata);
 				for i = 1:argvnum
 					switch argvstr{i}
-						case {'flag'}
-							obj.flag = argvdata{i};
 						case {'mode'}
 							obj.mode = argvdata{i};
                         case {'name', 'recordName', 'n'}
@@ -40,19 +32,36 @@ classdef DataRecorder < DataRecorderInitializer
 		end
 
 		function setId(obj)
-   			obj.id = IdManager.getId(obj);
+   			obj.recordId = IdManager.getRecorderCount(obj.manager);
         end
 		
 		function reset(obj)
-            if isempty(obj.id)
+            if isempty(obj.recordId)
     			obj.setId();
+                obj.file_count = 0;
             end
-            vec = datevec(date);
-            obj.dateStr = sprintf('%4d_%02d%02', vec(1), vec(2), vec(3));
+            rm = RecordManager.getObject();
+            if isempty(rm)
+                warning('RecordManager is not defined.');
+                evalin('base', 'recordManager_ = RecordManager();');
+                rm = RecordManager.getObject();
+            end
+            obj.manager = rm;
+            obj.isValid = true;
+            if strcmp(obj.flag, 'registerObserver')
+                obj.registerObserver();
+            end
         end
         
-        function dir = dirname(obj)
-            dir = strcat(obj.basedir, '\', obj.folder, '\', obj.dateStr);
+        function registerObserver(obj)
+            if isempty(obj.observer) || ~obj.observer.isValid
+                warning('Observer is not ready.');
+                return;
+            end
+            if isempty(obj.observer.recorder) || obj.observer.recorder.recordId ~= obj.recordId
+                obj.observer.set('recorder', obj);
+            end
+            obj.flag = '';
         end
     end
 end
