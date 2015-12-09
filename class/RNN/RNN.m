@@ -13,28 +13,17 @@ classdef RNN < handle & RNNInitializer & RNNFinalizer & RNNFunction & RNNConnect
         
     methods
         function obj = RNN(varargin)
-            if nargin == 0
-                return;
-            end
-            
-    		obj = RNN();
-            obj.setDefault();
     		obj.set(varargin);
-    		obj.setMode();
-    		obj.reset();
         end
         
-        function reset(obj, RI)
+        function reset(obj)
+            disp('Reset@RNN');
             % obj = RNN, RI = RNNInitializer
-            if nargin < 2
-                RI = obj;
-            elseif obj ~= RI
-                RNNInitializer.copy(obj, RI);
-            end
-            obj.Scale = 1/sqrt(RI.n*RI.p);
-            obj.Input = zeros(RI.n, 1);
-            obj.NetworkMatrix = RI.M0;
-            obj.Potential = RI.x0;
+            obj.reset@RNNInitializer();
+            obj.Scale = 1/sqrt(obj.n*obj.p);
+            obj.Input = zeros(obj.n, 1);
+            obj.NetworkMatrix = obj.M0;
+            obj.Potential = obj.x0;
             obj.readout();
         end        
         
