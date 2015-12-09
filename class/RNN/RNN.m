@@ -27,18 +27,6 @@ classdef RNN < handle & RNNInitializer & RNNFinalizer & RNNFunction & RNNConnect
             obj.readout();
         end        
         
-        function setPlastic(obj)
-        	if obj.isPlastic == false
-        		obj.isPlastic = true;
-        	end
-        end
-        
-        function resetPlastic(obj)
-        	if obj.isPlastic == true
-        		obj.isPlastic = false;
-        	end
-        end
-        
         function readout(obj)
             obj.Readout = tanh(obj.Potential);
         end
