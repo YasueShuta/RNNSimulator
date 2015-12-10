@@ -34,12 +34,20 @@ classdef Simulator < ObjectInitializer & SimulatorFunction
 							obj.nsecs = argvdata{i};
 						case {'dt'}
 							obj.dt = argvdata{i};
+                        case {'rootdir'}
+                            obj.rootdir = argvdata{i};
 						otherwise
 					end
 				end
 			end
 			obj.reset();
-		end
+        end
+        
+        function setDefault(obj)
+            obj.nsecs = SimulatorDefault.nsecs;
+            obj.dt = SimulatorDefault.dt;
+            obj.rootdir = SimulatorDefault.rootdir;
+        end
 		
 		function reset(obj)
 			obj.setSimtime();
@@ -47,5 +55,21 @@ classdef Simulator < ObjectInitializer & SimulatorFunction
 			obj.setSimulator();
 		end
 	
-	end
+    end
+    
+    methods (Static)
+        function obj = init(nsecs, dt, rootdir)
+            if nargin < 3 || isempty(rootdir)
+                rootdir = SimulatorDefault.rootdir;
+            end
+            if nargin < 2 || isempty(dt)
+                dt = SimulatorDefault.dt;
+            end
+            if nargin < 1 || isempty(nsecs)
+                nsecs = SimulatorDefault.nsecs;
+            end
+            obj = Simulator('nsecs', nsecs, 'dt', dt, 'rootdir', rootdir);
+        end
+    end
+                
 end

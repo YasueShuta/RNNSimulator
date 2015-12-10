@@ -18,9 +18,9 @@ classdef SimulationProperties < handle
     
     methods
     	function setSimtime(obj)
-    		obj.simtime = 1:dt:nsecs-dt;
+    		obj.simtime = 1:obj.dt:obj.nsecs-obj.dt;
     		obj.simtime_len = length(obj.simtime);
-    		obj.simtime_test = nsecs:dt:2*nsecs-dt;
+    		obj.simtime_test = obj.nsecs:obj.dt:2*obj.nsecs-obj.dt;
     	end
     	
     	function setRecordManager(obj, basedir, folder, idfile)

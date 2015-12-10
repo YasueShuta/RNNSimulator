@@ -1,4 +1,4 @@
-classdef Connector < handle & MyObject
+classdef Connector < handle
 	properties
 		weight;
 		w0;

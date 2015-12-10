@@ -45,7 +45,7 @@ classdef DataRecorderInitializer < ObjectInitializer
             if nargin < 1 || isempty(observer)
                 obj = DataRecorder();
             else
-                obj = DataRecorder('observer', observer, 'name', name);
+                obj = DataRecorder('observer', observer, 'recordName', name);
             end
         end
     end

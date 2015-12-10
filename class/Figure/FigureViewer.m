@@ -1,4 +1,4 @@
-classdef FigureViewer < handle
+classdef FigureViewer < ObjectInitializer
     %FigureViewer is a discription of parameters for MATLAB graph.
     %
     

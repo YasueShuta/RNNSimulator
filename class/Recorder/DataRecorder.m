@@ -24,8 +24,6 @@ classdef DataRecorder < DataRecorderInitializer & RecorderFunction
 					switch argvstr{i}
 						case {'mode'}
 							obj.mode = argvdata{i};
-                        case {'name', 'recordName', 'n'}
-                            obj.recordName = argvdata{i};
 						otherwise
 					end
 				end
