@@ -1,4 +1,4 @@
-classdef SimulationProperties < handle
+classdef SimulationProperties_ < handle
     %SimulationProperties
     %
     

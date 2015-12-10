@@ -11,8 +11,10 @@ classdef RNNInitializer < ObjectInitializer
         mode = 0;  % Network Initialization Mode (0: Random Sparse)
         isPlastic = false;
         isLoadedNetwork = false;
+        isDefinedNetwork = false;
         load_net;
         isLoadedPotential = false;
+        isDefinedPotential = false;
         load_x;
         
         flag;
@@ -21,11 +23,9 @@ classdef RNNInitializer < ObjectInitializer
     
     methods
         function obj = RNNInitializer(varargin)
-            if nargin == 0
-                return;
+            if strcmp(class(obj), 'RNNInitializer')
+                obj.set(varargin);
             end
-            obj.setDefault();
-            obj.set(varargin);
         end
         
         function setDefault(obj)
@@ -46,6 +46,7 @@ classdef RNNInitializer < ObjectInitializer
         end
         
         function set_inner(obj, argvnum, argvstr, argvdata)
+            obj.setDefault();
             for i = 1:argvnum
                 switch argvstr{i}
                     case {'N', 'n', 'nRec2Out'}
@@ -74,11 +75,19 @@ classdef RNNInitializer < ObjectInitializer
                         warning('RNNProperties: Invalid Argument.');
                 end
             end
+            obj.reset();
+        end
+        
+        function reset(obj)
+            disp('Reset@RNNInit');
+            obj.setMode();
             obj.setNetwork();
             obj.setPotential();
         end
-        
-        function setNetwork(obj)           
+        function setNetwork(obj)
+            if obj.isDefinedNetwork && ~isempty(obj.M0)
+                return;
+            end
         	if obj.isLoadedNetwork == false
                 obj.M0 = obj.initNetwork(obj.n, obj.p, obj.g);
             else
@@ -90,7 +99,10 @@ classdef RNNInitializer < ObjectInitializer
             end                
         end
         
-        function setPotential(obj)           
+        function setPotential(obj)
+            if obj.isDefinedPotential && ~isempty(obj.x0)
+                return;
+            end
         	if obj.isLoadedPotential == false
                 obj.x0 = obj.initPotential(obj.n);
             else
@@ -101,6 +113,19 @@ classdef RNNInitializer < ObjectInitializer
             	end
             end
         end
+        
+        function setPlastic(obj)
+        	if obj.isPlastic == false
+        		obj.isPlastic = true;
+        	end
+        end
+        
+        function resetPlastic(obj)
+        	if obj.isPlastic == true
+        		obj.isPlastic = false;
+        	end
+        end
+        
     end
     
     methods (Static)
@@ -143,21 +168,31 @@ classdef RNNInitializer < ObjectInitializer
                 obj.th = th;
             end
             if isempty(M0)
-                obj.M0 = obj.initNetwork(obj.n, obj.p, obj.g);
             elseif size(M0, 1) ~= n || size(M0, 2) ~= n
                 error('Invalid Argument(M0):');
             else
                 obj.M0 = M0;
+                obj.isDefinedNetwork = true;
             end
             if isempty(x0)
-                obj.x0 = obj.initPotential(obj.n);
             elseif isempty(x0) || size(x0, 1) ~= n || size(x0, 2) ~= 1
                 error('Invalid Argument(x0):');
             else
                 obj.x0 = x0;
+                obj.isDefinedPotential = true;
             end
             obj.reset();
         end
+        
+        function initRI(obj, RI)
+            % obj = RNN, RI = RNNInitializer
+            if nargin < 2
+            elseif obj ~= RI
+                RNNInitializer.copy(obj, RI);
+            end
+            obj.reset();
+        end        
+
         
         function x = initPotential(n)
             x = 0.5*randn(n, 1);
@@ -200,8 +235,10 @@ classdef RNNInitializer < ObjectInitializer
             obj.isPlastic = src.isPlastic;
             obj.isLoadedNetwork = src.isLoadedNetwork;
             obj.load_net = src.load_net;
+            obj.isDefinedNetwork = src.isDefinedNetwork;
             obj.isLoadedPotential = src.isLoadedPotential;
             obj.load_x = src.load_x;
+            obj.isDefinedPotential = src.isDefinedPotential;
             
             obj.flag = src.flag;
             obj.option = src.option;

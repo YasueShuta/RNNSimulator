@@ -1,11 +1,13 @@
-classdef DataRecorder < DataRecorderInitializer
+classdef DataRecorder < DataRecorderInitializer & RecorderFunction
 	% DATARECORDER
 	%
 	properties
 		recordId;
         file_count;
-	    
+	    data_count;
+        
 		manager;
+        logfile;
 	end
 	
 	methods
@@ -22,8 +24,6 @@ classdef DataRecorder < DataRecorderInitializer
 					switch argvstr{i}
 						case {'mode'}
 							obj.mode = argvdata{i};
-                        case {'name', 'recordName', 'n'}
-                            obj.recordName = argvdata{i};
 						otherwise
 					end
 				end
@@ -36,6 +36,7 @@ classdef DataRecorder < DataRecorderInitializer
         end
 		
 		function reset(obj)
+            obj.data_count = 0;
             if isempty(obj.recordId)
     			obj.setId();
                 obj.file_count = 0;
