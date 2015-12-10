@@ -57,11 +57,11 @@ classdef RecordManagerInitializer < ObjectInitializer
     end
     
     methods (Static)
-        function obj = init(basedir)
+        function obj = init(folder)
             if nargin < 1
                 obj = RecordManager();
             else
-                obj = RecordManager('basedir', basedir);
+                obj = RecordManager('folder', folder);
             end
         end
     end

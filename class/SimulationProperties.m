@@ -2,44 +2,40 @@ classdef SimulationProperties < handle
     %SimulationProperties
     %
     
-    properties
-        nRec2Out;
+    properties (Abstract)
         nsecs;
         t;
         ti;
         dt;
-        mode = 0;
-        rnn_mode = 0;
-        force_mode = 0;
-        
-        flag = 'uninitialize';
         
         simtime;
         simtime_len;
         simtime_test;
-        
-        
-        rnn;         % RNNProperties
-        force;       % FORCEProperties
-        record;      % FORCERecorder
-        viewer;      % FigureViewer
+
+        recordManager;      % RecordManager
+%        viewer;             % FigureViewer
     end
     
     methods
-        function SP = SimulationProperties(varargin)
-            if nargin > 0 && strcmp(varargin{1}, '-c')
-                switch varargin{2}
-                    case 'skip'
-                        SP = SimulationManager.set_inner(SP, varargin);
-                        return;
-                    otherwise
-                end
-            end
-            SP = SimulationManager.defaultSimulationProperties();   
-            SimulationManager.set_inner(SP, varargin);
-        end
-        
+    	function setSimtime(obj)
+    		obj.simtime = 1:dt:nsecs-dt;
+    		obj.simtime_len = length(obj.simtime);
+    		obj.simtime_test = nsecs:dt:2*nsecs-dt;
+    	end
+    	
+    	function setRecordManager(obj, basedir, folder, idfile)
+    		if nargin < 4 || isempty(idfile)
+    			idfile = '';
+    		end
+    		if nargin < 3 || isempty(folder)
+    			folder = '';
+    		end
+    		if nargin < 2 || isempty(basedir)
+    			basedir = '';
+    		end
+    		evalin('base', sprintf('recordManager = RecordManager(%s);', folder));
+    		obj.recordManager = RecordManager.getObject();
+    	end
     end
-    
 end
 
