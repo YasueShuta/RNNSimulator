@@ -9,13 +9,18 @@ classdef FigureViewer < ObjectInitializer
         figure_id;
         n_sub;
         
+        linewidth;
+        fontsize;
+        fontweight;
+        
         layout_x;
 		layout_y;
 		layout_i;
 	    
+	    observers={};
+	  	n_obs=0;
+	  	
         manager;
-        observers={};
-        n_data;
     end
     
     methods
@@ -41,15 +46,29 @@ classdef FigureViewer < ObjectInitializer
         end
 
 		function reset(obj)
-			
+			if isempty(obj.manager)
+				obj.manager = FigureManager.getObject();
+				obj.linewidth = obj.manager.linewidth;
+				obj.fontsize = obj.manager.fontsize;
+				obj.fontweight = obj.manager.fontweight;
+			end
+			if isempty(obj.figure_id)
+				obj.figure_id = figure;
+			end
+			obj.setMode();
 		end
         
         function setMode(obj)
         end
         
-        function setDefault(obj)
-        
+        function register(obj, observer)
+        	if nargin < 2
+        		return;
+        	else
+        	obj.n_obs = obj.n_obs + 1;
+        	obj.observers{obj.n_obs} = observer;
         end
+        		
 	end
 	
 	methods (Static)        

@@ -3,6 +3,10 @@ classdef RNNObserver < Observer
 		isTargetConnected = false;
         cellNum = 5;
         cell;
+        
+        data_figure;
+        dataCell_x;
+        dataCell_r;
 	end
 	
 	methods
@@ -49,6 +53,7 @@ classdef RNNObserver < Observer
             obj.cell = randsample(obj.target.n, obj.cellNum);
         end
         
+        %% print functions
         function str = sprint(obj)
             if ~obj.isTargetConnected
                 str = 'RNN is not connected';
@@ -65,13 +70,71 @@ classdef RNNObserver < Observer
         
         function data = data(obj)
             if ~obj.isTargetConnected
-                data = [];
+            	data = [];
                 return;
             end
-            data = zeros(1, obj.cellNum);
+            data = zeros(2, obj.cellNum);
             for i = 1:obj.cellNum
-                data(i) = obj.target.Readout(obj.cell(i));
+            	data(i, 1) = obj.target.Potential(obj.cell(i)); 
+                data(i, 2) = obj.target.Readout(obj.cell(i));
             end
+        end
+        
+        %% figure functions
+        function initFigureData(obj, simtime)
+        	obj.data_figure = zeros(size(simtime));
+        	obj.dataCell_x = cell(1, obj.cellNum);
+        	obj.dataCell_r = cell(1, obj.cellNum);
+        	for i = 1:cellNum
+        		obj.dataCell_x{i} = zeros(size(simtime));
+        		obj.dataCell_r{i} = zeros(size(simtime));
+        	end
+        end
+        
+        function recordFigureData(obj, ti)
+        	tmp = obj.data;
+        	for i = 1:cellNum
+        		obj.dataCell_x{i}(ti) = tmp(i, 1);
+        		obj.dataCell_r{i}(ti) = tmp(i, 2);
+        	end
+        	obj.data_figure(ti) = tmp(1, 1);
+        end
+        
+        function plot_inner(obj, simtime)
+			argv = '';
+			for i = 1:obj.cellNum
+				argv = strcat(argv, ' '' ', num2str(obj.cell{i}), ' '' ');
+				if i ~= obj.cellNum
+					argv = strcat(argv, ', ');
+				end
+			end
+			
+        	figure(obj.viewer.figure_id);
+        	subplot 211;
+			obj.viewer.plot_data(simtime, dataCell_x{1}, FigureManager.colorSet(2));
+			hold on;
+			obj.viewer.setTitle('innerRNN');
+			obj.viewer.setXLabel('time');
+			obj.viewer.setYLabel('potential');
+			eval(sprintf('obj.viewer.setLegend(%s)', argv)); 
+			for i = 2:obj.cellNum
+				obj.viewer.plot_data(simtime, dataCell_x{i}, ...
+					FigureManager.colorSet(mod(i, FigureManager.colorSetNum)+1);
+			end
+			hold off;
+			    
+			subplot 212;
+			obj.viewer.plot_data(simtime, dataCell_r{1}, FigureManager.colorSet(2));
+			hold on;
+			obj.viewer.setTitle('innerRNN');
+			obj.viewer.setXLabel('time');
+			obj.viewer.setYLabel('readout');
+			eval(sprintf('obj.viewer.setLegend(%s)', argv)); 
+			for i = 2:obj.cellNum
+				obj.viewer.plot_data(simtime, dataCell_x{i}, ...
+					FigureManager.colorSet(mod(i, FigureManager.colorSetNum)+1);
+			end
+			hold off;
         end
     end
     

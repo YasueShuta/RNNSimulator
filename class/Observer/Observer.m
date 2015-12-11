@@ -8,10 +8,12 @@ classdef Observer < ObjectInitializer & ObserverFunction
         isValid=false;
 		flag = 'initialize';
         
-		every = 10;
+		print_every = 10;
 		recorder;
 		dstfile;
 		dstdir;
+		
+		data_figure;
 	end
 	
 	methods
@@ -31,8 +33,8 @@ classdef Observer < ObjectInitializer & ObserverFunction
 						obj.target = obj.check_target(argvdata{i});
 					case {'output_mode', 'mode', 'm'}
 						obj.output_mode = obj.check_mode(argvdata{i});
-					case {'every', 'e'}
-						obj.every = argvdata{i};
+					case {'print_every', 'pe'}
+						obj.print_every = argvdata{i};
 					case {'recorder', 'r'}
 						obj.recorder = argvdata{i};
                         obj.flag = 'registerRecorder';
