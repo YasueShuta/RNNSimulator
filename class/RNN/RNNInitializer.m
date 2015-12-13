@@ -79,7 +79,6 @@ classdef RNNInitializer < ObjectInitializer
         end
         
         function reset(obj)
-            disp('Reset@RNNInit');
             obj.setMode();
             obj.setNetwork();
             obj.setPotential();

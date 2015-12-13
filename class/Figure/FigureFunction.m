@@ -5,15 +5,15 @@ classdef FigureFunction < handle
 				return;
 			elseif nargin < 4
 				color = 'blue';
-			end
+            end
 			plot(time, data, 'linewidth', obj.linewidth, 'color', color)
 		end
 		
-		function setTitle(obj, title)
+		function setTitle(obj, str)
 			if nargin < 2
 				return;
 			end
-			title(title, 'fontsize', obj.fontsize, 'fontweight', obj.fontweight);
+			title(str, 'fontsize', obj.fontsize, 'fontweight', obj.fontweight);
 		end
 		
 		function setXLabel(obj, x_label)
@@ -29,16 +29,16 @@ classdef FigureFunction < handle
 			ylabel(y_label, 'fontsize', obj.fontsize, 'fontweight', obj.fontweight);
 		end
 		function setLegend(obj, varargin)
-			if nargin < 2 || length(varargin) == 0
+			if nargin < 2 || isempty(varargin)
 				return;
 			end
 			argv = '';
 			for i = 1:length(varargin)
-				argv = strcat(argv, varargin{i});
+				argv = strcat(argv, '''', varargin{i}, '''');
 				if i ~= length(varargin)
 					argv = strcat(argv, ', ');
 				end
-			end
+            end
 			eval(sprintf('legend(%s);', argv));
 		end	
 	end

@@ -17,7 +17,6 @@ classdef RNN < handle & RNNInitializer & RNNFinalizer & RNNFunction & RNNConnect
         end
         
         function reset(obj)
-            disp('Reset@RNN');
             % obj = RNN, RI = RNNInitializer
             obj.reset@RNNInitializer();
             obj.Scale = 1/sqrt(obj.n*obj.p);

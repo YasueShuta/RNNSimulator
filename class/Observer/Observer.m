@@ -8,10 +8,12 @@ classdef Observer < ObjectInitializer & ObserverFunction
         isValid=false;
 		flag = 'initialize';
         
-		print_every = 10;
+		print_every = 100;
+        figure_every = 1000;
 		recorder;
 		dstfile;
 		dstdir;
+        viewer
 		
 		data_figure;
 	end
@@ -36,8 +38,9 @@ classdef Observer < ObjectInitializer & ObserverFunction
 					case {'print_every', 'pe'}
 						obj.print_every = argvdata{i};
 					case {'recorder', 'r'}
-						obj.recorder = argvdata{i};
-                        obj.flag = 'registerRecorder';
+						obj.registerRecorder(argvdata{i});
+                    case {'viewer', 'v'}
+                        obj.registerViewer(argvdata{i});
 					case {'dstfile', 'file', 'f'}
 						obj.dstfile = argvdata{i};
 					otherwise
@@ -66,16 +69,20 @@ classdef Observer < ObjectInitializer & ObserverFunction
 				warning('Invalid mode:');
 				mode = 'default';
 			end
-		end
-		
-		function registerRecorder(obj)
-			if isempty(obj.recorder) || ~obj.recorder.isValid
+        end
+	
+		function registerRecorder(obj, recorder)
+			if isempty(recorder) || ~recorder.isValid
 				warning('recorder is not ready');
 				obj.mode = 'default';
                 return;
             end
-            if isempty(obj.recorder.observer) || obj.recorder.observer.id ~= obj.id
-                obj.recorder.set('observer', obj);
+            if isempty(recorder.observer) || recorder.observer.id ~= obj.id
+                obj.recorder = recorder;
+                obj.flag = 'recorder';
+                if isempty(recorder.observer)
+                    obj.recorder.set('observer', obj);
+                end
             end
             obj.flag = '';
         end

@@ -9,7 +9,7 @@ classdef FigureManager < ObjectManager & ObjectInitializer
 		flag='';
 		colorSet;
 		colorSetNum;
-	end
+    end
 	
 	methods
 		function obj = FigureManager(varargin)
@@ -59,7 +59,7 @@ classdef FigureManager < ObjectManager & ObjectInitializer
 			if nargin == 0
 				tmp = RecordManager.findObjects('FigureManager');
 			end
-			if isemppty(tmp)
+			if isempty(tmp)
 				evalin('base', 'figureManager_ = FigureManager();');
 				ret = evalin('base', 'figureManager_');
 				return;

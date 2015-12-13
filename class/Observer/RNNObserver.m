@@ -1,10 +1,9 @@
 classdef RNNObserver < Observer
 	properties
 		isTargetConnected = false;
-        cellNum = 5;
+        cellNum = 10;
         cell;
         
-        data_figure;
         dataCell_x;
         dataCell_r;
 	end
@@ -38,9 +37,6 @@ classdef RNNObserver < Observer
                 obj.setCell();
             end
             obj.isValid = true; 
-            if strcmp(obj.flag, 'registerRecorder')
-                obj.registerRecorder();
-            end
         end
         
         function setCell(obj)
@@ -85,7 +81,7 @@ classdef RNNObserver < Observer
         	obj.data_figure = zeros(size(simtime));
         	obj.dataCell_x = cell(1, obj.cellNum);
         	obj.dataCell_r = cell(1, obj.cellNum);
-        	for i = 1:cellNum
+        	for i = 1:obj.cellNum
         		obj.dataCell_x{i} = zeros(size(simtime));
         		obj.dataCell_r{i} = zeros(size(simtime));
         	end
@@ -93,7 +89,7 @@ classdef RNNObserver < Observer
         
         function recordFigureData(obj, ti)
         	tmp = obj.data;
-        	for i = 1:cellNum
+        	for i = 1:obj.cellNum
         		obj.dataCell_x{i}(ti) = tmp(i, 1);
         		obj.dataCell_r{i}(ti) = tmp(i, 2);
         	end
@@ -103,7 +99,7 @@ classdef RNNObserver < Observer
         function plot_inner(obj, simtime)
 			argv = '';
 			for i = 1:obj.cellNum
-				argv = strcat(argv, ' '' ', num2str(obj.cell{i}), ' '' ');
+				argv = strcat(argv, ' '' ', num2str(obj.cell(i)), ' '' ');
 				if i ~= obj.cellNum
 					argv = strcat(argv, ', ');
 				end
@@ -111,41 +107,47 @@ classdef RNNObserver < Observer
 			
         	figure(obj.viewer.figure_id);
         	subplot 211;
-			obj.viewer.plot_data(simtime, dataCell_x{1}, FigureManager.colorSet(2));
+			obj.viewer.plot_data(simtime, obj.dataCell_x{1}, obj.viewer.manager.colorSet{2});
 			hold on;
 			obj.viewer.setTitle('innerRNN');
 			obj.viewer.setXLabel('time');
 			obj.viewer.setYLabel('potential');
-			eval(sprintf('obj.viewer.setLegend(%s)', argv)); 
 			for i = 2:obj.cellNum
-				obj.viewer.plot_data(simtime, dataCell_x{i}, ...
-					FigureManager.colorSet(mod(i, FigureManager.colorSetNum)+1);
+				obj.viewer.plot_data(simtime, obj.dataCell_x{i}, ...
+					obj.viewer.manager.colorSet{mod(i, obj.viewer.manager.colorSetNum)+1});
 			end
+			eval(sprintf('obj.viewer.setLegend(%s)', argv)); 
 			hold off;
 			    
 			subplot 212;
-			obj.viewer.plot_data(simtime, dataCell_r{1}, FigureManager.colorSet(2));
+			obj.viewer.plot_data(simtime, obj.dataCell_r{1}, obj.viewer.manager.colorSet{2});
 			hold on;
 			obj.viewer.setTitle('innerRNN');
 			obj.viewer.setXLabel('time');
 			obj.viewer.setYLabel('readout');
-			eval(sprintf('obj.viewer.setLegend(%s)', argv)); 
 			for i = 2:obj.cellNum
-				obj.viewer.plot_data(simtime, dataCell_x{i}, ...
-					FigureManager.colorSet(mod(i, FigureManager.colorSetNum)+1);
+				obj.viewer.plot_data(simtime, obj.dataCell_r{i}, ...
+					obj.viewer.manager.colorSet{mod(i, obj.viewer.manager.colorSetNum)+1});
 			end
+			eval(sprintf('obj.viewer.setLegend(%s)', argv)); 
 			hold off;
         end
     end
     
     methods (Static)    
-        function obj = init(target, recorder)
-            if nargin < 1
+        function obj = init(target, recorder, viewer)
+            if nargin < 1 || isempty(target)
                 obj = RNNObserver();
-            elseif nargin < 2
-                obj = RNNObserver('target', target);
             else
-                obj = RNNObserver('target', target, 'recorder', recorder);
+                if nargin < 2 || isempty(recorder)
+                    recorder = DataRecorder();
+                end
+                if nargin < 3 || isempty(viewer)
+                    viewer = FigureViewer();
+                end
+                obj = RNNObserver('target', target);
+                obj.registerRecorder(recorder);
+                obj.registerViewer(viewer);
             end
         end
     end

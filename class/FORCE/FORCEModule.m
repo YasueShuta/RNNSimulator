@@ -25,10 +25,15 @@ classdef FORCEModule < ObjectInitializer
            obj.force.reset(FI);
        end
        
-       function setDefault(obj)
+       function reset(obj, FI)
+           obj.force.reset(FI);
        end
        
-       function reset(obj, FI)
+       function update(obj, dt, ti)
+           obj.cn_out.transmit(dt);
+           obj.cell.update();
+           obj.cn_back.transmit(dt);
+           obj.force.update(ti);
        end
    end
    
