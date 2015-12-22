@@ -32,5 +32,8 @@ void DebugConsole::CloseConsole()
 
 void DebugConsole::Wait()
 {
-
+	std::cin.clear();
+	std::cin.ignore();
+	std::cout << "Press Enter:" << std::endl;
+	std::cin.get();
 }
