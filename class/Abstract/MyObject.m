@@ -1,2 +1,0 @@
-classdef MyObject < handle
-end
