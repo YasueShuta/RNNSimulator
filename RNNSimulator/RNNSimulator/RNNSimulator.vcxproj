@@ -112,6 +112,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\class\Abstract\MyObject.cpp" />
+    <ClCompile Include="..\..\class\Abstract\ObjectInitializer.cpp" />
     <ClCompile Include="..\..\class\Abstract\ObjectManager.cpp" />
     <ClCompile Include="..\..\class\Debug\DebugConsole.cpp" />
     <ClCompile Include="..\..\class\Debug\DebugMain.cpp" />
@@ -128,7 +129,6 @@
   <ItemGroup>
     <None Include="..\..\class\Abstract\MyObject.h" />
     <None Include="..\..\class\Abstract\ObjectFinalizer.cpp" />
-    <None Include="..\..\class\Abstract\ObjectInitializer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

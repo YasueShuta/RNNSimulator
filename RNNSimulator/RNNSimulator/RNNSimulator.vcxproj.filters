@@ -30,6 +30,9 @@
     <ClCompile Include="..\..\class\Abstract\ObjectManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\class\Abstract\ObjectInitializer.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\class\Debug\DebugConsole.h">
@@ -54,9 +57,6 @@
   <ItemGroup>
     <None Include="..\..\class\Abstract\MyObject.h">
       <Filter>ヘッダー ファイル</Filter>
-    </None>
-    <None Include="..\..\class\Abstract\ObjectInitializer.cpp">
-      <Filter>ソース ファイル</Filter>
     </None>
     <None Include="..\..\class\Abstract\ObjectFinalizer.cpp">
       <Filter>ソース ファイル</Filter>

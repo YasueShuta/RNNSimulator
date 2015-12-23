@@ -4,6 +4,7 @@
 #include "DebugMain.h"
 #include "DebugConsole.h"
 #include "../Abstract/ObjectManager.h"
+#include "../Abstract/ObjectInitializer.h"
 
 
 DebugMain::DebugMain()
@@ -71,6 +72,21 @@ int DebugMain::OMTest()
 	if (fo != NULL) {
 		std::cout << "Find (SampleManager): " << fo << "|" << typeid(*fo).name() << std::endl;
 	}
+	DebugConsole::Wait();
+	DebugConsole::CloseConsole();
+
+	return 0;
+}
+
+int DebugMain::OITest() {
+	DebugConsole::OpenConsole();
+	std::cout << "Start!" << std::endl;
+
+	SampleInitializer^ sample = gcnew SampleInitializer();
+
+	DebugConsole::Wait();
+	sample->set("-n 128 -p 0.001 threshold 1");
+
 	DebugConsole::Wait();
 	DebugConsole::CloseConsole();
 
