@@ -1,5 +1,6 @@
 #include "MyInclude.h"
 
 int main(void) {
-	DebugMain::ConsoleTest();
+//	DebugMain::ConsoleTest();
+	DebugMain::OMTest();
 }

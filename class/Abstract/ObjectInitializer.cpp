@@ -1,3 +1,4 @@
+/*
 classdef ObjectInitializer < MyObject
     %OBJECTINITIALIZER Interface for Initializer.
     %   Allocation rules, set parameter interface, e.t.c.
@@ -27,3 +28,4 @@ classdef ObjectInitializer < MyObject
     end
 end
 
+*/

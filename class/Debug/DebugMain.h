@@ -8,5 +8,6 @@ public:
 	static int Main();
 
 	static int ConsoleTest();
+	static int OMTest();
 };
 
