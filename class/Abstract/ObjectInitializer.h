@@ -4,10 +4,13 @@
 #include <vector>
 #include <string>
 
-ref class ObjectInitializer
+class ObjectInitializer
 {
 public:
 	ObjectInitializer();
+	ObjectInitializer(std::string argv) : ObjectInitializer() {
+		set(argv);
+	}
 	~ObjectInitializer();
 
 	virtual void hyde() {};
@@ -23,7 +26,7 @@ protected:
 };
 
 
-ref class SampleInitializer : public ObjectInitializer
+class SampleInitializer : public ObjectInitializer
 {
 protected:
 	virtual int set_inner() override {

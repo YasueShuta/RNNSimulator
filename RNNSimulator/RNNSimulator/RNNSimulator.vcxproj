@@ -120,6 +120,7 @@
     <ClCompile Include="..\..\class\Connector\Connector.cpp" />
     <ClCompile Include="..\..\class\Debug\DebugConsole.cpp" />
     <ClCompile Include="..\..\class\Debug\DebugMain.cpp" />
+    <ClCompile Include="..\..\class\Figure\FigureViewer.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -132,6 +133,7 @@
     <ClInclude Include="..\..\class\Connector\Connector.h" />
     <ClInclude Include="..\..\class\Debug\DebugConsole.h" />
     <ClInclude Include="..\..\class\Debug\DebugMain.h" />
+    <ClInclude Include="..\..\class\Figure\FigureViewer.h" />
     <ClInclude Include="MyInclude.h" />
     <ClInclude Include="MyPath.h" />
   </ItemGroup>
@@ -139,10 +141,7 @@
     <None Include="..\..\..\eigen\Eigen\Core" />
     <None Include="..\..\class\Abstract\MyObject.h" />
     <None Include="..\..\class\Abstract\ObjectFinalizer.cpp" />
-    <None Include="..\..\class\Figure\FigureDefault.m" />
     <None Include="..\..\class\Figure\FigureFunction.m" />
-    <None Include="..\..\class\Figure\FigureManager.m" />
-    <None Include="..\..\class\Figure\FigureViewer.m" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

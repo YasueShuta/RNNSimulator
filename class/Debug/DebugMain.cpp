@@ -87,7 +87,7 @@ int DebugMain::OITest() {
 	DebugConsole::OpenConsole();
 	std::cout << "Start!" << std::endl;
 
-	SampleInitializer^ sample = gcnew SampleInitializer();
+	SampleInitializer* sample = new SampleInitializer();
 
 	DebugConsole::Wait();
 	sample->set("-n 128 -p 0.001 threshold 1");

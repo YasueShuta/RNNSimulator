@@ -1,4 +1,4 @@
-﻿  DebugMain.cpp
+﻿  main.cpp
 c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(310): warning C4793: Eigen::internal::pstore<double,__m128d>': ネイティブ関数としてコンパイルされました:
   	マネージ コードでサポートされていない組み込み型が見つかりました
 c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(315): warning C4793: Eigen::internal::pstoreu<double,__m128d>': ネイティブ関数としてコンパイルされました:
