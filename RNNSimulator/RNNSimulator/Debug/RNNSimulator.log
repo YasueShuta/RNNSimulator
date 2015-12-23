@@ -1,4 +1,70 @@
-﻿  DebugMain.cpp
+﻿  Connector.cpp
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(310): warning C4793: Eigen::internal::pstore<double,__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(315): warning C4793: Eigen::internal::pstoreu<double,__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(316): warning C4793: Eigen::internal::pstoreu<double,__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(114): warning C4793: Eigen::internal::pset1<__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(347): warning C4793: Eigen::internal::pfirst<__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(220): warning C4793: Eigen::internal::pload<__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(123): warning C4793: Eigen::internal::padd<__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(238): warning C4793: Eigen::internal::ploadu<__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(638): warning C4793: Eigen::internal::palign_impl<1,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(638): warning C4793: Eigen::internal::palign_impl<1,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(638): warning C4793: Eigen::internal::palign_impl<1,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(638): warning C4793: Eigen::internal::palign_impl<1,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(639): warning C4793: Eigen::internal::palign_impl<1,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(639): warning C4793: Eigen::internal::palign_impl<1,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(639): warning C4793: Eigen::internal::palign_impl<1,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(639): warning C4793: Eigen::internal::palign_impl<1,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(638): warning C4793: Eigen::internal::palign_impl<2,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(638): warning C4793: Eigen::internal::palign_impl<2,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(638): warning C4793: Eigen::internal::palign_impl<2,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(638): warning C4793: Eigen::internal::palign_impl<2,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(639): warning C4793: Eigen::internal::palign_impl<2,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(639): warning C4793: Eigen::internal::palign_impl<2,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(639): warning C4793: Eigen::internal::palign_impl<2,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(639): warning C4793: Eigen::internal::palign_impl<2,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(638): warning C4793: Eigen::internal::palign_impl<3,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(638): warning C4793: Eigen::internal::palign_impl<3,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(638): warning C4793: Eigen::internal::palign_impl<3,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(638): warning C4793: Eigen::internal::palign_impl<3,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(639): warning C4793: Eigen::internal::palign_impl<3,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(639): warning C4793: Eigen::internal::palign_impl<3,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(639): warning C4793: Eigen::internal::palign_impl<3,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(639): warning C4793: Eigen::internal::palign_impl<3,__m128d>::run': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
+c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(150): warning C4793: Eigen::internal::pmul<__m128d>': ネイティブ関数としてコンパイルされました:
+  	マネージ コードでサポートされていない組み込み型が見つかりました
   MyObject.obj : マネージ コードが存在する場合は、/DEBUG:FASTLINK はサポートされません。/DEBUG:FULL でリンクを再開します
   RNNSimulator.vcxproj -> C:\Users\shuta\Documents\Visual Studio 2015\Projects\RNNSimulator\RNNSimulator\Debug\RNNSimulator.exe
   RNNSimulator.vcxproj -> C:\Users\shuta\Documents\Visual Studio 2015\Projects\RNNSimulator\RNNSimulator\Debug\RNNSimulator.pdb (Partial PDB)

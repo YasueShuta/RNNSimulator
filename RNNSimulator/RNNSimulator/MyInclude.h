@@ -10,3 +10,4 @@
 #include "../../class/Abstract/ObjectManager.h"
 #include "../../class/Abstract/ObjectInitializer.h"
 #include "../../class/Connector/Connectable.h"
+#include "../../class/Connector/Connector.h""

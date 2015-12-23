@@ -73,5 +73,6 @@
     <None Include="..\..\class\Abstract\ObjectFinalizer.cpp">
       <Filter>ソース ファイル</Filter>
     </None>
+    <None Include="..\..\..\eigen\Eigen\Core" />
   </ItemGroup>
 </Project>

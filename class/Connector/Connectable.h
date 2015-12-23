@@ -1,8 +1,9 @@
 #pragma once
 #include <vector>
+#include "../../../eigen/Eigen/core"
 
 namespace RNNSimulator {
-	ref class Connectable
+	class Connectable
 	{
 	public:
 		bool isConnectableObject = true;
@@ -10,14 +11,16 @@ namespace RNNSimulator {
 
 		virtual int outflow_len();
 		virtual int inflow_len();
-		virtual std::vector<double> outflow();
+//		virtual std::vector<double> outflow();
+		virtual Eigen::VectorXd outflow();
 		virtual void inflow(std::vector<double> flow);
+		virtual void inflow(Eigen::VectorXd flow);
 
 		Connectable() {};
 		~Connectable() {};
 	};
 
-	ref class SampleConnectable : public Connectable
+	class SampleConnectable : public Connectable
 	{
 	public:
 		int o_len;
@@ -37,11 +40,19 @@ namespace RNNSimulator {
 			return i_len;
 		}
 
+		/*
 		std::vector<double> outflow() override {
 			std::vector<double> ret(outflow_len(), 0);
 			return ret;
 		}
+		*/
+		Eigen::VectorXd outflow() override {
+			Eigen::VectorXd ret = Eigen::VectorXd::Random(outflow_len());
+			return ret;
+		}
 		void inflow(std::vector<double> flow) override {
+		}
+		void inflow(Eigen::VectorXd flow) override {
 		}
 	};
 }

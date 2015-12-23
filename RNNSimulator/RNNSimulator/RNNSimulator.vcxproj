@@ -131,6 +131,7 @@
     <ClInclude Include="MyInclude.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\eigen\Eigen\Core" />
     <None Include="..\..\class\Abstract\MyObject.h" />
     <None Include="..\..\class\Abstract\ObjectFinalizer.cpp" />
   </ItemGroup>

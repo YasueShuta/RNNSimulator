@@ -6,6 +6,7 @@
 #include "../Abstract/ObjectManager.h"
 #include "../Abstract/ObjectInitializer.h"
 #include "../Connector/Connectable.h"
+#include "../Connector/Connector.h"
 
 
 DebugMain::DebugMain()
@@ -98,10 +99,20 @@ int DebugMain::ConnectableTest() {
 	DebugConsole::OpenConsole();
 	std::cout << "Start!" << std::endl;
 
-	RNNSimulator::Connectable^ sample = gcnew RNNSimulator::SampleConnectable(3, 5);
+	RNNSimulator::Connectable* sample = new RNNSimulator::SampleConnectable(3, 5);
 	std::cout << "in: " << sample->inflow_len() << std::endl;
 	std::cout << "out: " << sample->outflow_len() << std::endl;
 
+	RNNSimulator::Connector* con = new RNNSimulator::Connector(sample, sample, 1);
+	std::cout << "weight" << std::endl;
+	std::cout << con->weight << std::endl;
+
+	std::cout << "flowIn: " << std::endl;
+	std::cout << sample->outflow() << std::endl;
+	std::cout << "flowOut: " << std::endl;
+	std::cout << con->transmit(1) << std::endl;
+	sample->inflow(con->transmit(1));
+ 
 	DebugConsole::Wait();
 	DebugConsole::CloseConsole();
 
