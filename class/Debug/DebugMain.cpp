@@ -7,6 +7,7 @@
 #include "../Abstract/ObjectInitializer.h"
 #include "../Connector/Connectable.h"
 #include "../Connector/Connector.h"
+#include "../Connector/ConnectableNode.h"
 
 
 DebugMain::DebugMain()
@@ -113,6 +114,34 @@ int DebugMain::ConnectableTest() {
 	std::cout << con->transmit(1) << std::endl;
 	sample->inflow(con->transmit(1));
  
+	DebugConsole::Wait();
+	DebugConsole::CloseConsole();
+
+	return 0;
+}
+
+int DebugMain::ConnectableNodeTest() {
+	DebugConsole::OpenConsole();
+	std::cout << "Start!" << std::endl;
+
+	RNNSimulator::ConnectableNode* sample = new RNNSimulator::ConnectableNode(5);
+	std::cout << "n: " << sample->cellNum << std::endl;
+	std::cout << "x: " << sample->potential << std::endl;
+	std::cout << "r: " << sample->readout << std::endl;
+
+	RNNSimulator::Connector* con = new RNNSimulator::Connector(sample, sample, 1);
+	std::cout << "weight" << std::endl;
+	std::cout << con->weight << std::endl;
+
+	std::cout << "flowIn: " << std::endl;
+	std::cout << sample->outflow() << std::endl;
+	std::cout << "flowOut: " << std::endl;
+	std::cout << con->transmit(1) << std::endl;
+	sample->inflow(con->transmit(1));
+
+	std::cout << "x: " << sample->potential << std::endl;
+	std::cout << "r: " << sample->readout << std::endl;
+
 	DebugConsole::Wait();
 	DebugConsole::CloseConsole();
 

@@ -11,5 +11,6 @@ public:
 	static int OMTest();
 	static int OITest();
 	static int ConnectableTest();
+	static int ConnectableNodeTest();
 };
 

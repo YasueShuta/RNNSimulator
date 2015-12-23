@@ -112,19 +112,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\class\Abstract\MyObject.cpp" />
+    <ClCompile Include="..\..\class\Abstract\Node.cpp" />
     <ClCompile Include="..\..\class\Abstract\ObjectInitializer.cpp" />
     <ClCompile Include="..\..\class\Abstract\ObjectManager.cpp" />
     <ClCompile Include="..\..\class\Connector\Connectable.cpp" />
+    <ClCompile Include="..\..\class\Connector\ConnectableNode.cpp" />
     <ClCompile Include="..\..\class\Connector\Connector.cpp" />
     <ClCompile Include="..\..\class\Debug\DebugConsole.cpp" />
     <ClCompile Include="..\..\class\Debug\DebugMain.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\class\Abstract\Node.h" />
     <ClInclude Include="..\..\class\Abstract\ObjectFinalizer.h" />
     <ClInclude Include="..\..\class\Abstract\ObjectInitializer.h" />
     <ClInclude Include="..\..\class\Abstract\ObjectManager.h" />
     <ClInclude Include="..\..\class\Connector\Connectable.h" />
+    <ClInclude Include="..\..\class\Connector\ConnectableNode.h" />
     <ClInclude Include="..\..\class\Connector\Connector.h" />
     <ClInclude Include="..\..\class\Debug\DebugConsole.h" />
     <ClInclude Include="..\..\class\Debug\DebugMain.h" />
@@ -134,6 +138,11 @@
     <None Include="..\..\..\eigen\Eigen\Core" />
     <None Include="..\..\class\Abstract\MyObject.h" />
     <None Include="..\..\class\Abstract\ObjectFinalizer.cpp" />
+    <None Include="..\..\class\RNNIO\ObjectIO.m" />
+    <None Include="..\..\class\RNNIO\RNNIO.m" />
+    <None Include="..\..\class\RNNIO\SingleFeedback.m" />
+    <None Include="..\..\class\RNNIO\SingleInput.m" />
+    <None Include="..\..\class\RNNIO\SingleOutput.m" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
