@@ -5,7 +5,8 @@ int main(void) {
 	// 	DebugMain::OMTest();
 	// 	DebugMain::OITest();
 	//	DebugMain::ConnectableTest();
-	DebugMain::ConnectableNodeTest();
+	// 	DebugMain::ConnectableNodeTest();
 
+	DebugMain::GnuplotTest();
 	return 0;
 };

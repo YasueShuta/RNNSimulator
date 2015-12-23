@@ -77,6 +77,9 @@
     <ClInclude Include="..\..\class\Connector\ConnectableNode.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="MyPath.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\class\Abstract\MyObject.h">
@@ -86,10 +89,9 @@
       <Filter>ソース ファイル</Filter>
     </None>
     <None Include="..\..\..\eigen\Eigen\Core" />
-    <None Include="..\..\class\RNNIO\ObjectIO.m" />
-    <None Include="..\..\class\RNNIO\RNNIO.m" />
-    <None Include="..\..\class\RNNIO\SingleFeedback.m" />
-    <None Include="..\..\class\RNNIO\SingleInput.m" />
-    <None Include="..\..\class\RNNIO\SingleOutput.m" />
+    <None Include="..\..\class\Figure\FigureViewer.m" />
+    <None Include="..\..\class\Figure\FigureDefault.m" />
+    <None Include="..\..\class\Figure\FigureFunction.m" />
+    <None Include="..\..\class\Figure\FigureManager.m" />
   </ItemGroup>
 </Project>

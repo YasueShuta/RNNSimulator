@@ -9,6 +9,8 @@
 #include "../Connector/Connector.h"
 #include "../Connector/ConnectableNode.h"
 
+#include "../../RNNSimulator/RNNSimulator/MyPath.h"
+
 
 DebugMain::DebugMain()
 {
@@ -143,6 +145,25 @@ int DebugMain::ConnectableNodeTest() {
 	std::cout << "r: " << sample->readout << std::endl;
 
 	DebugConsole::Wait();
+	DebugConsole::CloseConsole();
+
+	return 0;
+}
+
+
+int DebugMain::GnuplotTest() {
+	DebugConsole::OpenConsole();
+
+	FILE *fp = _popen(MyPath::GNUPLOT_PATH(), "w");
+	std::stringstream ss;
+	ss << "plot sin(x)" << std::endl;
+	fputs(ss.str().c_str(), fp);
+	fflush(fp);
+
+	std::cout << ss.str() << std::endl;
+
+	DebugConsole::Wait();
+	_pclose(fp);
 	DebugConsole::CloseConsole();
 
 	return 0;

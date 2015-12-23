@@ -5,6 +5,7 @@
 #include <windows.h>
 #include <typeinfo.h>
 
+#include "MyPath.h"
 #include "../../class/Debug/DebugConsole.h"
 #include "../../class/Debug/DebugMain.h"
 #include "../../class/Abstract/ObjectManager.h"
