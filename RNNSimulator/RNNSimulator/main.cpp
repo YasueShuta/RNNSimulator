@@ -3,6 +3,7 @@
 int main(void) {
 	//	DebugMain::ConsoleTest();
 	// 	DebugMain::OMTest();
-	DebugMain::OITest();
+	// 	DebugMain::OITest();
+	DebugMain::ConnectableTest();
 	return 0;
 };

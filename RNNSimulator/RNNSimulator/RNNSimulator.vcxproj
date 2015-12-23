@@ -114,6 +114,8 @@
     <ClCompile Include="..\..\class\Abstract\MyObject.cpp" />
     <ClCompile Include="..\..\class\Abstract\ObjectInitializer.cpp" />
     <ClCompile Include="..\..\class\Abstract\ObjectManager.cpp" />
+    <ClCompile Include="..\..\class\Connector\Connectable.cpp" />
+    <ClCompile Include="..\..\class\Connector\Connector.cpp" />
     <ClCompile Include="..\..\class\Debug\DebugConsole.cpp" />
     <ClCompile Include="..\..\class\Debug\DebugMain.cpp" />
     <ClCompile Include="main.cpp" />
@@ -122,6 +124,8 @@
     <ClInclude Include="..\..\class\Abstract\ObjectFinalizer.h" />
     <ClInclude Include="..\..\class\Abstract\ObjectInitializer.h" />
     <ClInclude Include="..\..\class\Abstract\ObjectManager.h" />
+    <ClInclude Include="..\..\class\Connector\Connectable.h" />
+    <ClInclude Include="..\..\class\Connector\Connector.h" />
     <ClInclude Include="..\..\class\Debug\DebugConsole.h" />
     <ClInclude Include="..\..\class\Debug\DebugMain.h" />
     <ClInclude Include="MyInclude.h" />

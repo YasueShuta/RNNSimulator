@@ -5,6 +5,7 @@
 #include "DebugConsole.h"
 #include "../Abstract/ObjectManager.h"
 #include "../Abstract/ObjectInitializer.h"
+#include "../Connector/Connectable.h"
 
 
 DebugMain::DebugMain()
@@ -86,6 +87,20 @@ int DebugMain::OITest() {
 
 	DebugConsole::Wait();
 	sample->set("-n 128 -p 0.001 threshold 1");
+
+	DebugConsole::Wait();
+	DebugConsole::CloseConsole();
+
+	return 0;
+}
+
+int DebugMain::ConnectableTest() {
+	DebugConsole::OpenConsole();
+	std::cout << "Start!" << std::endl;
+
+	RNNSimulator::Connectable^ sample = gcnew RNNSimulator::SampleConnectable(3, 5);
+	std::cout << "in: " << sample->inflow_len() << std::endl;
+	std::cout << "out: " << sample->outflow_len() << std::endl;
 
 	DebugConsole::Wait();
 	DebugConsole::CloseConsole();

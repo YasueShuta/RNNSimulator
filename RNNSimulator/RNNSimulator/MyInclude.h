@@ -9,3 +9,4 @@
 #include "../../class/Debug/DebugMain.h"
 #include "../../class/Abstract/ObjectManager.h"
 #include "../../class/Abstract/ObjectInitializer.h"
+#include "../../class/Connector/Connectable.h"

@@ -1,3 +1,4 @@
+/*
 classdef Connector < handle
 	properties
 		weight;
@@ -35,3 +36,4 @@ classdef Connector < handle
 		end
 	end
 end
+*/
