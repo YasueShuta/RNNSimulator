@@ -1,2 +1,4 @@
-classdef ObjectFinalizer < handle
-end
+#include "ObjectFinalizer.h"
+
+ObjectFinalizer::ObjectFinalizer(){}
+ObjectFinalizer::~ObjectFinalizer(){}

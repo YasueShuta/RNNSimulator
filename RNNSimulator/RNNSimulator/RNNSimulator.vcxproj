@@ -29,6 +29,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>true</CLRSupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -110,14 +111,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\class\Abstract\MyObject.cpp" />
+    <ClCompile Include="..\..\class\Abstract\Node.cpp" />
+    <ClCompile Include="..\..\class\Abstract\ObjectInitializer.cpp" />
+    <ClCompile Include="..\..\class\Abstract\ObjectManager.cpp" />
+    <ClCompile Include="..\..\class\Connector\Connectable.cpp" />
+    <ClCompile Include="..\..\class\Connector\ConnectableNode.cpp" />
+    <ClCompile Include="..\..\class\Connector\Connector.cpp" />
     <ClCompile Include="..\..\class\Debug\DebugConsole.cpp" />
     <ClCompile Include="..\..\class\Debug\DebugMain.cpp" />
+    <ClCompile Include="..\..\class\Figure\FigureViewer.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\class\Abstract\Node.h" />
+    <ClInclude Include="..\..\class\Abstract\ObjectFinalizer.h" />
+    <ClInclude Include="..\..\class\Abstract\ObjectInitializer.h" />
+    <ClInclude Include="..\..\class\Abstract\ObjectManager.h" />
+    <ClInclude Include="..\..\class\Connector\Connectable.h" />
+    <ClInclude Include="..\..\class\Connector\ConnectableNode.h" />
+    <ClInclude Include="..\..\class\Connector\Connector.h" />
     <ClInclude Include="..\..\class\Debug\DebugConsole.h" />
     <ClInclude Include="..\..\class\Debug\DebugMain.h" />
+    <ClInclude Include="..\..\class\Figure\FigureViewer.h" />
     <ClInclude Include="MyInclude.h" />
+    <ClInclude Include="MyPath.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\eigen\Eigen\Core" />
+    <None Include="..\..\class\Abstract\MyObject.h" />
+    <None Include="..\..\class\Abstract\ObjectFinalizer.cpp" />
+    <None Include="..\..\class\Figure\FigureFunction.m" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
