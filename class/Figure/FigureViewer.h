@@ -37,6 +37,7 @@ namespace RNNSimulator {
 //		void registerObserver(Observer* obs);
 //		static FigureViewer* init(Observer* obs);
 
+
 	protected:
 		int set_inner() override {
 			return ObjectInitializer::set_inner();

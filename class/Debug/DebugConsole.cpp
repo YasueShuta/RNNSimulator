@@ -1,5 +1,6 @@
 #include "DebugConsole.h"
 #include <iostream>
+#include <string>
 #include <windows.h>
 
 bool DebugConsole::isOpen = false;
@@ -32,8 +33,17 @@ void DebugConsole::CloseConsole()
 
 void DebugConsole::Wait()
 {
+	std::cout << "(If Stop, Press Enter: )" << std::endl;
 	std::cin.clear();
 	std::cin.ignore();
-	std::cout << "Press Enter:" << std::endl;
+	std::cout << "Press Enter:";
 	std::cin.get();
+}
+
+std::string DebugConsole::GetLine()
+{
+	std::string ret;
+	std::cout << "$ ";
+	std::getline(std::cin, ret);
+	return ret;
 }

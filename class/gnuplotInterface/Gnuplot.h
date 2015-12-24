@@ -29,6 +29,22 @@ namespace Gnuplot {
 	private:
 		Handle* h;
 	public:
+		void setTitle(const char* title_);
+		void setTitle(const char* title_, int fontsize_);
+		void setTitle(const char* title_, const char* font_);
+		void setTitle(const char* title_, const char* font_, int fontsize);
+
+		void setXLabel();
+
+		void setYLabel();
+
+		void setKey();
+
+//		void plotFunc();
+//		void plotVec1();
+//		void plotVec2();
+
+		void replot();
 
 		GP();
 		~GP();

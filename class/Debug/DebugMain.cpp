@@ -173,7 +173,6 @@ int DebugMain::FigureViewerTest() {
 
 
 int DebugMain::GnuplotTest() {
-	DebugConsole::OpenConsole();
 
 	Gnuplot::Handle* h = new Gnuplot::Handle();
 
@@ -188,6 +187,18 @@ int DebugMain::GnuplotTest() {
 
 	h2->dispBuf();
 	h2->write();
+
+	std::string buf;
+
+	DebugConsole::OpenConsole();
+	while (1) {
+		buf = DebugConsole::GetLine();
+		if (buf.compare("quit") == 0) {
+			break;
+		}
+		std::cout << buf << std::endl;
+		h->write(buf);
+	}
 
 	DebugConsole::Wait();
 	delete h, h2;

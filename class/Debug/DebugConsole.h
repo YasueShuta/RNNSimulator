@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 class DebugConsole
 {
@@ -11,6 +12,7 @@ public:
 	static void CloseConsole();
 
 	static void Wait();
+	static std::string GetLine();
 
 	static bool isOpen;
 	//	static FILE* fp_console;
