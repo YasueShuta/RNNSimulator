@@ -24,6 +24,15 @@ namespace Gnuplot {
 		void dispBuf();
 	};
 
+	class GP
+	{
+	private:
+		Handle* h;
+	public:
 
+		GP();
+		~GP();
+	};
 }
+
 

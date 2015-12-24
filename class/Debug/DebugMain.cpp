@@ -182,8 +182,15 @@ int DebugMain::GnuplotTest() {
 	h->dispBuf();
 	h->write();
 
+	Gnuplot::Handle* h2 = new Gnuplot::Handle();
+
+	h2->buf << "plot tan(x)";
+
+	h2->dispBuf();
+	h2->write();
+
 	DebugConsole::Wait();
-	delete h;
+	delete h, h2;
 	DebugConsole::CloseConsole();
 
 	return 0;

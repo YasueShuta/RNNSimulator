@@ -6,8 +6,6 @@ Handle::Handle()
 {
 	fp = _popen(GNUPLOT_EXE, "w");
 }
-
-
 Handle::~Handle()
 {
 	_pclose(fp);
@@ -39,3 +37,13 @@ void Handle::dispBuf()
 {
 	std::cout << buf.str() << std::endl;
 }
+
+
+GP::GP()
+{
+	h = new Handle();
+}
+GP::~GP()
+{
+}
+
