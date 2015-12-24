@@ -12,6 +12,7 @@ public:
 	static int OITest();
 	static int ConnectableTest();
 	static int ConnectableNodeTest();
+	static int FigureViewerTest();
 
 	static int GnuplotTest();
 };

@@ -121,6 +121,7 @@
     <ClCompile Include="..\..\class\Debug\DebugConsole.cpp" />
     <ClCompile Include="..\..\class\Debug\DebugMain.cpp" />
     <ClCompile Include="..\..\class\Figure\FigureViewer.cpp" />
+    <ClCompile Include="..\..\class\gnuplotInterface\Gnuplot.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -134,6 +135,7 @@
     <ClInclude Include="..\..\class\Debug\DebugConsole.h" />
     <ClInclude Include="..\..\class\Debug\DebugMain.h" />
     <ClInclude Include="..\..\class\Figure\FigureViewer.h" />
+    <ClInclude Include="..\..\class\gnuplotInterface\Gnuplot.h" />
     <ClInclude Include="MyInclude.h" />
     <ClInclude Include="MyPath.h" />
   </ItemGroup>

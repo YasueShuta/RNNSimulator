@@ -8,6 +8,8 @@
 #include "../Connector/Connectable.h"
 #include "../Connector/Connector.h"
 #include "../Connector/ConnectableNode.h"
+#include "../Figure/FigureViewer.h"
+#include "../gnuplotInterface/Gnuplot.h"
 
 #include "../../RNNSimulator/RNNSimulator/MyPath.h"
 
@@ -150,20 +152,38 @@ int DebugMain::ConnectableNodeTest() {
 	return 0;
 }
 
+int DebugMain::FigureViewerTest() {
+
+	DebugConsole::OpenConsole();
+
+	RNNSimulator::FigureViewer* sample1 = new RNNSimulator::FigureViewer();
+	std::cout << "id: " << sample1->id << ", nextId: " << sample1->nextId << std::endl;
+	RNNSimulator::FigureViewer* sample2 = new RNNSimulator::FigureViewer();
+	std::cout << "id: " << sample2->id << ", nextId: " << sample1->nextId << std::endl;
+	RNNSimulator::FigureViewer* sample3 = new RNNSimulator::FigureViewer();
+	std::cout << "id: " << sample3->id << ", nextId: " << sample1->nextId << std::endl;
+	RNNSimulator::FigureViewer* sample4 = new RNNSimulator::FigureViewer();
+	std::cout << "id: " << sample4->id << ", nextId: " << sample1->nextId << std::endl;
+
+	DebugConsole::Wait();
+	DebugConsole::CloseConsole();
+
+	return 0;
+}
+
 
 int DebugMain::GnuplotTest() {
 	DebugConsole::OpenConsole();
 
-	FILE *fp = _popen(MyPath::GNUPLOT_PATH(), "w");
-	std::stringstream ss;
-	ss << "plot sin(x)" << std::endl;
-	fputs(ss.str().c_str(), fp);
-	fflush(fp);
+	Gnuplot::Handle* h = new Gnuplot::Handle();
 
-	std::cout << ss.str() << std::endl;
+	h->buf << "plot sin(x)";
+
+	h->dispBuf();
+	h->write();
 
 	DebugConsole::Wait();
-	_pclose(fp);
+	delete h;
 	DebugConsole::CloseConsole();
 
 	return 0;
