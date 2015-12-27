@@ -11,10 +11,10 @@ namespace RNNSimulator {
 		ConnectableNode(int n) : Node(n) {};
 		ConnectableNode(int n, int mode) : Node(n, mode) {};
 		
-		int outflow_len();
-		int inflow_len();
-		Eigen::VectorXd outflow();
-		void inflow(Eigen::VectorXd flow);
+		virtual int outflow_len() override;
+		virtual int inflow_len() override;
+		virtual Eigen::VectorXd outflow() override;
+		virtual void inflow(Eigen::VectorXd flow) override;
 	};
 
 }

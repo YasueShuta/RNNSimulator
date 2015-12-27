@@ -21,8 +21,7 @@ Findable::Findable()
 
 Findable::~Findable()
 {
-	std::cout << "Destructor: parent" << std::endl;
-
+	//	std::cout << "Destructor: parent" << std::endl;
 	Findable* parent;
 	parent = (Findable*)findObject<>(id + 1);
 	parent->next = this->next;

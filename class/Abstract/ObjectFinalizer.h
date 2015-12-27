@@ -4,5 +4,5 @@
 class ObjectFinalizer {
 public:
 	ObjectFinalizer();
-	~ObjectFinalizer();
+	virtual ~ObjectFinalizer();
 };

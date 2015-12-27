@@ -16,11 +16,11 @@ namespace RNNSimulator {
 		Connector(Connectable* in, Connectable* out);
 		Connector(Connectable* in, Connectable* out, int option);
 		Connector(Connectable* in, Connectable* out, std::vector<double> w);
-		~Connector();
+		virtual ~Connector();
 		
 		void resetWeight();
 
 //		std::vector<double> transmit(double dt);
-		Eigen::VectorXd transmit(double dt);
+		virtual Eigen::VectorXd transmit(double dt);
 	};
 }

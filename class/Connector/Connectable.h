@@ -31,12 +31,12 @@ namespace RNNSimulator {
 			o_len = out;
 			i_len = in;
 		};
-		~SampleConnectable() {};
+		virtual ~SampleConnectable() {};
 
-		int outflow_len() override {
+		virtual int outflow_len() override {
 			return o_len;
 		}
-		int inflow_len() override {
+		virtual int inflow_len() override {
 			return i_len;
 		}
 
@@ -46,13 +46,13 @@ namespace RNNSimulator {
 			return ret;
 		}
 		*/
-		Eigen::VectorXd outflow() override {
+		virtual Eigen::VectorXd outflow() override {
 			Eigen::VectorXd ret = Eigen::VectorXd::Random(outflow_len());
 			return ret;
 		}
-		void inflow(std::vector<double> flow) override {
+		virtual void inflow(std::vector<double> flow) override {
 		}
-		void inflow(Eigen::VectorXd flow) override {
+		virtual void inflow(Eigen::VectorXd flow) override {
 		}
 	};
 }
