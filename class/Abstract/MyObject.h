@@ -1,9 +1,11 @@
 #pragma once
 
-class MyObject
-{
-public:
-	virtual ~MyObject() {};
-};
+namespace RNNSimulator {
+	class MyObject
+	{
+	public:
+		virtual ~MyObject() {};
+	};
 
-MyObject* GetMyObject();
+	MyObject* GetMyObject();
+}
