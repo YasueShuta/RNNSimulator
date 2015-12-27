@@ -10,10 +10,8 @@ namespace RNNSimulator {
 	class ObjectInitializer
 	{
 	public:
-		ObjectInitializer();
-		ObjectInitializer(std::string argv) : ObjectInitializer() {
-			set(argv);
-		}
+		ObjectInitializer() : ObjectInitializer("") {};
+		ObjectInitializer(std::string argv);
 		virtual ~ObjectInitializer();
 
 		virtual void hyde() {};
@@ -23,14 +21,18 @@ namespace RNNSimulator {
 
 	protected:
 		virtual int set_inner() {
+			reset();
 			return 0;
 		}
 		virtual int set_inner(int argvnum, std::vector<std::string> argvstr, std::vector<std::string> argvdata) {
+			reset();
 			return 0;
 		}
 		virtual int set_inner(int argvnum, va_list argv) {
+			reset();
 			return 0;
 		}
+		virtual void reset() {};
 	};
 
 

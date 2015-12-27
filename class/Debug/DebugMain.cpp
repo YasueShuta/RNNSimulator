@@ -209,16 +209,23 @@ int DebugMain::ConnectableNodeTest() {
 
 int DebugMain::FigureViewerTest() {
 
-	DebugConsole::OpenConsole();
-
 	RNNSimulator::FigureViewer* sample1 = new RNNSimulator::FigureViewer();
-	std::cout << "id: " << sample1->id << ", nextId: " << sample1->nextId << std::endl;
-	RNNSimulator::FigureViewer* sample2 = new RNNSimulator::FigureViewer();
-	std::cout << "id: " << sample2->id << ", nextId: " << sample1->nextId << std::endl;
-	RNNSimulator::FigureViewer* sample3 = new RNNSimulator::FigureViewer();
-	std::cout << "id: " << sample3->id << ", nextId: " << sample1->nextId << std::endl;
-	RNNSimulator::FigureViewer* sample4 = new RNNSimulator::FigureViewer();
-	std::cout << "id: " << sample4->id << ", nextId: " << sample1->nextId << std::endl;
+	std::cout << "id: " << sample1->id << ", nextId: " << sample1->NEXTID << ", nextFigId: " << sample1->NEXTFIGID << std::endl;
+	RNNSimulator::FigureViewer* sample2 = new RNNSimulator::FigureViewer("offset_x 700");
+	std::cout << "id: " << sample2->id << ", nextId: " << sample2->NEXTID << ", nextFigId: " << sample2->NEXTFIGID << std::endl;
+	RNNSimulator::FigureViewer* sample3 = new RNNSimulator::FigureViewer("offset_y 480");
+	std::cout << "id: " << sample3->id << ", nextId: " << sample3->NEXTID << ", nextFigId: " << sample3->NEXTFIGID << std::endl;
+	RNNSimulator::FigureViewer* sample4 = new RNNSimulator::FigureViewer("offset_x 700 offset_y 480");
+	std::cout << "id: " << sample4->id << ", nextId: " << sample4->NEXTID << ", nextFigId: " << sample4->NEXTFIGID << std::endl;
+
+	sample1->set("size_x 1280 offset_x 100 linewidth 5");
+
+	sample1->fig->hwrite("plot sin(x)");
+	sample2->fig->hwrite("plot sin(x)");
+	sample3->fig->hwrite("plot sin(x)");
+	sample4->fig->hwrite("plot sin(x)");
+
+	DebugConsole::OpenConsole();
 
 	DebugConsole::Wait();
 	DebugConsole::CloseConsole();
@@ -284,9 +291,9 @@ int DebugMain::GnuplotTest() {
 	gp2->plotVec2(xvec, yvec1, "with lines linewidth 3 linecolor 'orange' title \"sin(x)\"");
 
 	std::vector<std::vector<double>> yvecarray{yvec1, yvec2};
-	std::vector<const char*> optionarray{ "with lines lw 3 lc 'cyan' title 'sin(x)'", "with lines lw 3 lc 'magenta' title 'cos(x)'"};
+	std::vector<std::string> optionarray{ "with lines lw 3 lc 'cyan' title 'sin(x)'", "with lines lw 3 lc 'magenta' title 'cos(x)'"};
 	double* yptrarray[2] = { yptr1, yptr2 };
-	const char* optptrarray[2] = { "with lines lw 3 lc 'cyan' title 'sin(x)'", "with lines lw 3 lc 'magenta' title 'cos(x)'" };
+	std::string optptrarray[2] = { "with lines lw 3 lc 'cyan' title 'sin(x)'", "with lines lw 3 lc 'magenta' title 'cos(x)'" };
 
 	gp3->hwrite(ss.str());
 	gp3->plotVec2Multi(xvec, yvecarray, optionarray);

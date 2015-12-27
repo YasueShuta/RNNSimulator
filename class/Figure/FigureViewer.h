@@ -2,23 +2,32 @@
 #include <vector>
 #include <string>
 #include "..\Abstract\ObjectInitializer.h"
+#include "../Abstract/Findable.h"
+#include "../gnuplotInterface/Gnuplot.h"
 
 namespace RNNSimulator {
 	class FigureViewer :
-		public ObjectInitializer
+		public ObjectInitializer, public Findable
 	{
 	public:
 		int mode;
-		char* flag;
-		int id;
-		static int nextId;
+		std::string flag;
+		int figId;
+		static int NEXTFIGID;
 
-		FILE* pFig;
+		Gnuplot::GP* fig;
 		int n_fig;
+
+		std::string terminal;
+		std::string title;
+		int wsize_x;
+		int wsize_y;
+		int woffset_x;
+		int woffset_y;
 
 		double linewidth;
 		double fontsize;
-		char* fontweight;
+		std::string fontweight;
 
 		int layout_x;
 		int layout_y;
@@ -27,21 +36,20 @@ namespace RNNSimulator {
 		// std::vector<Observer*> observers;
 		int n_obs;
 
-		FigureViewer();
-		FigureViewer(std::string argv) : FigureViewer() {
-			set(argv);
-		}
+		FigureViewer() : FigureViewer("") {};
+		FigureViewer(std::string argv);
 		~FigureViewer();
-		void reset();
+
+		Gnuplot::GP* initFigure();
+		void replaceFigure();
+
+		void reset() override;
 		void setDefault();
 //		void registerObserver(Observer* obs);
 //		static FigureViewer* init(Observer* obs);
 
 
 	protected:
-		int set_inner() override {
-			return ObjectInitializer::set_inner();
-		}
 		int set_inner(int argvnum, std::vector<std::string> argvstr, std::vector<std::string> argvdata) override;
 		int set_inner(int argvnum, va_list argv);
 	};

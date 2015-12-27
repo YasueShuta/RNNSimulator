@@ -50,11 +50,6 @@ void Handle::write(std::string s)
 	buf << s << std::endl;
 	send();
 }
-void Handle::write(const char* s)
-{
-	buf << s << std::endl;
-	send();
-}
 
 void Handle::send()
 {
@@ -95,7 +90,7 @@ GP::GP(int id) {
 GP::GP(Handle* h_) {
 	h = h_;
 }
-GP::GP(bool isPOption_, const char* terminal_, const char* title_, int wsize_x_, int wsize_y_, int woffset_x, int woffset_y, const char* file_) {
+GP::GP(bool isPOption_, std::string terminal_, std::string title_, int wsize_x_, int wsize_y_, int woffset_x, int woffset_y, std::string file_) {
 	std::stringstream ss;
 	if (isPOption_) {
 		ss << " --persist";
@@ -105,12 +100,10 @@ GP::GP(bool isPOption_, const char* terminal_, const char* title_, int wsize_x_,
 	ss.str("");
 
 	ss << "set terminal " << terminal_;
-	if (std::strlen(title_) > 0)
+	if (title_.length() > 0)
 		ss << " title \"" << title_ << "\"";
 	ss << " size " << wsize_x_ << "," << wsize_y_;
 	ss << " position " << woffset_x << "," << woffset_y;
-
-	std::cout << ss.str() << std::endl;
 
 	h->write(ss.str());
 }
@@ -118,28 +111,82 @@ GP::~GP()
 {
 };
 
-void GP::plotVec2(std::vector<double> xdata_, std::vector<double> ydata_, const char* option_) {
+void GP::plotVec2(std::vector<double> xdata_, std::vector<double> ydata_, std::string option_) {
 	if (xdata_.size() != ydata_.size()) return;
 	h->buf << "plot '-' " << option_;
 	h->write();
+	inputVec2(xdata_, ydata_);
+}
+void GP::plotVec2(std::vector<double> xdata_, std::vector<double> ydata_, int linewidth_, std::string linecolor_) {
+	if (xdata_.size() != ydata_.size()) return;
+	h->buf << "plot '-' " << "with lines linewidth " << linewidth_ << " linecolor '" << linecolor_ << "'";
+	h->write();
+	inputVec2(xdata_, ydata_);
+}
+void GP::plotVec2(std::vector<double> xdata_, std::vector<double> ydata_, int linewidth_, int linecolor_) {
+	if (xdata_.size() != ydata_.size()) return;
+	h->buf << "plot '-' " << "with lines linewidth " << linewidth_ << " linecolor " << linecolor_;
+	h->write();
+	inputVec2(xdata_, ydata_);
+}
+void GP::plotVec2Multi(std::vector<double> xdata_, std::vector<std::vector<double>> ydataarray_, std::vector<std::string> optionarray_) {
+	int ynum = ydataarray_.size();
+	h->buf << "plot ";
+	for (int i = 0;i < ynum;i++) {
+		h->buf << "'-'";
+		if (optionarray_.size() > 0)
+			h->buf << " " << optionarray_.at(i);
+		if (i < ynum - 1) h->buf << ", ";
+	}
+	h->write();
+	inputVec2Multi(xdata_, ydataarray_);
+}
+void GP::plotVec2Multi(std::vector<double> xdata_, std::vector<std::vector<double>> ydataarray_, int linewidth_, std::vector<std::string> linecolors_) {
+	int ynum = ydataarray_.size();
+	h->buf << "plot ";
+	for (int i = 0;i < ynum;i++) {
+		h->buf << "'-' with lines linewidth " << linewidth_ << " linecolor " << linecolors_.at(i);
+		if (i < ynum - 1) h->buf << ", ";
+	}
+	h->write();
+	inputVec2Multi(xdata_, ydataarray_);
+}
+
+void GP::plotVec2(double* xdata_, double* ydata_, int num, std::string option_) {
+	h->buf << "plot '-' " << option_;
+	h->write();
+	inputVec2(xdata_, ydata_, num);
+}
+void GP::plotVec2Multi(double* xdata_, int len_, double* ydataarray_[], int ynum_, std::string optionarray_[]) {
+	h->buf << "plot";
+	for (int i = 0;i < ynum_;i++) {
+		h->buf << " '-'";
+		if (optionarray_ != NULL)
+			h->buf << " " << optionarray_[i];
+		if (i < ynum_ - 1) h->buf << ", ";
+	}
+	h->write();
+	inputVec2Multi(xdata_, len_, ydataarray_, ynum_);
+}
+
+void GP::inputVec2(std::vector<double> xdata_, std::vector<double> ydata_) {
 	for (int i = 0;i < xdata_.size(); i++) {
 		h->buf << xdata_.at(i) << " " << ydata_.at(i);
 		h->write();
 	}
 	h->write("e");
 }
-void GP::plotVec2Multi(std::vector<double> xdata_, std::vector<std::vector<double>> ydataarray_, std::vector<const char*> optionarray_) {
+void GP::inputVec2(double* xdata_, double* ydata_, int len_) {
+	for (int i = 0;i < len_;i++) {
+		h->buf << xdata_[i] << " " << ydata_[i];
+		h->write();
+	}
+	h->write("e");
+}
+void GP::inputVec2Multi(std::vector<double> xdata_, std::vector<std::vector<double>> ydataarray_){
 	int len = xdata_.size();
 	int ynum = ydataarray_.size();
-	h->buf << "plot";
-	for (int i = 0;i < ynum;i++) {
-		h->buf << " '-'";
-		if (optionarray_.size() > 0)
-			h->buf << " " << optionarray_.at(i);
-		if (i < ynum - 1) h->buf << ", ";
-	}
-	h->write();
-	for (int i = 0;i < ynum; i++){
+	for (int i = 0;i < ynum; i++) {
 		for (int j = 0;j < len; j++) {
 			h->buf << xdata_.at(j) << " " << ydataarray_.at(i).at(j);
 			h->write();
@@ -147,34 +194,15 @@ void GP::plotVec2Multi(std::vector<double> xdata_, std::vector<std::vector<doubl
 		h->write("e");
 	}
 }
-void GP::plotVec2(double* xdata_, double* ydata_, int num, const char* option_) {
-	h->buf << "plot '-' " << option_;
-	h->write();
-	for (int i = 0;i < num;i++) {
-		h->buf << xdata_[i] << " " << ydata_[i];
-		h->write();
-	}
-	h->write("e");
-	h->write("replot");
-}
-void GP::plotVec2Multi(double* xdata_, int len_, double* ydataarray_[], int num_, const char* optionarray_[]) {
-	h->buf << "plot";
-	for (int i = 0;i < num_;i++) {
-		h->buf << " '-'";
-		if (optionarray_ != NULL)
-			h->buf << " " << optionarray_[i];
-		if (i < num_ - 1) h->buf << ", ";
-	}
-	h->write();
-	for (int i = 0;i < num_;i++) {
+void GP::inputVec2Multi(double* xdata_, int len_, double* ydataarray_[], int ynum_) {
+	for (int i = 0;i < ynum_; i++) {
 		for (int j = 0;j < len_; j++) {
-			h->buf << xdata_[j] << " " << ydataarray_[i][j];
+			h->buf << xdata_[j]	<< " " << ydataarray_[i][j];
 			h->write();
 		}
 		h->write("e");
 	}
 }
-
 
 void GP::replotAll() {
 	Gnuplot::GP* tmp;

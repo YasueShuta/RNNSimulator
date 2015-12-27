@@ -5,8 +5,8 @@
 
 using namespace RNNSimulator;
 
-ObjectInitializer::ObjectInitializer() {
-
+ObjectInitializer::ObjectInitializer(std::string argv){
+	set(argv);
 }
 
 ObjectInitializer::~ObjectInitializer() {
