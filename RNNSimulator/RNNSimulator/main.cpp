@@ -3,8 +3,8 @@
 
 int main(void) {
 	//	DebugMain::ConsoleTest();
-	// 	DebugMain::OMTest();
-	 	DebugMain::OITest();
+	 	DebugMain::FindableTest();
+	// 	DebugMain::OITest();
 	//	DebugMain::ConnectableTest();
 	// 	DebugMain::ConnectableNodeTest();
 	//  DebugMain::GnuplotTest();

@@ -8,7 +8,7 @@ public:
 	static int Main();
 
 	static int ConsoleTest();
-	static int OMTest();
+	static int FindableTest();
 	static int OITest();
 	static int ConnectableTest();
 	static int ConnectableNodeTest();

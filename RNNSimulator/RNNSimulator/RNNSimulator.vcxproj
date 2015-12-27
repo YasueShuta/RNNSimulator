@@ -72,8 +72,8 @@
   <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -114,7 +114,7 @@
     <ClCompile Include="..\..\class\Abstract\MyObject.cpp" />
     <ClCompile Include="..\..\class\Abstract\Node.cpp" />
     <ClCompile Include="..\..\class\Abstract\ObjectInitializer.cpp" />
-    <ClCompile Include="..\..\class\Abstract\ObjectManager.cpp" />
+    <ClCompile Include="..\..\class\Abstract\Findable.cpp" />
     <ClCompile Include="..\..\class\Connector\Connectable.cpp" />
     <ClCompile Include="..\..\class\Connector\ConnectableNode.cpp" />
     <ClCompile Include="..\..\class\Connector\Connector.cpp" />
@@ -126,10 +126,11 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\class\Abstract\Findable_private.h" />
     <ClInclude Include="..\..\class\Abstract\Node.h" />
     <ClInclude Include="..\..\class\Abstract\ObjectFinalizer.h" />
     <ClInclude Include="..\..\class\Abstract\ObjectInitializer.h" />
-    <ClInclude Include="..\..\class\Abstract\ObjectManager.h" />
+    <ClInclude Include="..\..\class\Abstract\Findable.h" />
     <ClInclude Include="..\..\class\Connector\Connectable.h" />
     <ClInclude Include="..\..\class\Connector\ConnectableNode.h" />
     <ClInclude Include="..\..\class\Connector\Connector.h" />
@@ -139,13 +140,13 @@
     <ClInclude Include="..\..\class\gnuplotInterface\Gnuplot.h" />
     <ClInclude Include="..\..\class\Observer\Observer.h" />
     <ClInclude Include="MyInclude.h" />
-    <ClInclude Include="MyPath.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\eigen\Eigen\Core" />
     <None Include="..\..\class\Abstract\MyObject.h" />
     <None Include="..\..\class\Abstract\ObjectFinalizer.cpp" />
     <None Include="..\..\class\Observer\Observer.m" />
+    <None Include="..\RNNSimulator.sdf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

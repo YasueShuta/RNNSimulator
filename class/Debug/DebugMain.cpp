@@ -6,7 +6,7 @@
 
 #include "DebugMain.h"
 #include "DebugConsole.h"
-#include "../Abstract/ObjectManager.h"
+#include "../Abstract/Findable.h"
 #include "../Abstract/ObjectInitializer.h"
 #include "../Connector/Connectable.h"
 #include "../Connector/Connector.h"
@@ -43,45 +43,85 @@ int DebugMain::ConsoleTest()
 	return 0;
 }
 
-int DebugMain::OMTest()
+int DebugMain::FindableTest()
 {
 	DebugConsole::OpenConsole();
 
 	std::cout << "Start:" << std::endl;
-	std::cout << "num: " << ObjectManagerStore::num << std::endl;
-	ObjectManager* a = new ObjectManager();
-	std::cout << "a: " << a << std::endl;
-	std::cout << "num: " << ObjectManagerStore::num << std::endl;
-	ObjectManager* b = new ObjectManager();
-	std::cout << "b: " << b << std::endl;
-	std::cout << "num: " << ObjectManagerStore::num << std::endl;
-	ObjectManager* c = new SampleManager();
-	std::cout << "c: " << c << std::endl;
-	std::cout << "num: " << ObjectManagerStore::num << std::endl;
-	ObjectManager* curr = ObjectManagerStore::root;
-	for (int i = 0;i < ObjectManagerStore::num; i++) {
-		std::cout << curr->parent << "->";
-		curr = curr->parent;
-	}
-	std::cout << std::endl;
-	delete b;
-	curr = ObjectManagerStore::root;
-	for (int i = 0;i < ObjectManagerStore::num; i++) {
-		std::cout << curr->parent << "->";
-		curr = curr->parent;
-	}
-	std::cout << std::endl;
+	RNNSimulator::Findable* tmp;
+	std::cout << "num: " << RNNSimulator::Findable::NEXTID << std::endl;
+	tmp = new RNNSimulator::Findable();
+	std::cout << "a: " << tmp << std::endl;
+	std::cout << "num: " << RNNSimulator::Findable::NEXTID << std::endl;
+	tmp  = new RNNSimulator::Findable();
+	std::cout << "b: " << tmp << std::endl;
+	std::cout << "num: " << RNNSimulator::Findable::NEXTID << std::endl;
+	tmp = new RNNSimulator::SampleFindable();
+	std::cout << "c: " << tmp << std::endl;
+	std::cout << "num: " << RNNSimulator::Findable::NEXTID << std::endl;
+	tmp = new RNNSimulator::SampleFindable();
+	std::cout << "d: " << tmp << std::endl;
+	std::cout << "num: " << RNNSimulator::Findable::NEXTID << std::endl;
+	tmp = new RNNSimulator::Findable();
+	std::cout << "e: " << tmp << std::endl;
+	std::cout << "num: " << RNNSimulator::Findable::NEXTID << std::endl;
+	tmp = new RNNSimulator::SampleFindable();
+	std::cout << "f: " << tmp << std::endl;
+	std::cout << "num: " << RNNSimulator::Findable::NEXTID << std::endl;
 
-	std::cout << "Type: " << typeid(*ObjectManagerStore::root->parent).name() << std::endl;
+	RNNSimulator::Findable* curr;
+
+	/*
+	std::cout << "Findable" << std::endl;
+
+	curr = RNNSimulator::Findable::ROOT;
+	for (int i = 0;i < RNNSimulator::Findable::NEXTID; i++) {
+		std::cout << curr << "->";
+		curr = curr->next;
+	}
+	std::cout << std::endl;
+	*/
+	/*
+	std::cout << "find id=1" << std::endl;
+	curr = (RNNSimulator::Findable*)RNNSimulator::findObject<>(1);
+	std::cout << curr << std::endl;
+
+	std::cout << "find T=SampleFindable" << std::endl;
+	curr = (RNNSimulator::SampleFindable*)RNNSimulator::findObject<RNNSimulator::SampleFindable>();
+	std::cout << curr << std::endl;
+
+	std::cout << "find id=2" << std::endl;
+	curr = (RNNSimulator::SampleFindable*)RNNSimulator::findObject<>(2);
+	std::cout << curr << std::endl;
+	*/
+	curr = (RNNSimulator::Findable*)RNNSimulator::findObject<>(1);
+	std::cout << "Delete: " << curr << std::endl;
+	delete curr;
+	curr = (RNNSimulator::Findable*)RNNSimulator::findObject<RNNSimulator::SampleFindable>(3);
+	std::cout << "Delete: " << curr << std::endl;
+	delete curr;
+
+	curr = RNNSimulator::Findable::ROOT;
+	for (int i = 0;i < RNNSimulator::Findable::NEXTID; i++) {
+		std::cout << curr << "->";
+		if (curr == NULL) break;
+		curr = curr->next;
+	}
+	std::cout << std::endl;
+	
+	/*
+	std::cout << "Type: " << typeid(*RNNSimulator::Findable::ROOT->next).name() << std::endl;
 	std::cout << "Type: " << typeid(*a).name() << std::endl;
 	std::cout << "Type: " << typeid(*c).name() << std::endl;
+	*/
 
- ObjectManager* d = new ObjectManager();
- ObjectManager* e = new ObjectManager();
-	ObjectManager* fo = ObjectManager::findObject("SampleManager");
+	RNNSimulator::Findable* fo = (RNNSimulator::Findable*)RNNSimulator::findObject<RNNSimulator::SampleFindable>();
 	if (fo != NULL) {
-		std::cout << "Find (SampleManager): " << fo << "|" << typeid(*fo).name() << std::endl;
+		std::cout << "Find (SampleFindable): " << fo << "| " << fo->id << "| " << typeid(*fo).name() << std::endl;
 	}
+
+	std::cout << RNNSimulator::Findable::NEXTID << std::endl;
+
 	DebugConsole::Wait();
 	DebugConsole::CloseConsole();
 
@@ -92,7 +132,7 @@ int DebugMain::OITest() {
 	DebugConsole::OpenConsole();
 	std::cout << "Start!" << std::endl;
 
-	SampleInitializer* sample = new SampleInitializer();
+	RNNSimulator::SampleInitializer* sample = new RNNSimulator::SampleInitializer();
 
 	std::cout << "id: " << sample->id << std::endl <<
 		"name: " << sample->name << std::endl <<
