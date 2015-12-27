@@ -220,8 +220,26 @@ int DebugMain::FigureViewerTest() {
 
 	sample1->set("size_x 1280 offset_x 100 linewidth 5");
 
-	sample1->fig->hwrite("plot sin(x)");
-	sample2->fig->hwrite("plot sin(x)");
+	sample1->plot("sin(x)", "red", "SIN");
+	sample1->fig->holdOn();
+	sample1->plot("cos(x)", "blue");
+	sample1->plot("tanh(x)", "green");
+	sample1->fig->holdOff();
+
+	int num = 1000; double dx = 4 * M_PI / num;
+	std::vector<double> xvec(num);
+	std::vector<double> yvec1(num);
+	std::vector<double> yvec2(num);
+	for (int i = 0;i < num;i++) {
+		xvec.at(i) = dx*i - 2 * M_PI;
+		yvec1.at(i) = sin(xvec.at(i));
+		yvec2.at(i) = cos(xvec.at(i));
+	}
+//td::vector<std::string> colors = { "red", "blue" };
+//td::vector<std::string> titles = { "SIN", "COS" };
+
+	sample2->plot_datavar(2, { "red", "blue" }, { "SIN", "COS" }, 
+		xvec, yvec1, yvec2);
 	sample3->fig->hwrite("plot sin(x)");
 	sample4->fig->hwrite("plot sin(x)");
 

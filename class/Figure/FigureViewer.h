@@ -4,6 +4,7 @@
 #include "..\Abstract\ObjectInitializer.h"
 #include "../Abstract/Findable.h"
 #include "../gnuplotInterface/Gnuplot.h"
+#include <stdarg.h>
 
 namespace RNNSimulator {
 	class FigureViewer :
@@ -42,6 +43,14 @@ namespace RNNSimulator {
 
 		Gnuplot::GP* initFigure();
 		void replaceFigure();
+
+		void plot(std::string arg_);
+		void plot(std::string arg_, int linecolor_, std::string title_ = "");
+		void plot(std::string arg_, std::string linecolor_, std::string title_ = "");
+		void plot_data(std::vector<double> xvec_, std::vector<double> yvec_, std::string linecolor_ = "blue", std::string title_ = "");
+		void plot_datavar(int datanum,
+			std::vector<std::string> linecolors_,
+			std::vector<std::string> titles_, ...);
 
 		void reset() override;
 		void setDefault();

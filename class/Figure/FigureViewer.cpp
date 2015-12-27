@@ -119,6 +119,36 @@ void FigureViewer::replaceFigure() {
 
 }
 
+void FigureViewer::plot(std::string arg_) {
+	fig->plotFunc(arg_, linewidth);
+}
+void FigureViewer::plot(std::string arg_, int linecolor_, std::string title_) {
+	fig->plotFunc(arg_, linewidth, linecolor_, title_);
+}
+void FigureViewer::plot(std::string arg_, std::string linecolor_, std::string title_) {
+	fig->plotFunc(arg_, linewidth, linecolor_, title_);
+}
+
+void FigureViewer::plot_data(std::vector<double> xvec_, std::vector<double> yvec_, std::string linecolor_, std::string title_) {
+	fig->plotVec2(xvec_, yvec_, linewidth, linecolor_);
+}
+void FigureViewer::plot_datavar(int datanum_, std::vector<std::string> linecolors_, std::vector<std::string> titles_, ...) {
+	va_list vl;
+	va_start(vl, titles_);
+	std::vector<double> xvec;
+	std::vector<std::vector<double>> yvec = std::vector<std::vector<double>>(datanum_);
+	xvec = va_arg(vl, std::vector<double>);
+	for (int i = 0;i < datanum_;i++) {
+		yvec.at(i) = va_arg(vl, std::vector<double>);
+	}
+	if (datanum_ == 1) {
+		fig->plotVec2(xvec, yvec.at(1), linewidth, linecolors_.at(1));
+	}
+	else {
+		fig->plotVec2Multi(xvec, yvec, linewidth, linecolors_, titles_);
+	}
+}
+
 void FigureViewer::reset() {
 	if (fig == NULL) {
 		fig = initFigure();

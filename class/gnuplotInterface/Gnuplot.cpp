@@ -111,6 +111,27 @@ GP::~GP()
 {
 };
 
+void GP::plotFunc(std::string arg) {
+	if (isHold) h->buf << "replot " << arg;
+	else h->buf << "plot " << arg;
+	h->write();
+}
+void GP::plotFunc(std::string arg, int linewidth_, int linecolor_, std::string title_) {
+	if (isHold) h->buf << "replot " << arg;
+	else h->buf << "plot " << arg;	h->buf << " linewidth " << linewidth_;
+	h->buf << " linecolor " << linecolor_;
+	if (title_.length() > 0) h->buf << " title '" << title_ << "'";
+	h->write();
+}
+void GP::plotFunc(std::string arg, int linewidth_, std::string linecolor_, std::string title_) {
+	if (isHold) h->buf << "replot " << arg;
+	else h->buf << "plot " << arg;
+	h->buf << " linewidth " << linewidth_;
+	h->buf << " linecolor '" << linecolor_ << "'";
+	if (title_.length() > 0) h->buf << " title '" << title_ << "'";
+	h->write();
+}
+
 void GP::plotVec2(std::vector<double> xdata_, std::vector<double> ydata_, std::string option_) {
 	if (xdata_.size() != ydata_.size()) return;
 	h->buf << "plot '-' " << option_;
@@ -141,11 +162,16 @@ void GP::plotVec2Multi(std::vector<double> xdata_, std::vector<std::vector<doubl
 	h->write();
 	inputVec2Multi(xdata_, ydataarray_);
 }
-void GP::plotVec2Multi(std::vector<double> xdata_, std::vector<std::vector<double>> ydataarray_, int linewidth_, std::vector<std::string> linecolors_) {
+void GP::plotVec2Multi(std::vector<double> xdata_, std::vector<std::vector<double>> ydataarray_, int linewidth_,
+	std::vector<std::string> linecolors_, std::vector<std::string> titles_) {
 	int ynum = ydataarray_.size();
 	h->buf << "plot ";
 	for (int i = 0;i < ynum;i++) {
-		h->buf << "'-' with lines linewidth " << linewidth_ << " linecolor " << linecolors_.at(i);
+		h->buf << "'-' with lines linewidth " << linewidth_;
+		if (linecolors_.size() >= i && linecolors_.at(i).length() > 0)
+			h->buf << " linecolor '" << linecolors_.at(i) << "'";
+		if (titles_.size() >= i && titles_.at(i).length() > 0)
+			h->buf << " title '" << titles_.at(i) << "'";
 		if (i < ynum - 1) h->buf << ", ";
 	}
 	h->write();

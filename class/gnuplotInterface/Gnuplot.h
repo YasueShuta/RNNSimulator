@@ -38,21 +38,29 @@ namespace Gnuplot {
 	{
 	private:
 		Handle* h;
+		bool isHold = false;
 
 	public:
 		void hwrite() { h->write(); };
-		void hwrite(const char* s) { h->write(s); };
-		void hwrite(std::string s) { h->write(s); };
-		int getId() { return h->id; };
+		void hwrite(const char* s) { h->write(s); }
+		void hwrite(std::string s) { h->write(s); }
+		int getId() { return h->id; }
+		void holdOn() {	isHold = true;}
+		void holdOff() { isHold = false; }
 
-//		void plotFunc();
-//		void plotFunc(int linewidth, int linecolor);
-//		void plotVec1();
+		void plotFunc(std::string arg);
+		void plotFunc(std::string arg, int linewidth, int linecolor, std::string title_ = "");
+		void plotFunc(std::string arg, int linewidth = 3, std::string linecolor = "blue", std::string title_ = "");
+		//		void plotVec1();
 		void plotVec2(std::vector<double> xdata_, std::vector<double> ydata_, std::string option_ = "");
 		void plotVec2(std::vector<double> xdata_, std::vector<double> ydata_, int linewidth_ = 3, std::string linecolor_ = "");
 		void plotVec2(std::vector<double> xdata_, std::vector<double> ydata_, int linewidth_ = 3, int linecolor_ = 1);
 		void plotVec2Multi(std::vector<double> xdata_, std::vector<std::vector<double>> ydataarray_, std::vector<std::string> optionarray_ = std::vector<std::string>(0));
-		void plotVec2Multi(std::vector<double> xdata_, std::vector<std::vector<double>> ydataarray_, int linewidth_, std::vector<std::string> linecolors_ = std::vector<std::string>(0));
+		void plotVec2Multi(std::vector<double> xdata_,
+			std::vector<std::vector<double>> ydataarray_,
+			int linewidth_ = 1,
+			std::vector<std::string> linecolors_ = std::vector<std::string>(0),
+			std::vector<std::string> titles_ = std::vector<std::string>(0));
 		void plotVec2(double* xdata_, double* ydata_, int len_, std::string option = "");
 		void plotVec2Multi(double* xdata_, int len_, double* ydataarray_[], int ynum, std::string optionarray_[] = NULL);
 
