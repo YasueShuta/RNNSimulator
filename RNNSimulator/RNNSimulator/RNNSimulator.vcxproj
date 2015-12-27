@@ -122,6 +122,7 @@
     <ClCompile Include="..\..\class\Debug\DebugMain.cpp" />
     <ClCompile Include="..\..\class\Figure\FigureViewer.cpp" />
     <ClCompile Include="..\..\class\gnuplotInterface\Gnuplot.cpp" />
+    <ClCompile Include="..\..\class\Observer\Observer.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +137,7 @@
     <ClInclude Include="..\..\class\Debug\DebugMain.h" />
     <ClInclude Include="..\..\class\Figure\FigureViewer.h" />
     <ClInclude Include="..\..\class\gnuplotInterface\Gnuplot.h" />
+    <ClInclude Include="..\..\class\Observer\Observer.h" />
     <ClInclude Include="MyInclude.h" />
     <ClInclude Include="MyPath.h" />
   </ItemGroup>
@@ -143,7 +145,7 @@
     <None Include="..\..\..\eigen\Eigen\Core" />
     <None Include="..\..\class\Abstract\MyObject.h" />
     <None Include="..\..\class\Abstract\ObjectFinalizer.cpp" />
-    <None Include="..\..\class\Figure\FigureFunction.m" />
+    <None Include="..\..\class\Observer\Observer.m" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

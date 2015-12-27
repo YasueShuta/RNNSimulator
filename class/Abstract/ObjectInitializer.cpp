@@ -19,11 +19,17 @@ int ObjectInitializer::set(std::string argv) {
 
 	std::vector<std::string> vec;
 	std::stringstream ss(argv);
-	char sep = ' ';
-	std::string buf;
+	char sep1 = ' ';
+	char sep2 = ',';
 
-	while (std::getline(ss, buf, sep)){
-		vec.push_back(buf);
+	std::string buf;
+	std::string buf2;
+
+	while (std::getline(ss, buf, sep1)){
+		std::stringstream ss2(buf);
+		while (std::getline(ss2, buf2, sep2)) {
+			vec.push_back(buf2);
+		}
 	}
 	return set(vec);
 }
@@ -54,4 +60,9 @@ int ObjectInitializer::set(std::vector<std::string> argv) {
 		}
 		return set_inner(argvnum, argvstr, argvdata);
 	}
+}
+int ObjectInitializer::setvar(int argvnum, ...) {
+	va_list argv;
+	va_start(argv, argvnum);
+	return set_inner(argvnum, argv);
 }

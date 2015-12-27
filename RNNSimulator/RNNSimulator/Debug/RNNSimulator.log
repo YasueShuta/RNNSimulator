@@ -1,19 +1,7 @@
-﻿  DebugConsole.cpp
-  DebugMain.cpp
-  FigureViewer.cpp
-  Gnuplot.cpp
-..\..\class\gnuplotInterface\Gnuplot.cpp(125): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
-  main.cpp
-  コードを生成中...
-c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(310): warning C4793: Eigen::internal::pstore<double,__m128d>': ネイティブ関数としてコンパイルされました:
-  	マネージ コードでサポートされていない組み込み型が見つかりました
-c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(315): warning C4793: Eigen::internal::pstoreu<double,__m128d>': ネイティブ関数としてコンパイルされました:
-  	マネージ コードでサポートされていない組み込み型が見つかりました
-c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(316): warning C4793: Eigen::internal::pstoreu<double,__m128d>': ネイティブ関数としてコンパイルされました:
-  	マネージ コードでサポートされていない組み込み型が見つかりました
-c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(220): warning C4793: Eigen::internal::pload<__m128d>': ネイティブ関数としてコンパイルされました:
-  	マネージ コードでサポートされていない組み込み型が見つかりました
-c:\users\shuta\documents\visual studio 2015\projects\eigen\eigen\src\core\arch\sse\packetmath.h(238): warning C4793: Eigen::internal::ploadu<__m128d>': ネイティブ関数としてコンパイルされました:
+﻿  ObjectInitializer.cpp
+c:\users\shuta\documents\visual studio 2015\projects\rnnsimulator\class\abstract\objectinitializer.cpp(64): warning C4793: ObjectInitializer::setvar': ネイティブ関数としてコンパイルされました:
+  	vararg は /clr でサポートされていません
+c:\users\shuta\documents\visual studio 2015\projects\rnnsimulator\class\abstract\objectinitializer.cpp(66): warning C4793: ObjectInitializer::setvar': ネイティブ関数としてコンパイルされました:
   	マネージ コードでサポートされていない組み込み型が見つかりました
   MyObject.obj : マネージ コードが存在する場合は、/DEBUG:FASTLINK はサポートされません。/DEBUG:FULL でリンクを再開します
   RNNSimulator.vcxproj -> C:\Users\shuta\Documents\Visual Studio 2015\Projects\RNNSimulator\RNNSimulator\Debug\RNNSimulator.exe

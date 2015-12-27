@@ -51,6 +51,9 @@
     <ClCompile Include="..\..\class\gnuplotInterface\Gnuplot.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\class\Observer\Observer.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\class\Debug\DebugConsole.h">
@@ -92,6 +95,9 @@
     <ClInclude Include="..\..\class\gnuplotInterface\Gnuplot.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\class\Observer\Observer.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\class\Abstract\MyObject.h">
@@ -101,6 +107,6 @@
       <Filter>ソース ファイル</Filter>
     </None>
     <None Include="..\..\..\eigen\Eigen\Core" />
-    <None Include="..\..\class\Figure\FigureFunction.m" />
+    <None Include="..\..\class\Observer\Observer.m" />
   </ItemGroup>
 </Project>

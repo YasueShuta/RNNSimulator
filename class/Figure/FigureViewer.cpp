@@ -45,6 +45,31 @@ int FigureViewer::set_inner(int argvnum, std::vector<std::string> argvstr, std::
 
 	return argvnum;
 }
+int FigureViewer::set_inner(int argvnum, va_list argv) {
+	std::string arg;
+	for (int i = 0; i < argvnum; i++) {
+		arg = va_arg(argv, char*);
+		if (arg == "mode") {
+			mode = va_arg(argv, int);
+		}
+		else if (arg == "flag") {
+			flag = va_arg(argv, char*);
+		}
+		else if (arg == "linewidth" || arg == "lw") {
+			linewidth = va_arg(argv, double);
+		}
+		else if (arg == "fontsize" || arg == "fs") {
+			fontsize = va_arg(argv, double);
+		}
+		else if (arg == "fontweight" || arg == "fw") {
+			fontweight = va_arg(argv, char*);
+		}
+	}
+	reset();
+
+	return argvnum;
+}
+
 void FigureViewer::reset() {
 	if (pFig == NULL) {
 		//		pFig = initFigure();

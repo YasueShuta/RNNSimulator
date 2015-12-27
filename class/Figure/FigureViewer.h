@@ -43,6 +43,7 @@ namespace RNNSimulator {
 			return ObjectInitializer::set_inner();
 		}
 		int set_inner(int argvnum, std::vector<std::string> argvstr, std::vector<std::string> argvdata) override;
+		int set_inner(int argvnum, va_list argv);
 	};
 
 }

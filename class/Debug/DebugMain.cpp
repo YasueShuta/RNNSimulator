@@ -94,10 +94,22 @@ int DebugMain::OITest() {
 
 	SampleInitializer* sample = new SampleInitializer();
 
+	std::cout << "id: " << sample->id << std::endl <<
+		"name: " << sample->name << std::endl <<
+		"data: " << sample->data << std::endl;
 	DebugConsole::Wait();
-	sample->set("-n 128 -p 0.001 threshold 1");
+
+	sample->set("-id 128 -name trouble, threshold, 1, data 2.345");
+
+	sample->setvar(4, "id", 64, "name", "va", "data", 0.5f, "ptr", &sample);
 
 	DebugConsole::Wait();
+	std::cout << "id: " << sample->id << std::endl <<
+		"name: " << sample->name << std::endl <<
+		"data: " << sample->data << std::endl <<
+		"ptr: " << sample->ptr << std::endl;
+	DebugConsole::Wait();
+
 	DebugConsole::CloseConsole();
 
 	return 0;
