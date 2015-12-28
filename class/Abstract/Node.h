@@ -1,10 +1,12 @@
 #pragma once
 
 #include <vector>
+#include "../Abstract/Findable.h"
+#include "../Abstract/ObjectInitializer.h"
 #include "../../../eigen/Eigen/core"
 
 namespace RNNSimulator {
-	class Node
+	class Node : public ObjectInitializer
 	{
 	public:
 		int mode;
@@ -14,15 +16,20 @@ namespace RNNSimulator {
 		int cellNum;
 
 		Node();
-		Node(int num);
-		Node(int num, int mode);
+		Node(std::string argv);
+		Node(int setvarnum, ...);
 		virtual ~Node();
 
-		std::vector<double> x2vec();
-		std::vector<double> r2vec();
+		void setDefault();
+		void reset();
+		std::vector<double> to_vec(Eigen::VectorXd);
 
 		virtual void update();
 		void array_atanh();
+
+	protected:
+		virtual int set_inner(int argvnum, std::vector<std::string> argvstr, std::vector<std::string> argvdata) override;
+		virtual int set_inner(int argvnum, va_list argv) override;
 	};
 }
 

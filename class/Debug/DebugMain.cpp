@@ -351,3 +351,42 @@ int DebugMain::GnuplotTest() {
 
 	return 0;
 }
+
+int DebugMain::EigenTest() {
+	Eigen::MatrixXd vec;
+	std::vector<double> svec;
+	double* data, *sdata;
+	//data.resize(2, 3);
+	vec = Eigen::MatrixXd::Zero(2, 3);
+	svec = { 1,4,2,5,3,6 };
+	data = (double*)&vec(0);
+	sdata = (double*)&svec.at(0);
+
+	DebugConsole::OpenConsole();
+
+	for (int i = 0;i < 6;i++) {
+		std::cout << data[i] << ", ";
+ 	}
+	std::cout << std::endl;
+
+	vec << 1, 2, 3,
+		4, 5, 6;
+
+	for (int i = 0;i < 6;i++) {
+		std::cout << data[i] << ", ";
+	}
+	std::cout << std::endl;
+
+	for (int i = 0;i < 6;i++) {
+		std::cout << sdata[i] << ", ";
+	}
+	std::cout << std::endl;
+
+	std::cout << "Ptr: " << &sdata[0] << std::endl;
+	for (int i = 0; i < 6; i++) {
+		std::cout << i << ": " << &sdata[i] << " | " << &vec(i) << std::endl;
+	}
+
+	DebugConsole::Wait();
+	DebugConsole::CloseConsole();
+}

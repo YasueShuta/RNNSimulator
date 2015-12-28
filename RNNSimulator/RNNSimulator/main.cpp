@@ -8,7 +8,8 @@ int main(void) {
 	//	DebugMain::ConnectableTest();
 	// 	DebugMain::ConnectableNodeTest();
 	//  DebugMain::GnuplotTest();
-	DebugMain::FigureViewerTest();
+	//  DebugMain::FigureViewerTest();
+	DebugMain::EigenTest();
 
 	DebugMain::Main();
 

@@ -63,8 +63,8 @@ int ObjectInitializer::set(std::vector<std::string> argv) {
 		return set_inner(argvnum, argvstr, argvdata);
 	}
 }
-int ObjectInitializer::setvar(int argvnum, ...) {
+int ObjectInitializer::set(int setvarnum, ...) {
 	va_list argv;
-	va_start(argv, argvnum);
-	return set_inner(argvnum, argv);
+	va_start(argv, setvarnum);
+	return set_inner(setvarnum, argv);
 }

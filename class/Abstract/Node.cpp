@@ -1,12 +1,27 @@
 #include "Node.h"
 
 using namespace RNNSimulator;
-Node::Node() : Node(1) {}
-Node::Node(int num) : Node(num, 1) {}
-Node::Node(int num, int mode_)
+Node::Node() : Node("") {}
+Node::Node(std::string argv) {
+	setDefault();
+	set(argv);
+}
+Node::Node(int setvarnum, ...)
 {
-	cellNum = num;
-	mode = mode_;
+	setDefault();
+	va_list argv;
+	va_start(argv, setvarnum);
+	set(setvarnum, argv);
+	reset();
+}
+
+Node::~Node() {};
+
+void Node::setDefault() {
+	cellNum = 1;
+	mode = 1;
+}
+void Node::reset() {
 	switch (mode) {
 	case 0:
 		potential = Eigen::VectorXd::Zero(cellNum);
@@ -19,19 +34,11 @@ Node::Node(int num, int mode_)
 	}
 	readout = potential;
 }
-
-Node::~Node() {};
-std::vector<double> Node::x2vec() {
+std::vector<double> Node::to_vec(Eigen::VectorXd src_) {
 	std::vector<double> ret(cellNum);
-	Eigen::Map<Eigen::VectorXd>(&ret[0], cellNum) = potential;
+	Eigen::Map<Eigen::VectorXd>(&ret[0], cellNum) = src_;
 	return ret;
 }
-std::vector<double> Node::r2vec() {
-	std::vector<double> ret(cellNum);
-	Eigen::Map<Eigen::VectorXd>(&ret[0], cellNum) = readout;
-	return ret;
-}
-
 void Node::update() {
 	readout = potential;
 }
@@ -45,3 +52,9 @@ void Node::array_atanh(){
 	readout = r.matrix();
 }
 
+int set_inner(int argvnum, std::vector<std::string> argvstr, std::vector<std::string> argvdata) {
+	return argvnum;
+}
+int set_inner(int argvnum, va_list argv) {
+	return argvnum;
+}

@@ -15,9 +15,10 @@ namespace RNNSimulator {
 		virtual ~ObjectInitializer();
 
 		virtual void hyde() {};
-		int set(std::string argv);
-		int set(std::vector<std::string> argv);
-		int setvar(int argvnum, ...); // use stdarg.h, va macro setvar(2, "arg1", arg1, "arg2", arg2)
+		virtual void reset() {};
+		virtual int set(std::string argv) final;
+		virtual int set(std::vector<std::string> argv) final;
+		virtual int set(int setvarnum, ...) final; // use stdarg.h, va macro setvar(2, "arg1", arg1, "arg2", arg2)
 
 	protected:
 		virtual int set_inner() {
@@ -32,7 +33,6 @@ namespace RNNSimulator {
 			reset();
 			return 0;
 		}
-		virtual void reset() {};
 	};
 
 
@@ -67,9 +67,9 @@ namespace RNNSimulator {
 			}
 			return argvnum;
 		}
-		virtual int set_inner(int argvnum, va_list argv) {
+		virtual int set_inner(int setvarnum, va_list argv) {
 			std::string arg;
-			for (int i = 0;i < argvnum;i++) {
+			for (int i = 0;i < setvarnum;i++) {
 				arg = va_arg(argv, char*);
 				std::cout << i << ": " << arg;
 				if (std::strcmp(arg.c_str(), "id") == 0) {
@@ -94,7 +94,7 @@ namespace RNNSimulator {
 					ptr = ptr_;
 				}
 			}
-			return argvnum;
+			return setvarnum;
 		}
 	};
 

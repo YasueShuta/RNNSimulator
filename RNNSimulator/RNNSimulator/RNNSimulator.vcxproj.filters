@@ -98,6 +98,9 @@
     <ClInclude Include="..\..\class\Abstract\Findable_private.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\class\Observer\Observer_private.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\class\Abstract\MyObject.h">

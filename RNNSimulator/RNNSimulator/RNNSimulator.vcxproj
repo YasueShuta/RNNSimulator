@@ -139,6 +139,7 @@
     <ClInclude Include="..\..\class\Figure\FigureViewer.h" />
     <ClInclude Include="..\..\class\gnuplotInterface\Gnuplot.h" />
     <ClInclude Include="..\..\class\Observer\Observer.h" />
+    <ClInclude Include="..\..\class\Observer\Observer_private.h" />
     <ClInclude Include="MyInclude.h" />
   </ItemGroup>
   <ItemGroup>

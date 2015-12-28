@@ -2,48 +2,79 @@
 
 using namespace RNNSimulator;
 
-#ifndef _RNN_Observer_CPP
-#define _RNN_Observer_CPP
-Observer* Observer::HEAD = NULL;
-int Observer::NEXTID = 0;
+#ifndef _OBSERVER_CPP
+#define _OBSERVER_CPP
+int Observer::NEXTOBJID = 0;
+
 #endif
 
-
-Observer::Observer()
+Observer::Observer(int argvnum, ...)
 {
-	setId();
+	setDefault();
+	va_list argv;
+	va_start(argv, argvnum);
+	set_inner(argvnum, argv);
+	reset();
 }
-
-
 Observer::~Observer()
 {
-	Observer* curr = Observer::HEAD;
-	if (curr == this) {
-		Observer::HEAD = nextObserver;
-		curr = NULL;
-	}
-	while (curr != NULL) {
-		if (curr->nextObserver == this) {
-			curr->nextObserver = nextObserver;
-			break;
-		}
-		curr = curr->nextObserver;
-	}
 }
 
+void Observer::setDefault() {
+	isValid = false;
+	flag = "initialize";
+	print_every = 100;
+	plot_every = 1000;
 
+	viewer = NULL;
+	dataptr = NULL;
+}
+void Observer::reset() {
+	setId();
+	if(dataptr == NULL)
+		setTargetData();
+}
 void Observer::setId() {
-	id = Observer::NEXTID;
-	Observer::NEXTID += 1;
-	nextObserver = Observer::HEAD;
-	Observer::HEAD = this;
+	id = Observer::NEXTOBJID;
+	Observer::NEXTOBJID += 1;
 }
-int Observer::set_inner(int argvnum, std::vector<std::string> argvstr, std::vector<std::string> argvdata) {
+void Observer::setTargetData() {
+	if (target == NULL) return;
+	std::string typeraw = typeid(*target).raw_name();
+	if (typeraw == typeid(Node).raw_name()) {
+		dataptr = &target->readout(0);
+		datalen = target->cellNum;
+	}
+	else {
+		std::cout << "Failed to set target: " << typeid(*target).name() << std::endl;
+	}
+}
+
+int Observer::set_inner(int argvnum, va_list argv) {
 	for (int i = 0;i < argvnum; i++) {
-		std::string tmp = argvstr.at(i);
-		if (tmp.compare("target") == 0 || tmp.compare("t")) {
-//			target = argvdata
+		std::string tmp = va_arg(argv, char*);
+		if (tmp == "target" || tmp == "t") {
+			target = va_arg(argv, Node*);
+		}
+		else if (tmp == "print_every" || tmp == "print") {
+			print_every = va_arg(argv, int);
+		}
+		else if (tmp == "plot_every" || tmp == "plot") {
+			plot_every = va_arg(argv, int);
+		}
+		else if (tmp == "recorder" || tmp == "r") {
+			std::cout << "Not Yet" << std::endl;
+		}
+		else if (tmp == "viewer" || tmp == "v") {
+			viewer = va_arg(argv, FigureViewer*);
+		}
+		else if (tmp == "dstfile" || tmp == "file" || tmp == "f") {
+			dstfile = va_arg(argv, char*);
+		}
+		else if (tmp == "datavec" || tmp == "data") {
+			dataptr = va_arg(argv, void*);
 		}
 	}
 	return 0;
+	
 }

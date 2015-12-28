@@ -1,44 +1,49 @@
 #pragma once
+#include <typeinfo.h>
+
 #include "../Abstract/ObjectInitializer.h"
+#include "../Abstract/Findable.h"
 #include "../Abstract/Node.h"
 #include "../Figure/FigureViewer.h"
 
 namespace RNNSimulator {
-	class Observer : public ObjectInitializer
+	class Observer : public ObjectInitializer, public Findable
 	{
 	public:
-		static int NEXTID;
-		static Observer* HEAD;
+		static int NEXTOBJID;
 
-		int id;
-		Observer* nextObserver;
+		int obj_id;
 
 		Node* target;
 
-		bool isValid = false;
-		char* flag = "initialize";
+		bool isValid;
+		std::string flag;
 
-		int print_every = 100;
-		int plot_every = 1000;
+		int print_every;
+		int plot_every;
 
 		// DataRecorder* recorder;
-		char* dstfile;
-		char* dstdir;
+		std::string dstfile;
+		std::string dstdir;
 		FigureViewer* viewer;
 
-		std::vector<double> datavec;
+		void* dataptr;
+		int datalen;
+		template <typename T> T data();
 
-
+		virtual void setDefault();
+		virtual void reset();
+	
 		void setId();
+		void setTargetData();
 
-		Observer();
-		~Observer();
+		Observer() : Observer(0) {};
+		Observer(int setvarnum, ...);
+		virtual ~Observer();
 
 	protected:
-		virtual int set_inner() override {
-			return 0;
-		};
-		virtual int set_inner(int argvnum, std::vector<std::string> argvstr, std::vector<std::string> argvdata) override;
+		virtual int set_inner(int argvnum, va_list argv) override;
 	};
 }
 
+#include "Observer_private.h"

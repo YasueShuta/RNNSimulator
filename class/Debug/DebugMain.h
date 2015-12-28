@@ -15,5 +15,6 @@ public:
 	static int FigureViewerTest();
 
 	static int GnuplotTest();
+	static int EigenTest();
 };
 
