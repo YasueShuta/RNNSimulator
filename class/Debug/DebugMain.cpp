@@ -238,6 +238,7 @@ int DebugMain::FigureViewerTest() {
 //td::vector<std::string> colors = { "red", "blue" };
 //td::vector<std::string> titles = { "SIN", "COS" };
 
+	sample2->setvar(2, "x", "time [s]", "y", "value");
 	sample2->plot_datavar(2, { "red", "blue" }, { "SIN", "COS" }, 
 		xvec, yvec1, yvec2);
 	sample3->fig->hwrite("plot sin(x)");

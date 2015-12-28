@@ -69,6 +69,8 @@ namespace Gnuplot {
 		void inputVec2Multi(std::vector<double> xdata_, std::vector<std::vector<double>> ydataarray_);
 		void inputVec2Multi(double* xdata_, int len_, double* ydataarray_[], int ynum_);
 
+		void replot();
+
 		static void replotAll();
 
 		GP();
@@ -77,12 +79,14 @@ namespace Gnuplot {
 		GP(Handle* h_);
 		GP(bool isPOption_,
 			std::string terminal_ = "windows",
-			std::string title_ = "",
+			std::string title_ = "Figure",
+			std::string font_ = "",
+			double fontsize_ = 18,
 			int wsize_x_ = 640,
 			int wsize_y_ = 330,
 			int woffset_x_ = 30,
-			int woffset_y_ = 30,
-			std::string file_ = "");
+			int woffset_y_ = 30
+			);
 		~GP();
 	};
 }

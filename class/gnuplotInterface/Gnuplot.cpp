@@ -90,7 +90,17 @@ GP::GP(int id) {
 GP::GP(Handle* h_) {
 	h = h_;
 }
-GP::GP(bool isPOption_, std::string terminal_, std::string title_, int wsize_x_, int wsize_y_, int woffset_x, int woffset_y, std::string file_) {
+GP::GP(bool isPOption_,
+	std::string terminal_,
+	std::string title_,
+	std::string font_,
+	double fontsize_,
+	int wsize_x_,
+	int wsize_y_,
+	int woffset_x,
+	int woffset_y
+	)
+{
 	std::stringstream ss;
 	if (isPOption_) {
 		ss << " --persist";
@@ -102,6 +112,8 @@ GP::GP(bool isPOption_, std::string terminal_, std::string title_, int wsize_x_,
 	ss << "set terminal " << terminal_;
 	if (title_.length() > 0)
 		ss << " title \"" << title_ << "\"";
+	if (font_.length() > 0)
+		ss << " font '" << font_ << "," << fontsize_ << "'";
 	ss << " size " << wsize_x_ << "," << wsize_y_;
 	ss << " position " << woffset_x << "," << woffset_y;
 
@@ -109,7 +121,7 @@ GP::GP(bool isPOption_, std::string terminal_, std::string title_, int wsize_x_,
 }
 GP::~GP()
 {
-};
+}
 
 void GP::plotFunc(std::string arg) {
 	if (isHold) h->buf << "replot " << arg;
@@ -230,6 +242,9 @@ void GP::inputVec2Multi(double* xdata_, int len_, double* ydataarray_[], int ynu
 	}
 }
 
+void GP::replot() {
+	h->write("replot");
+}
 void GP::replotAll() {
 	Gnuplot::GP* tmp;
 	for (int i = 0;i < Handle::NEXTID; i++) {

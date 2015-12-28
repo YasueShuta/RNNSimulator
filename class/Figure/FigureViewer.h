@@ -26,9 +26,14 @@ namespace RNNSimulator {
 		int woffset_x;
 		int woffset_y;
 
+		std::string xlabel;
+		std::string ylabel;
+
 		double linewidth;
 		double fontsize;
-		std::string fontweight;
+		double fontsize1;
+		std::string font;
+		std::string font1;
 
 		int layout_x;
 		int layout_y;
@@ -39,7 +44,7 @@ namespace RNNSimulator {
 
 		FigureViewer() : FigureViewer("") {};
 		FigureViewer(std::string argv);
-		~FigureViewer();
+		virtual ~FigureViewer();
 
 		Gnuplot::GP* initFigure();
 		void replaceFigure();
@@ -51,6 +56,8 @@ namespace RNNSimulator {
 		void plot_datavar(int datanum,
 			std::vector<std::string> linecolors_,
 			std::vector<std::string> titles_, ...);
+
+		void setLabel(std::string cmd_, std::string label_, double fontsize_ = -1, std::string font_ = "");
 
 		void reset() override;
 		void setDefault();
