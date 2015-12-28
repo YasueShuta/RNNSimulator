@@ -52,9 +52,9 @@ void Node::array_atanh(){
 	readout = r.matrix();
 }
 
-int set_inner(int argvnum, std::vector<std::string> argvstr, std::vector<std::string> argvdata) {
+int Node::set_inner(int argvnum, std::vector<std::string> argvstr, std::vector<std::string> argvdata) {
 	return argvnum;
 }
-int set_inner(int argvnum, va_list argv) {
+int Node::set_inner(int argvnum, va_list argv) {
 	return argvnum;
 }

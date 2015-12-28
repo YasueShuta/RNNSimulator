@@ -19,8 +19,8 @@ namespace RNNSimulator {
 		virtual void hyde() {};
 	};
 
-	template <typename T = Findable> void* findObject();
-	template <typename T = Findable> void* findObject(int id);
+	template <typename T = Findable> T* findObject();
+	template <typename T = Findable> T* findObject(int id);
 
 	class SampleFindable : public Findable
 	{

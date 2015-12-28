@@ -101,6 +101,9 @@
     <ClInclude Include="..\..\class\Observer\Observer_private.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\class\Recorder\IdManager.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\class\Abstract\MyObject.h">
@@ -110,7 +113,14 @@
       <Filter>ソース ファイル</Filter>
     </None>
     <None Include="..\..\..\eigen\Eigen\Core" />
-    <None Include="..\..\class\Observer\Observer.m" />
     <None Include="..\RNNSimulator.sdf" />
+    <None Include="..\..\class\Recorder\DataRecorder.m" />
+    <None Include="..\..\class\Recorder\DataRecorderInitializer.m" />
+    <None Include="..\..\class\Recorder\DataRecorderPin.m" />
+    <None Include="..\..\class\Recorder\IdManager.m" />
+    <None Include="..\..\class\Recorder\IdManagerDefault.m" />
+    <None Include="..\..\class\Recorder\RecorderFunction.m" />
+    <None Include="..\..\class\Recorder\RecordManager.m" />
+    <None Include="..\..\class\Recorder\RecordManagerInitializer.m" />
   </ItemGroup>
 </Project>

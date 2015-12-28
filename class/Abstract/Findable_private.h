@@ -1,13 +1,13 @@
 #pragma once
 
 namespace RNNSimulator {
-	template <typename T> void* findObject(){
+	template <typename T> T* findObject(){
 		return findObject<T>(-1);
 	}
 
-	template <typename T> void* findObject(int id_) {
-		if (id_ == Findable::NEXTID) return Findable::ROOT;
-		Findable* curr = T::ROOT;
+	template <typename T> T* findObject(int id_) {
+		if (id_ == Findable::NEXTID) return (T*)Findable::ROOT;
+		T* curr = (T*)Findable::ROOT;
 		for (int i = 0;i < T::NEXTID; i++) {
 			/*
 			std::cout << "Curr: " << typeid(*curr).name() << std::endl;
@@ -16,7 +16,7 @@ namespace RNNSimulator {
 			if (typeid(T) == typeid(Findable) || typeid(*curr) == typeid(T))
 				if (id_ < 0 || curr->id == id_)
 					return curr;
-			curr = curr->next;
+			curr = (T*)curr->next;
 		}
 		return NULL;
 	}

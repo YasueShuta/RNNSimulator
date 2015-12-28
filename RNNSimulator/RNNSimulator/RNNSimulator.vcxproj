@@ -140,13 +140,21 @@
     <ClInclude Include="..\..\class\gnuplotInterface\Gnuplot.h" />
     <ClInclude Include="..\..\class\Observer\Observer.h" />
     <ClInclude Include="..\..\class\Observer\Observer_private.h" />
+    <ClInclude Include="..\..\class\Recorder\IdManager.h" />
     <ClInclude Include="MyInclude.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\eigen\Eigen\Core" />
     <None Include="..\..\class\Abstract\MyObject.h" />
     <None Include="..\..\class\Abstract\ObjectFinalizer.cpp" />
-    <None Include="..\..\class\Observer\Observer.m" />
+    <None Include="..\..\class\Recorder\DataRecorder.m" />
+    <None Include="..\..\class\Recorder\DataRecorderInitializer.m" />
+    <None Include="..\..\class\Recorder\DataRecorderPin.m" />
+    <None Include="..\..\class\Recorder\IdManager.m" />
+    <None Include="..\..\class\Recorder\IdManagerDefault.m" />
+    <None Include="..\..\class\Recorder\RecorderFunction.m" />
+    <None Include="..\..\class\Recorder\RecordManager.m" />
+    <None Include="..\..\class\Recorder\RecordManagerInitializer.m" />
     <None Include="..\RNNSimulator.sdf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

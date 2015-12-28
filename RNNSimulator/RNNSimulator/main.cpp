@@ -3,13 +3,13 @@
 
 int main(void) {
 	//	DebugMain::ConsoleTest();
-	// 	DebugMain::FindableTest();
+	 	DebugMain::FindableTest();
 	// 	DebugMain::OITest();
 	//	DebugMain::ConnectableTest();
 	// 	DebugMain::ConnectableNodeTest();
 	//  DebugMain::GnuplotTest();
 	//  DebugMain::FigureViewerTest();
-	DebugMain::EigenTest();
+//	DebugMain::EigenTest();
 
 	DebugMain::Main();
 

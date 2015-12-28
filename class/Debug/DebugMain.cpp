@@ -141,7 +141,7 @@ int DebugMain::OITest() {
 
 	sample->set("-id 128 -name trouble, threshold, 1, data 2.345");
 
-	sample->setvar(4, "id", 64, "name", "va", "data", 0.5f, "ptr", &sample);
+	sample->set(4, "id", 64, "name", "va", "data", 0.5f, "ptr", &sample);
 
 	DebugConsole::Wait();
 	std::cout << "id: " << sample->id << std::endl <<
@@ -238,7 +238,7 @@ int DebugMain::FigureViewerTest() {
 //td::vector<std::string> colors = { "red", "blue" };
 //td::vector<std::string> titles = { "SIN", "COS" };
 
-	sample2->setvar(2, "x", "time [s]", "y", "value");
+	sample2->set(2, "x", "time [s]", "y", "value");
 	sample2->plot_datavar(2, { "red", "blue" }, { "SIN", "COS" }, 
 		xvec, yvec1, yvec2);
 	sample3->fig->hwrite("plot sin(x)");
