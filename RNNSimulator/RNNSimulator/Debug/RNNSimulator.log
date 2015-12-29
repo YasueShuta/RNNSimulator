@@ -1,10 +1,4 @@
-﻿  Node.cpp
-  Findable.cpp
-  ConnectableNode.cpp
-  DebugMain.cpp
-  FigureViewer.cpp
-  Observer.cpp
-  コードを生成中...
+﻿  DebugMain.cpp
   MyObject.obj : マネージ コードが存在する場合は、/DEBUG:FASTLINK はサポートされません。/DEBUG:FULL でリンクを再開します
   RNNSimulator.vcxproj -> C:\Users\shuta\Documents\Visual Studio 2015\Projects\RNNSimulator\RNNSimulator\Debug\RNNSimulator.exe
   RNNSimulator.vcxproj -> C:\Users\shuta\Documents\Visual Studio 2015\Projects\RNNSimulator\RNNSimulator\Debug\RNNSimulator.pdb (Partial PDB)

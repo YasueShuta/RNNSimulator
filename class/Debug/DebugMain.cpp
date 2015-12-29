@@ -28,6 +28,11 @@ DebugMain::~DebugMain()
 
 int DebugMain::Main()
 {
+	std::stringstream ss;
+	ss << "cd C:\\Users\\shuta\\Documents\\Visual Studio 2015\\Projects\\RNNSimulator" << " & ";
+	ss << "mkdir sample_d" << " & ";
+	ss << "cd >> sample_d\\sample.txt";
+	system(ss.str().c_str());
 	return 0;
 }
 
