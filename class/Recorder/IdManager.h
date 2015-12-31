@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "../Abstract/Findable.h"
+#include "../../RNNSimulator/RNNSimulator/MyPath.h"
 
 namespace RNNSimulator {
 	class SetupInfo
@@ -25,8 +26,8 @@ namespace RNNSimulator {
 	class IdManager : public Findable
 	{
 	private:
-		const std::string setupdir = 
-			"C:\\Users\\shuta\\Documents\\u-tokyo\\brain\\lab_doc\\record\\RNNSimulator\\setup.txt";
+		const std::string setupdir = RNNSimulator::SETUPFILE_DIR;
+		const std::string setupname = RNNSimulator::SETUPFILE_NAME;
 
 	public:
 		static IdManager* getObject();
