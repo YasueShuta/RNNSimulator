@@ -3,6 +3,7 @@
 
 #define _USE_MATH_DEFINES
 #include <math.h>
+#include <fstream>
 
 #include "DebugMain.h"
 #include "DebugConsole.h"
@@ -28,11 +29,43 @@ DebugMain::~DebugMain()
 
 int DebugMain::Main()
 {
+	{
+		std::ofstream ofs("test.txt");
+		ofs << "Jast a Minute 5" << std::endl;
+		ofs << "Input:    Answer5AnswerAnswer" << std::endl;
+	}
+	
+	DebugConsole::OpenConsole();
+
+	{
+		std::ifstream ifs("test.txt");
+		std::string str, mem;
+		char buf[19];
+		int b;
+	
+		std::getline(ifs, str);	
+		std::cout << str << std::endl;
+		sscanf_s(str.c_str(), "Jast a Minute %d", &b);
+		std::cout << "b: " << b << std::endl;
+		DebugConsole::Wait();
+
+		ifs >> str;
+		std::cout << str << " " << std::endl;
+		ifs >> str;
+		std::cout << str << std::endl;
+		mem = str;
+		std::cout << mem << std::endl;
+		DebugConsole::Wait();
+	}
+	/*
+	DebugConsole::OpenConsole();
 	std::stringstream ss;
 	ss << "cd C:\\Users\\shuta\\Documents\\Visual Studio 2015\\Projects\\RNNSimulator" << " & ";
 	ss << "mkdir sample_d" << " & ";
 	ss << "cd >> sample_d\\sample.txt";
 	system(ss.str().c_str());
+	DebugConsole::Wait();
+	*/
 	return 0;
 }
 

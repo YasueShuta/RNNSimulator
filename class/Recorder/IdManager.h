@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <fstream>
 #include "../Abstract/Findable.h"
 #include "../../RNNSimulator/RNNSimulator/MyPath.h"
 
@@ -12,7 +13,7 @@ namespace RNNSimulator {
 //		std::string idfile;
 
 		SetupInfo() {};
-		SetupInfo(std::string basedir_, std::string folder_, std::string idfile_);
+		SetupInfo(std::string basedir_, std::string folder_);
 		SetupInfo(std::string filename);
 		~SetupInfo() {};
 
@@ -24,7 +25,7 @@ namespace RNNSimulator {
 	{
 	public:
 		IdInfo() {};
-		IdInfo() {};
+		~IdInfo() {};
 	};
 
 	class IdManager : public Findable
