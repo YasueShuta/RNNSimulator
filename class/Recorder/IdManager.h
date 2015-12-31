@@ -13,7 +13,11 @@ namespace RNNSimulator {
 
 		SetupInfo() {};
 		SetupInfo(std::string basedir_, std::string folder_, std::string idfile_);
+		SetupInfo(std::string filename);
 		~SetupInfo() {};
+
+		std::string dirname() const;
+		std::string foldername() const;
 	};
 
 	class IdInfo
@@ -30,12 +34,19 @@ namespace RNNSimulator {
 		const std::string setupname = RNNSimulator::SETUPFILE_NAME;
 
 	public:
+		SetupInfo setup;
+		IdInfo idinfo;
+
+		IdManager();
+		~IdManager();
+
 		static IdManager* getObject();
 		static SetupInfo getSetup();
 
 		void init();
 		void reset();
 
-		void getId()
+		void getId();
+		void saveId();
 	};
 }
