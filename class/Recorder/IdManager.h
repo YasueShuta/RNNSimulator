@@ -43,6 +43,7 @@ namespace RNNSimulator {
 
 		static IdManager* getObject();
 		static SetupInfo getSetup();
+		static IdInfo getIdInfo();
 
 		void init();
 		void reset();

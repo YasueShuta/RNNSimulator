@@ -13,6 +13,7 @@ public:
 	static int ConnectableTest();
 	static int ConnectableNodeTest();
 	static int FigureViewerTest();
+	static int RecorderTest();
 
 	static int GnuplotTest();
 	static int EigenTest();

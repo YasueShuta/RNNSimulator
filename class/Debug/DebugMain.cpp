@@ -13,6 +13,8 @@
 #include "../Connector/Connector.h"
 #include "../Connector/ConnectableNode.h"
 #include "../Figure/FigureViewer.h"
+#include "../Recorder/IdManager.h"
+#include "../Recorder/DataRecorder.h"
 #include "../gnuplotInterface/Gnuplot.h"
 
 #include "../../RNNSimulator/RNNSimulator/MyPath.h"
@@ -29,6 +31,7 @@ DebugMain::~DebugMain()
 
 int DebugMain::Main()
 {
+	/*
 	{
 		std::ofstream ofs("test.txt");
 		ofs << "Jast a Minute 5" << std::endl;
@@ -57,6 +60,7 @@ int DebugMain::Main()
 		std::cout << mem << std::endl;
 		DebugConsole::Wait();
 	}
+	*/
 	/*
 	DebugConsole::OpenConsole();
 	std::stringstream ss;
@@ -289,7 +293,15 @@ int DebugMain::FigureViewerTest() {
 
 	return 0;
 }
-
+int DebugMain::RecorderTest() {
+	DebugConsole::OpenConsole();
+	std::cout << "Recorder Test: " << std::endl;
+	RNNSimulator::IdManager* obj = RNNSimulator::IdManager::getObject();
+	std::cout << obj << std::endl;
+	DebugConsole::Wait();
+	DebugConsole::CloseConsole();
+	return 0;
+}
 
 int DebugMain::GnuplotTest() {
 

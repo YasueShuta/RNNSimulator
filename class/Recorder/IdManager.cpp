@@ -19,8 +19,8 @@ SetupInfo::SetupInfo(std::string filename_) {
 		ifs >> basedir;
 		ifs >> buf; // skip pre-space sentense
 		ifs >> folder;
-//		ifs >> "Base directory: " >> basedir;
-//		ifs >> "Folder name: " >> folder;
+//		ifs >> "BaseDirectory: " >> basedir;
+//		ifs >> "FolderName: " >> folder;
 	}
 }
 
@@ -34,8 +34,8 @@ std::string SetupInfo::foldername() const {
 }
 
 
-IdInfo::IdInfo() {};
-IdInfo::~IdInfo() {};
+//IdInfo::IdInfo() {}
+//IdInfo::~IdInfo() {}
 
 
 IdManager::IdManager() {
@@ -58,13 +58,28 @@ SetupInfo IdManager::getSetup() {
 	SetupInfo ret(str);
 	return ret;
 }
+IdInfo IdManager::getIdInfo() {
+	IdManager* im = getObject();
+	IdInfo* ret = new IdInfo();
+	return *ret;
+}
 
 void IdManager::init() {
-	std::ofstream ofs;
-
+	std::string str, cmd;
+	str = setupdir + "\\" + setupname;
+	std::ofstream ofs(str.c_str());
+	ofs << "BaseDirectory: " << str << std::endl;
+	cmd = "mkdir " + setupdir + " > NUL 2>&1";
+	system(cmd.c_str());
+	ofs << "FolderName: " << "testFile";
+	cmd = "mkdir " + setupdir + "\\" + "testFile";
+	cmd = cmd + " > NUL 2>&1";
+	system(cmd.c_str());
 }
 void IdManager::reset() {
-
+	init();
+	setup = getSetup();
+	idinfo = getIdInfo();
 }
 
 void IdManager::getId() {

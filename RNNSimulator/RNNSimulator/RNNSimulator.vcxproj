@@ -141,6 +141,7 @@
     <ClInclude Include="..\..\class\gnuplotInterface\Gnuplot.h" />
     <ClInclude Include="..\..\class\Observer\Observer.h" />
     <ClInclude Include="..\..\class\Observer\Observer_private.h" />
+    <ClInclude Include="..\..\class\Recorder\DataRecorder.h" />
     <ClInclude Include="..\..\class\Recorder\IdManager.h" />
     <ClInclude Include="MyInclude.h" />
     <ClInclude Include="MyPath.h" />

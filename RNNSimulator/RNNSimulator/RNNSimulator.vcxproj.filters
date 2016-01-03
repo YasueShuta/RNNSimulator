@@ -110,6 +110,9 @@
     <ClInclude Include="MyPath.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\class\Recorder\DataRecorder.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\class\Abstract\MyObject.h">
