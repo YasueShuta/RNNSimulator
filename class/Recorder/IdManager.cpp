@@ -2,9 +2,10 @@
 
 using namespace RNNSimulator;
 
-SetupInfo::SetupInfo(std::string basedir_, std::string folder_) {
+SetupInfo::SetupInfo(std::string basedir_, std::string folder_, std::string idfile_) {
 	basedir = basedir_;
 	folder = folder_;
+	idfile = idfile_;
 }
 
 SetupInfo::SetupInfo(std::string filename_) {
@@ -13,26 +14,30 @@ SetupInfo::SetupInfo(std::string filename_) {
 
 	if (ifs.fail()) {
 		std::cout << "Error: File could not open" << std::endl;
+		return;
 	}
-	else {
-		ifs >> buf; // skip pre-space sentense
-		ifs >> basedir;
-		ifs >> buf; // skip pre-space sentense
-		ifs >> folder;
-//		ifs >> "BaseDirectory: " >> basedir;
-//		ifs >> "FolderName: " >> folder;
-	}
+	
+	ifs >> buf; // skip pre-space sentense
+	ifs >> basedir;
+	ifs >> buf; // skip pre-space sentense
+	ifs >> folder;
+//	ifs >> buf;	
+//	ifs >> idfile;
+//	ifs >> buf;
+//	ifs >> simIdNum;
 }
 
 std::string SetupInfo::dirname() const {
 	return basedir;
 }
-
 std::string SetupInfo::foldername() const {
 	std::string ret;
 	return basedir + "\\" + folder;
 }
-
+std::string SetupInfo::idfilename() const {
+	std::string ret;
+	return basedir + "\\" + folder + "\\" + idfile;
+}
 
 //IdInfo::IdInfo() {}
 //IdInfo::~IdInfo() {}
@@ -75,10 +80,10 @@ SetupInfo IdManager::getSetup() {
 	SetupInfo ret(str);
 	return ret;
 }
-IdInfo IdManager::getIdInfo() {
+IdInfo IdManager::getIdInfo(int simId) {
 	IdManager* im = getObject();
-	IdInfo* ret = new IdInfo();
-	return *ret;
+	SetupInfo si = im->getSetup();
+	return im->loadId(simId); 
 }
 
 void IdManager::init() {
@@ -92,16 +97,47 @@ void IdManager::init() {
 	cmd = "mkdir " + setupdir + "\\" + "testFile";
 	cmd = cmd + " > NUL 2>&1";
 	system(cmd.c_str());
+	ofs << std::endl;
+	ofs << "IdFileName: " << "id.txt";
+
 }
 void IdManager::reset() {
 	init();
 	setup = getSetup();
+	simIdNum = setup.simIdNum;
 	idinfo = getIdInfo();
 }
 
-void IdManager::getId() {
-	getId(-1);
+
+IdInfo IdManager::initId() {
+	std::string filename = getSetup().idfilename();
+	std::ofstream ofs;
+	IdInfo* ret = new IdInfo();
+	std::string str;
+
+	if (simIdNum < 0) {
+		// id file is empty
+		simIdNum = 0;
+	}
+
+	ret->simId = simIdNum;
+	simIdNum += 1;
+	ret->recordId = 0;
+	ret->file_count = 0;
+	ret->data_count = 0;
+
+	return *ret;
+
+}
+IdInfo IdManager::loadId(int simId) {
+	std::string filename = getSetup().idfilename();
+	IdInfo* ret = new IdInfo();
+	
+	return *ret;
 }
 void IdManager::saveId(IdInfo idinfo) {
+
+}
+void IdManager::saveId(int simId, std::string idstr) {
 
 }

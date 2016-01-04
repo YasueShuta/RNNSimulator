@@ -303,6 +303,7 @@ int DebugMain::RecorderTest() {
 	RNNSimulator::DataRecorder* dr2 = new RNNSimulator::DataRecorder("sample");
 
 	std::cout << dr1->recordId << ":(" << dr1->id << ") " << dr1->recordName << std::endl;
+	std::cout << dr2->recordId << ":(" << dr2->id << ") " << dr2->recordName << std::endl;
 //	std::cout << obj->setup.folder << std::endl;
 
 	DebugConsole::Wait();
