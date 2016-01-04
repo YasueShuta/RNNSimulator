@@ -53,8 +53,28 @@ void Node::array_atanh(){
 }
 
 int Node::set_inner(int argvnum, std::vector<std::string> argvstr, std::vector<std::string> argvdata) {
+	std::string str;
+	for (int i = 0;i < argvnum;i++) {
+		str = argvstr.at(i);
+		if (str == "cellNum" || str == "num" || str == "n") {
+			cellNum = std::stoi(argvdata.at(i));
+		}
+		else if (str == "mode" || str == "m") {
+			mode = std::stoi(argvdata.at(i));
+		}
+	}
 	return argvnum;
 }
 int Node::set_inner(int argvnum, va_list argv) {
+	std::string str;
+	for (int i = 0;i < argvnum;i++) {
+		str = va_arg(argv, char*);
+		if (str == "cellNum" || str == "num" || str == "n") {
+			cellNum = va_arg(argv, int);
+		}
+		else if (str == "mode" || str == "m") {
+			mode = va_arg(argv, int);
+		}
+	}
 	return argvnum;
 }

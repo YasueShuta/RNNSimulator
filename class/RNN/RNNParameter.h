@@ -15,7 +15,9 @@ namespace RNNSimulator {
 
 		bool isPlastic = false;
 		bool isLoadedNetwork = false;
+		std::string loadnetname;
 		bool isLoadedPotential = false;
+		std::string loadxname;
 
 
 		virtual void reset();
@@ -26,14 +28,13 @@ namespace RNNSimulator {
 		void setPlastic();
 		void resetPlastic();
 
-		static void init() { init(64); }
-		static void init(int n_,
-			double p_ = 0.1,
-			double g_ = 1.5,
-			double th_ = 1.5,
-			std::vector<double> M0_ = std::vector<double>(0),
-			std::vector<double> x0_ = std::vector<double>(0));
-
+		static RNNParameter* init() { init(-1); }
+		static RNNParameter* init(int n,
+			double p_ = -1,
+			double g_ = -1,
+			double th_ = -1,
+			std::string loadnetname_ = "",
+			std::string loadxfilename_ = "");
 		RNNParameter();
 		RNNParameter(std::string argv);
 		RNNParameter(int varargnum, ...);
@@ -41,6 +42,7 @@ namespace RNNSimulator {
 		~RNNParameter();
 
 	protected:
-		virtual int set_inner(int varargnum, va_list argv);
+		virtual int set_inner(int argvnum, std::vector<std::string> argvstr, std::vector<std::string> argvdata) override;
+		virtual int set_inner(int varargnum, va_list argv) override;
 	};
 }
