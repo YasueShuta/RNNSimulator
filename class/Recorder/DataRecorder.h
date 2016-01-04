@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <fstream>
+#include <time.h>
 #include "../Abstract/ObjectInitializer.h"
 #include "../Abstract/Findable.h"
 
@@ -30,6 +31,12 @@ namespace RNNSimulator {
 		virtual void reset();
 		void setId();
 		void recordObserver(Observer* observer_);
+
+		void print(std::string str_, std::string filename_ = filename);
+		void initfile();
+		void save(std::string str_, std::string name_, std::string dir_);
+		std::string timeStr();
+		
 
 	protected:
 		virtual int set_inner(int varargnum, va_list argv) override;
