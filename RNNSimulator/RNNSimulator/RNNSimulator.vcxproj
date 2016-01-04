@@ -123,6 +123,7 @@
     <ClCompile Include="..\..\class\Figure\FigureViewer.cpp" />
     <ClCompile Include="..\..\class\gnuplotInterface\Gnuplot.cpp" />
     <ClCompile Include="..\..\class\Observer\Observer.cpp" />
+    <ClCompile Include="..\..\class\Recorder\DataRecorder.cpp" />
     <ClCompile Include="..\..\class\Recorder\IdManager.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>

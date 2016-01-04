@@ -57,6 +57,9 @@
     <ClCompile Include="..\..\class\Recorder\IdManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\class\Recorder\DataRecorder.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\class\Debug\DebugConsole.h">

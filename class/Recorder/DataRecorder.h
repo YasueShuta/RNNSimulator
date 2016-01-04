@@ -9,10 +9,12 @@ namespace RNNSimulator {
 
 	class DataRecorder : public ObjectInitializer, public Findable {
 	public:
-		int simId;
-		int recordId;
-		int file_count;
-		int data_count;
+		static int NEXTRECID;
+
+		int simId = -1;
+		int recordId = -1;
+		int file_count = -1;
+		int data_count = -1;
 
 		std::string filename;
 
@@ -27,7 +29,7 @@ namespace RNNSimulator {
 
 		virtual void reset();
 		void setId();
-		void recorderObserver(Observer observer_);
+		void recordObserver(Observer* observer_);
 
 	protected:
 		virtual int set_inner(int varargnum, va_list argv) override;

@@ -296,8 +296,15 @@ int DebugMain::FigureViewerTest() {
 int DebugMain::RecorderTest() {
 	DebugConsole::OpenConsole();
 	std::cout << "Recorder Test: " << std::endl;
-	RNNSimulator::IdManager* obj = RNNSimulator::IdManager::getObject();
-	std::cout << obj << std::endl;
+//	RNNSimulator::IdManager* obj = RNNSimulator::IdManager::getObject();
+	RNNSimulator::Findable* fin1 = new RNNSimulator::Findable();
+	RNNSimulator::DataRecorder* dr1 = new RNNSimulator::DataRecorder();
+	RNNSimulator::Findable* fin2 = new RNNSimulator::Findable();
+	RNNSimulator::DataRecorder* dr2 = new RNNSimulator::DataRecorder("sample");
+
+	std::cout << dr1->recordId << ":(" << dr1->id << ") " << dr1->recordName << std::endl;
+//	std::cout << obj->setup.folder << std::endl;
+
 	DebugConsole::Wait();
 	DebugConsole::CloseConsole();
 	return 0;

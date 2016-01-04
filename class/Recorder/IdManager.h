@@ -10,20 +10,29 @@ namespace RNNSimulator {
 	public:
 		std::string basedir;
 		std::string folder;
-//		std::string idfile;
+		std::string idfile;
 
 		SetupInfo() {};
-		SetupInfo(std::string basedir_, std::string folder_);
+		SetupInfo(std::string basedir_, std::string folder_, std::string idfile_);
 		SetupInfo(std::string filename);
 		~SetupInfo() {};
 
 		std::string dirname() const;
 		std::string foldername() const;
+		std::string idfilename() const;
 	};
 
 	class IdInfo
 	{
 	public:
+		int simId;
+		int recordId;
+		int file_count;
+		int data_count;
+
+		std::string id2str();
+		static IdInfo str2id(std::string str_);
+
 		IdInfo() {};
 		~IdInfo() {};
 	};
@@ -48,7 +57,8 @@ namespace RNNSimulator {
 		void init();
 		void reset();
 
-		void getId();
-		void saveId();
+		void getId(int simId = -1);
+		void saveId(IdInfo idinfo);
+		void saveId(int simId, std::string idstr);
 	};
 }

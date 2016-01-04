@@ -36,7 +36,24 @@ std::string SetupInfo::foldername() const {
 
 //IdInfo::IdInfo() {}
 //IdInfo::~IdInfo() {}
-
+std::string IdInfo::id2str() {
+	std::string ret;
+	ret = std::to_string(simId);
+	ret += " " + std::to_string(recordId);
+	ret += " " + std::to_string(file_count);
+	ret += " " + std::to_string(data_count);
+	return ret;
+}
+IdInfo IdInfo::str2id(std::string str_) {
+	IdInfo* ret = new IdInfo();
+	int tmp0, tmp1, tmp2, tmp3;
+	sscanf_s(str_.c_str(), "%d %d %d %d", &tmp0, &tmp1, &tmp2, &tmp3);
+	ret->simId = tmp0;
+	ret->recordId = tmp1;
+	ret->file_count = tmp2;
+	ret->data_count = tmp3;
+	return *ret;
+}
 
 IdManager::IdManager() {
 	reset();
@@ -83,8 +100,8 @@ void IdManager::reset() {
 }
 
 void IdManager::getId() {
-
+	getId(-1);
 }
-void IdManager::saveId() {
+void IdManager::saveId(IdInfo idinfo) {
 
 }
