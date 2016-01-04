@@ -7,10 +7,12 @@ namespace RNNSimulator {
 	public:
 		RNNParameter* param;
 		double scale;
+		double dt=-1;
 
 		Eigen::MatrixXd network;
 
 		RNNNode();
+		RNNNode(std::string argv);
 		RNNNode(int varargnum, ...);
 		~RNNNode();
 

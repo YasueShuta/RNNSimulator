@@ -60,6 +60,12 @@
     <ClCompile Include="..\..\class\Recorder\DataRecorder.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\class\RNN\RNNParameter.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\class\RNN\RNNNode.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\class\Debug\DebugConsole.h">
@@ -116,6 +122,21 @@
     <ClInclude Include="..\..\class\Recorder\DataRecorder.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\class\FORCE\FORCEParameter.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\class\FORCE\FORCEPlasticity.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\class\FORCE\FORCEModule.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\class\RNN\RNNParameter.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\class\RNN\RNNNode.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\class\Abstract\MyObject.h">
@@ -134,5 +155,23 @@
     <None Include="..\..\class\Recorder\RecorderFunction.m" />
     <None Include="..\..\class\Recorder\RecordManager.m" />
     <None Include="..\..\class\Recorder\RecordManagerInitializer.m" />
+    <None Include="..\..\class\FORCE\FORCE.m" />
+    <None Include="..\..\class\FORCE\FORCEDefault.m" />
+    <None Include="..\..\class\FORCE\FORCEFunction.m" />
+    <None Include="..\..\class\FORCE\FORCEInitializer.m" />
+    <None Include="..\..\class\FORCE\FORCEModule.m" />
+    <None Include="..\..\class\FORCE\FORCEProperties.m" />
+    <None Include="..\..\class\RNN\RNN.m" />
+    <None Include="..\..\class\RNN\RNNDefault.m" />
+    <None Include="..\..\class\RNN\RNNFinalizer.m" />
+    <None Include="..\..\class\RNN\RNNFunction.m" />
+    <None Include="..\..\class\RNN\RNNInitializer.m" />
+    <None Include="..\..\class\RNN\RNNManager.m" />
+    <None Include="..\..\class\RNN\RNNProperties.m" />
+    <None Include="..\..\class\RNN\RNNRecorder.m" />
+    <None Include="..\..\class\RNNIO\RNNIO.m" />
+    <None Include="..\..\class\RNNIO\SingleFeedback.m" />
+    <None Include="..\..\class\RNNIO\SingleInput.m" />
+    <None Include="..\..\class\RNNIO\SingleOutput.m" />
   </ItemGroup>
 </Project>

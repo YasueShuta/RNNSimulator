@@ -43,7 +43,7 @@ void Node::update() {
 	readout = potential;
 }
 
-void Node::array_atanh(){
+void Node::atanh_read(){
 	Eigen::ArrayXd x = potential.array();
 	Eigen::ArrayXd r(x.size());
 	for (int i = 0; i < r.size(); i++) {

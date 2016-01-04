@@ -23,6 +23,7 @@ RNNParameter::RNNParameter(int varargnum, va_list argv) {
 RNNParameter::~RNNParameter() {}
 
 void RNNParameter::reset() {
+	scale = 1.0 / sqrt(n*p);
 	setNetwork();
 	setPotential();
 }

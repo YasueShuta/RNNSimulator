@@ -1,6 +1,7 @@
 #pragma once
 #include "../Abstract/ObjectInitializer.h"
 #include "../../../eigen/Eigen/core"
+#include <math.h>
 
 namespace RNNSimulator {
 	class RNNParameter : public ObjectInitializer {
@@ -12,6 +13,8 @@ namespace RNNSimulator {
 
 		Eigen::MatrixXd M0;
 		Eigen::VectorXd x0;
+
+		double scale;
 
 		bool isPlastic = false;
 		bool isLoadedNetwork = false;

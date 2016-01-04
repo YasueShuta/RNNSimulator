@@ -125,6 +125,8 @@
     <ClCompile Include="..\..\class\Observer\Observer.cpp" />
     <ClCompile Include="..\..\class\Recorder\DataRecorder.cpp" />
     <ClCompile Include="..\..\class\Recorder\IdManager.cpp" />
+    <ClCompile Include="..\..\class\RNN\RNNNode.cpp" />
+    <ClCompile Include="..\..\class\RNN\RNNParameter.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -139,11 +141,16 @@
     <ClInclude Include="..\..\class\Debug\DebugConsole.h" />
     <ClInclude Include="..\..\class\Debug\DebugMain.h" />
     <ClInclude Include="..\..\class\Figure\FigureViewer.h" />
+    <ClInclude Include="..\..\class\FORCE\FORCEModule.h" />
+    <ClInclude Include="..\..\class\FORCE\FORCEParameter.h" />
+    <ClInclude Include="..\..\class\FORCE\FORCEPlasticity.h" />
     <ClInclude Include="..\..\class\gnuplotInterface\Gnuplot.h" />
     <ClInclude Include="..\..\class\Observer\Observer.h" />
     <ClInclude Include="..\..\class\Observer\Observer_private.h" />
     <ClInclude Include="..\..\class\Recorder\DataRecorder.h" />
     <ClInclude Include="..\..\class\Recorder\IdManager.h" />
+    <ClInclude Include="..\..\class\RNN\RNNNode.h" />
+    <ClInclude Include="..\..\class\RNN\RNNParameter.h" />
     <ClInclude Include="MyInclude.h" />
     <ClInclude Include="MyPath.h" />
   </ItemGroup>
@@ -151,6 +158,12 @@
     <None Include="..\..\..\eigen\Eigen\Core" />
     <None Include="..\..\class\Abstract\MyObject.h" />
     <None Include="..\..\class\Abstract\ObjectFinalizer.cpp" />
+    <None Include="..\..\class\FORCE\FORCE.m" />
+    <None Include="..\..\class\FORCE\FORCEDefault.m" />
+    <None Include="..\..\class\FORCE\FORCEFunction.m" />
+    <None Include="..\..\class\FORCE\FORCEInitializer.m" />
+    <None Include="..\..\class\FORCE\FORCEModule.m" />
+    <None Include="..\..\class\FORCE\FORCEProperties.m" />
     <None Include="..\..\class\Recorder\DataRecorder.m" />
     <None Include="..\..\class\Recorder\DataRecorderInitializer.m" />
     <None Include="..\..\class\Recorder\DataRecorderPin.m" />
@@ -159,6 +172,18 @@
     <None Include="..\..\class\Recorder\RecorderFunction.m" />
     <None Include="..\..\class\Recorder\RecordManager.m" />
     <None Include="..\..\class\Recorder\RecordManagerInitializer.m" />
+    <None Include="..\..\class\RNNIO\RNNIO.m" />
+    <None Include="..\..\class\RNNIO\SingleFeedback.m" />
+    <None Include="..\..\class\RNNIO\SingleInput.m" />
+    <None Include="..\..\class\RNNIO\SingleOutput.m" />
+    <None Include="..\..\class\RNN\RNN.m" />
+    <None Include="..\..\class\RNN\RNNDefault.m" />
+    <None Include="..\..\class\RNN\RNNFinalizer.m" />
+    <None Include="..\..\class\RNN\RNNFunction.m" />
+    <None Include="..\..\class\RNN\RNNInitializer.m" />
+    <None Include="..\..\class\RNN\RNNManager.m" />
+    <None Include="..\..\class\RNN\RNNProperties.m" />
+    <None Include="..\..\class\RNN\RNNRecorder.m" />
     <None Include="..\RNNSimulator.sdf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
