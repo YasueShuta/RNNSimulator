@@ -3,7 +3,7 @@
 #include "../../../eigen/Eigen/core"
 
 namespace RNNSimulator {
-	class RNNParameter {
+	class RNNParameter : public ObjectInitializer {
 	public:
 		int n;
 		double p;
@@ -35,6 +35,9 @@ namespace RNNSimulator {
 			std::vector<double> x0_ = std::vector<double>(0));
 
 		RNNParameter();
+		RNNParameter(std::string argv);
+		RNNParameter(int varargnum, ...);
+		RNNParameter(int varargnum, va_list argv);
 		~RNNParameter();
 
 	protected:
