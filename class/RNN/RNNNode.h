@@ -16,6 +16,7 @@ namespace RNNSimulator {
 		RNNNode(int varargnum, ...);
 		~RNNNode();
 
+		virtual int set_inner(int varargnum, va_list argv) override;
 		virtual void reset();
 		virtual void update() override;
 	};

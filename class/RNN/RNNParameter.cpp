@@ -39,6 +39,8 @@ void RNNParameter::setNetwork() {
 	}
 	else {
 		// Sparse
+		std::cout << "Set Network(N: " << n << ")" << std::endl;
+		M0.resize(n, n);
 		M0 = nrand(n, p, 0, g*scale);
 	}
 }
@@ -88,9 +90,9 @@ Eigen::SparseMatrix<double> RNNParameter::nrand(int n_, double p_, double mean, 
 	for (int i = 0;i < n_;i++) {
 		for (int j = 0;j < n_;j++) {
 			d = ud(gen);
-			if (p_ < d) break;
+			if (p_ < d) continue;
 			d = nd(gen);
-			vec.push_back(Eigen::Triplet<double>(d, i, j));
+			vec.push_back(Eigen::Triplet<double>(i, j, d));
 		}
 	}
 

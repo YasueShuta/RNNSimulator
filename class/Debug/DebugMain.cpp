@@ -318,13 +318,15 @@ int DebugMain::RNNTest() {
 	DebugConsole::OpenConsole();
 
 	std::cout << "RNNTest:" << std::endl;
-	RNNSimulator::RNNNode* rnn = new RNNSimulator::RNNNode();
+	RNNSimulator::RNNNode* rnn = new RNNSimulator::RNNNode(1, "n", 8);
 
 	std::cout << "RNN: " << std::endl;
 	std::cout << "Pointer: " << rnn << std::endl;
 	std::cout << "N: " << rnn->cellNum << std::endl;
-	std::cout << rnn->param->x0 << std::endl;
-
+	Eigen::MatrixXd tmp; tmp = Eigen::MatrixXd::Identity(rnn->cellNum, rnn->cellNum);
+	tmp = rnn->network;
+	std::cout << tmp << std::endl;
+	//  std::cout << rnn->param->x0 << std::endl;
 	DebugConsole::Wait();
 	DebugConsole::CloseConsole();
 	return 0;

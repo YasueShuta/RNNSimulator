@@ -13,18 +13,19 @@ RNNNode::RNNNode(int varargnum, ...) {
 	setDefault();
 	va_list argv;
 	va_start(argv, varargnum);
-	param = new RNNParameter(varargnum, argv);
+	param = new RNNParameter();
 	set_inner(varargnum, argv);
 	reset();
 }
 RNNNode::~RNNNode() {};
 
 void RNNNode::reset() {
-	ConnectableNode::reset();
+	param->reset();
 	if (cellNum != param->n) {
 		std::cout << "cellNum not matching..." << std::endl;
 		cellNum = param->n;
 	}
+	ConnectableNode::reset();
 	network = param->M0;
 	potential = param->x0;
 	scale = param->scale;
@@ -38,4 +39,10 @@ void RNNNode::update() {
 	potential += (-1 * potential + input) * dt;
 	atanh_read();
 	output = readout;
+}
+
+int RNNNode::set_inner(int varargnum, va_list argv) {
+	ConnectableNode::set_inner(varargnum, argv);
+	param->set_inner(varargnum, argv);
+	return varargnum;
 }

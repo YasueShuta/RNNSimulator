@@ -1,5 +1,4 @@
 ﻿  DebugMain.cpp
-  RNNNode.cpp
   RNNParameter.cpp
   コードを生成中...
   MyObject.obj : マネージ コードが存在する場合は、/DEBUG:FASTLINK はサポートされません。/DEBUG:FULL でリンクを再開します
