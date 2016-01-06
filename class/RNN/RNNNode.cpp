@@ -21,8 +21,8 @@ RNNNode::~RNNNode() {};
 
 void RNNNode::reset() {
 	ConnectableNode::reset();
-	if (cellNum == param->n) {
-		std::cout << "Error: cellNum not matching..." << std::endl;
+	if (cellNum != param->n) {
+		std::cout << "cellNum not matching..." << std::endl;
 		cellNum = param->n;
 	}
 	network = param->M0;

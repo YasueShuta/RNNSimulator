@@ -14,8 +14,10 @@ public:
 	static int ConnectableNodeTest();
 	static int FigureViewerTest();
 	static int RecorderTest();
+	static int RNNTest();
 
 	static int GnuplotTest();
 	static int EigenTest();
+	static int RandomTest();
 };
 

@@ -14,7 +14,7 @@ ConnectableNode::ConnectableNode(int varargnum, ...){
 void ConnectableNode::reset() {
 	Node::reset();
 	output = readout;
-	input = Eigen::VectorXd::Zero(cellNum);
+//	input = Eigen::VectorXd::Zero(cellNum);
 }
 
 int ConnectableNode::outflow_len()

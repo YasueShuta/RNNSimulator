@@ -32,7 +32,7 @@ namespace RNNSimulator {
 		void setId();
 		void recordObserver(Observer* observer_);
 
-		void print(std::string str_, std::string filename_ = filename);
+		void print(std::string str_, std::string filename_ = "");
 		void initfile();
 		void save(std::string str_, std::string name_, std::string dir_);
 		std::string timeStr();

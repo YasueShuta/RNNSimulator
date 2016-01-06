@@ -39,7 +39,7 @@ void RNNParameter::setNetwork() {
 	}
 	else {
 		// Sparse
-		M0 = Eigen::MatrixXd::Random(n);
+		M0 = nrand(n, p, 0, g*scale);
 	}
 }
 void RNNParameter::setPotential() {
@@ -48,7 +48,7 @@ void RNNParameter::setPotential() {
 	}
 	else {
 		x0 = 2.0 * Eigen::VectorXd::Random(n);
-		x0.array() - 0.5;
+		x0.array() - 1.0;
 	}
 }
 void RNNParameter::setPlastic() {
@@ -74,6 +74,29 @@ RNNParameter* RNNParameter::init(int n_,
 	if (loadxname_.length() > 0)
 		str += " -x " + loadxname_;
 	return new RNNParameter(str);
+}
+
+Eigen::SparseMatrix<double> RNNParameter::nrand(int n_, double p_, double mean, double dev) {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::normal_distribution<> nd(mean, dev);
+	std::uniform_real_distribution<> ud(0,1);
+
+	std::vector<Eigen::Triplet<double>> vec;
+
+	double d;
+	for (int i = 0;i < n_;i++) {
+		for (int j = 0;j < n_;j++) {
+			d = ud(gen);
+			if (p_ < d) break;
+			d = nd(gen);
+			vec.push_back(Eigen::Triplet<double>(d, i, j));
+		}
+	}
+
+	Eigen::SparseMatrix<double> s(n_, n_);
+	s.setFromTriplets(vec.begin(), vec.end());
+	return s;
 }
 
 int RNNParameter::set_inner(int argvnum, std::vector<std::string> argvstr, std::vector<std::string> argvdata) {

@@ -9,8 +9,10 @@ int main(void) {
 	// 	DebugMain::ConnectableNodeTest();
 	//  DebugMain::GnuplotTest();
 	//  DebugMain::FigureViewerTest();
-	DebugMain::RecorderTest();
-	//	DebugMain::EigenTest();
+	//  DebugMain::RecorderTest();
+	DebugMain::RNNTest();
+	//  DebugMain::EigenTest();
+	DebugMain::RandomTest();
 
 	DebugMain::Main();
 

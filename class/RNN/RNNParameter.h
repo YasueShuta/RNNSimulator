@@ -1,7 +1,9 @@
 #pragma once
 #include "../Abstract/ObjectInitializer.h"
 #include "../../../eigen/Eigen/core"
+#include "../../../eigen/Eigen/Sparse"
 #include <math.h>
+#include <random>
 
 namespace RNNSimulator {
 	class RNNParameter : public ObjectInitializer {
@@ -38,6 +40,9 @@ namespace RNNSimulator {
 			double th_ = -1,
 			std::string loadnetname_ = "",
 			std::string loadxfilename_ = "");
+
+		static Eigen::SparseMatrix<double> nrand(int n_, double p_, double mean = 0, double dev = 1);
+
 		RNNParameter();
 		RNNParameter(std::string argv);
 		RNNParameter(int varargnum, ...);

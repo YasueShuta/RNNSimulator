@@ -3,6 +3,7 @@
 
 #define _USE_MATH_DEFINES
 #include <math.h>
+#include <random>
 #include <fstream>
 
 #include "DebugMain.h"
@@ -15,6 +16,7 @@
 #include "../Figure/FigureViewer.h"
 #include "../Recorder/IdManager.h"
 #include "../Recorder/DataRecorder.h"
+#include "../RNN/RNNNode.h"
 #include "../gnuplotInterface/Gnuplot.h"
 
 #include "../../RNNSimulator/RNNSimulator/MyPath.h"
@@ -293,6 +295,7 @@ int DebugMain::FigureViewerTest() {
 
 	return 0;
 }
+
 int DebugMain::RecorderTest() {
 	DebugConsole::OpenConsole();
 	std::cout << "Recorder Test: " << std::endl;
@@ -305,6 +308,22 @@ int DebugMain::RecorderTest() {
 	std::cout << dr1->recordId << ":(" << dr1->id << ") " << dr1->recordName << std::endl;
 	std::cout << dr2->recordId << ":(" << dr2->id << ") " << dr2->recordName << std::endl;
 //	std::cout << obj->setup.folder << std::endl;
+
+	DebugConsole::Wait();
+	DebugConsole::CloseConsole();
+	return 0;
+}
+
+int DebugMain::RNNTest() {
+	DebugConsole::OpenConsole();
+
+	std::cout << "RNNTest:" << std::endl;
+	RNNSimulator::RNNNode* rnn = new RNNSimulator::RNNNode();
+
+	std::cout << "RNN: " << std::endl;
+	std::cout << "Pointer: " << rnn << std::endl;
+	std::cout << "N: " << rnn->cellNum << std::endl;
+	std::cout << rnn->param->x0 << std::endl;
 
 	DebugConsole::Wait();
 	DebugConsole::CloseConsole();
@@ -447,4 +466,42 @@ int DebugMain::EigenTest() {
 
 	DebugConsole::Wait();
 	DebugConsole::CloseConsole();
+}
+
+int DebugMain::RandomTest() {
+	DebugConsole::OpenConsole();
+
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::normal_distribution<> d(0, 1);
+
+	std::vector<double> tmpvec(30000), hist(100);
+	for (int i = 0; i < 30000;i++) {
+		tmpvec.at(i) = d(gen);
+	}
+	std::sort(tmpvec.begin(), tmpvec.end());
+	int j = 0;
+	for (int i = 0;i < 30000;i++) {
+		if (j < 100 && tmpvec.at(i) >= -3 + 0.06*j) {
+			j += 1;
+		}
+		if (j == 100) hist.at(j - 1) += 1;
+		else hist.at(j) += 1;
+	}
+	std::vector<double> xvec(100), tvec(30000);
+	for (int i = 0;i < 100;i++) {
+		xvec.at(i) = -2.97 + 0.06*i;
+	}
+	for (int i = 0;i < 30000;i++) {
+		tvec.at(i) = i;
+	}
+	Gnuplot::GP* gp = new Gnuplot::GP();
+	gp->plotVec2(&xvec.at(0), &hist.at(0), 100);
+
+	DebugConsole::Wait();
+	gp->plotVec2(&tvec.at(0), &tmpvec.at(0), 30000);
+
+	DebugConsole::Wait();
+	DebugConsole::CloseConsole();
+
 }
