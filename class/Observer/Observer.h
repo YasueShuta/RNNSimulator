@@ -5,6 +5,7 @@
 #include "../Abstract/Findable.h"
 #include "../Abstract/Node.h"
 #include "../Figure/FigureViewer.h"
+#include "../Recorder/DataRecorder.h"
 
 namespace RNNSimulator {
 	class Observer : public ObjectInitializer, public Findable
@@ -22,7 +23,7 @@ namespace RNNSimulator {
 		int print_every;
 		int plot_every;
 
-		// DataRecorder* recorder;
+		DataRecorder* recorder;
 		std::string dstfile;
 		std::string dstdir;
 		FigureViewer* viewer;
