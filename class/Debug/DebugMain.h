@@ -15,6 +15,7 @@ public:
 	static int FigureViewerTest();
 	static int RecorderTest();
 	static int RNNTest();
+	static int TemporalObserverTest();
 
 	static int GnuplotTest();
 	static int EigenTest();

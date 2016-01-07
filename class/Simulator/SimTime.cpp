@@ -15,6 +15,20 @@ SimTime::SimTime(double nsecs_, double dt_) {
 }
 SimTime::~SimTime(){}
 
+void SimTime::reset() {
+	ti = 0;
+	now = 0;
+}
+void SimTime::step() {
+	ti += 1;
+	now += dt;
+}
+
+bool SimTime::ok() {
+	if (ti >= 0 && ti < len) return true;
+	return false;
+}
+
 SimTime* SimTime::getObject() {
 	SimTime* ret;
 	ret = findObject<SimTime>();

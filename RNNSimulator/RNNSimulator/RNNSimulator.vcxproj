@@ -123,6 +123,7 @@
     <ClCompile Include="..\..\class\Figure\FigureViewer.cpp" />
     <ClCompile Include="..\..\class\gnuplotInterface\Gnuplot.cpp" />
     <ClCompile Include="..\..\class\Observer\Observer.cpp" />
+    <ClCompile Include="..\..\class\Observer\TemporalObserver.cpp" />
     <ClCompile Include="..\..\class\Recorder\DataRecorder.cpp" />
     <ClCompile Include="..\..\class\Recorder\IdManager.cpp" />
     <ClCompile Include="..\..\class\RNN\RNNNode.cpp" />
@@ -148,6 +149,7 @@
     <ClInclude Include="..\..\class\gnuplotInterface\Gnuplot.h" />
     <ClInclude Include="..\..\class\Observer\Observer.h" />
     <ClInclude Include="..\..\class\Observer\Observer_private.h" />
+    <ClInclude Include="..\..\class\Observer\TemporalObserver.h" />
     <ClInclude Include="..\..\class\Recorder\DataRecorder.h" />
     <ClInclude Include="..\..\class\Recorder\IdManager.h" />
     <ClInclude Include="..\..\class\RNN\RNNNode.h" />

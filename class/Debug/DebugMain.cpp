@@ -18,6 +18,7 @@
 #include "../Recorder/DataRecorder.h"
 #include "../RNN/RNNNode.h"
 #include "../Observer/Observer.h"
+#include "../Observer/TemporalObserver.h"
 
 #include "../gnuplotInterface/Gnuplot.h"
 
@@ -343,6 +344,33 @@ int DebugMain::RNNTest() {
 			std::cout << "quit" << std::endl;
 			break;
 		}
+	}
+
+	DebugConsole::Wait();
+	DebugConsole::CloseConsole();
+	return 0;
+}
+
+int DebugMain::TemporalObserverTest() {
+	DebugConsole::OpenConsole();
+
+	std::cout << "RNNTest:" << std::endl;
+	RNNSimulator::SimTime simtime(10);
+	RNNSimulator::RNNNode* rnn = new RNNSimulator::RNNNode(1, "n", 32);
+	RNNSimulator::TemporalObserver* obs = new RNNSimulator::TemporalObserver(1, "target", rnn);
+	obs->viewTarget();
+	RNNSimulator::Connector* con = new RNNSimulator::Connector(rnn, rnn, 1);
+
+	while (simtime.ok()) {
+		rnn->update();
+		con->transmit();
+		obs->viewTarget();
+		Sleep(100);
+		if (DebugConsole::WaitKey('q')) {
+			std::cout << "quit" << std::endl;
+			break;
+		}
+		simtime.step();
 	}
 
 	DebugConsole::Wait();

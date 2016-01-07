@@ -13,6 +13,10 @@ namespace RNNSimulator {
 
 		double dt;
 
+		void reset();
+		void step();
+		bool ok();
+
 		SimTime(double nsecs_ = 144.0, double dt_ = 0.1);
 		~SimTime();
 

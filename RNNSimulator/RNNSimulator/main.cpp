@@ -10,7 +10,8 @@ int main(void) {
 	//  DebugMain::GnuplotTest();
 	//  DebugMain::FigureViewerTest();
 	//  DebugMain::RecorderTest();
-	DebugMain::RNNTest();
+	//  DebugMain::RNNTest();
+	DebugMain::TemporalObserverTest();
 	//  DebugMain::EigenTest();
 	//  DebugMain::RandomTest();
 
