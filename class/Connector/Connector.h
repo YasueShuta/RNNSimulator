@@ -1,6 +1,7 @@
 #pragma once
 #include "..\..\..\eigen\Eigen\Core"
 #include "Connectable.h"
+#include "../Simulator/SimTime.h"
 
 namespace RNNSimulator {
 	class Connector
@@ -12,6 +13,7 @@ namespace RNNSimulator {
 		Eigen::MatrixXd weight;
 		int rows;
 		int cols;
+		double dt;
 
 		Connector(Connectable* in, Connectable* out);
 		Connector(Connectable* in, Connectable* out, int option);
@@ -21,6 +23,7 @@ namespace RNNSimulator {
 		void resetWeight();
 
 //		std::vector<double> transmit(double dt);
-		virtual Eigen::VectorXd transmit(double dt);
+		virtual Eigen::VectorXd transmit();
+		virtual Eigen::VectorXd transmit(double dt_);
 	};
 }

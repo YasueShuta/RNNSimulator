@@ -1,5 +1,7 @@
-﻿  DebugMain.cpp
+﻿  Connector.cpp
+  DebugMain.cpp
   RNNNode.cpp
+  SimTime.cpp
   コードを生成中...
   MyObject.obj : マネージ コードが存在する場合は、/DEBUG:FASTLINK はサポートされません。/DEBUG:FULL でリンクを再開します
   RNNSimulator.vcxproj -> C:\Users\shuta\Documents\Visual Studio 2015\Projects\RNNSimulator\RNNSimulator\Debug\RNNSimulator.exe

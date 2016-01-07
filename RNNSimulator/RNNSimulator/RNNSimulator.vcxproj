@@ -127,6 +127,7 @@
     <ClCompile Include="..\..\class\Recorder\IdManager.cpp" />
     <ClCompile Include="..\..\class\RNN\RNNNode.cpp" />
     <ClCompile Include="..\..\class\RNN\RNNParameter.cpp" />
+    <ClCompile Include="..\..\class\Simulator\SimTime.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +152,7 @@
     <ClInclude Include="..\..\class\Recorder\IdManager.h" />
     <ClInclude Include="..\..\class\RNN\RNNNode.h" />
     <ClInclude Include="..\..\class\RNN\RNNParameter.h" />
+    <ClInclude Include="..\..\class\Simulator\SimTime.h" />
     <ClInclude Include="MyInclude.h" />
     <ClInclude Include="MyPath.h" />
   </ItemGroup>

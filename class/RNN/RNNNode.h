@@ -1,6 +1,7 @@
 #pragma once
 #include "RNNParameter.h"
 #include "../Connector/ConnectableNode.h"
+#include "../Simulator/SimTime.h"
 
 namespace RNNSimulator {
 	class RNNNode : public ConnectableNode {

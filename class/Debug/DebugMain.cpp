@@ -336,7 +336,7 @@ int DebugMain::RNNTest() {
 
 	while (1) {
 		rnn->update();
-		con->transmit(rnn->dt);
+		con->transmit();
 		obs->viewTarget();
 		Sleep(100);
 		if (DebugConsole::WaitKey('q')) {

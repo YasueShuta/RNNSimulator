@@ -30,6 +30,7 @@ void RNNNode::reset() {
 	network = param->M0;
 	potential = param->x0;
 	scale = param->scale;
+	dt = SimTime::getObject()->dt;
 }
 
 void RNNNode::update() {
