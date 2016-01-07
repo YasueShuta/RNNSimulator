@@ -19,6 +19,7 @@
 #include "../RNN/RNNNode.h"
 #include "../Observer/Observer.h"
 #include "../Observer/TemporalObserver.h"
+#include "../FORCE/FORCEModule.h"
 
 #include "../gnuplotInterface/Gnuplot.h"
 
@@ -372,6 +373,15 @@ int DebugMain::TemporalObserverTest() {
 		}
 		simtime.step();
 	}
+
+	DebugConsole::Wait();
+	DebugConsole::CloseConsole();
+	return 0;
+}
+
+int DebugMain::FORCETest() {
+	DebugConsole::OpenConsole();
+
 
 	DebugConsole::Wait();
 	DebugConsole::CloseConsole();

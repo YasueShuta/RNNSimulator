@@ -16,6 +16,7 @@ public:
 	static int RecorderTest();
 	static int RNNTest();
 	static int TemporalObserverTest();
+	static int FORCETest();
 
 	static int GnuplotTest();
 	static int EigenTest();

@@ -12,6 +12,7 @@ int main(void) {
 	//  DebugMain::RecorderTest();
 	//  DebugMain::RNNTest();
 	DebugMain::TemporalObserverTest();
+
 	//  DebugMain::EigenTest();
 	//  DebugMain::RandomTest();
 
