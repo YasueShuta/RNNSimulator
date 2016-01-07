@@ -382,6 +382,11 @@ int DebugMain::TemporalObserverTest() {
 int DebugMain::FORCETest() {
 	DebugConsole::OpenConsole();
 
+	RNNSimulator::RNNNode* rnn = new RNNSimulator::RNNNode(1, "n", 8);
+	RNNSimulator::FORCEModule* fm = new RNNSimulator::FORCEModule(rnn, rnn);
+
+	rnn->update();
+	fm->update();
 
 	DebugConsole::Wait();
 	DebugConsole::CloseConsole();

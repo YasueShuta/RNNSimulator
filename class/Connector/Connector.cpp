@@ -42,12 +42,12 @@ void Connector::resetWeight()
 
 
 Eigen::VectorXd Connector::transmit() {
-	Eigen::VectorXd flow = weight * in->outflow() * dt;
+	flow = weight * in->outflow() * dt;
 	out->inflow(flow);
 	return flow;
 }
 Eigen::VectorXd Connector::transmit(double dt_) {
-	Eigen::VectorXd flow = weight * in->outflow() * dt_;
+	flow = weight * in->outflow() * dt_;
 	out->inflow(flow);
 	return flow;
 }

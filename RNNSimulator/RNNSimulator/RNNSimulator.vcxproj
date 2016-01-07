@@ -121,6 +121,9 @@
     <ClCompile Include="..\..\class\Debug\DebugConsole.cpp" />
     <ClCompile Include="..\..\class\Debug\DebugMain.cpp" />
     <ClCompile Include="..\..\class\Figure\FigureViewer.cpp" />
+    <ClCompile Include="..\..\class\FORCE\FORCEModule.cpp" />
+    <ClCompile Include="..\..\class\FORCE\FORCEParameter.cpp" />
+    <ClCompile Include="..\..\class\FORCE\FORCEPlasticity.cpp" />
     <ClCompile Include="..\..\class\gnuplotInterface\Gnuplot.cpp" />
     <ClCompile Include="..\..\class\Observer\Observer.cpp" />
     <ClCompile Include="..\..\class\Observer\TemporalObserver.cpp" />
@@ -146,6 +149,7 @@
     <ClInclude Include="..\..\class\FORCE\FORCEModule.h" />
     <ClInclude Include="..\..\class\FORCE\FORCEParameter.h" />
     <ClInclude Include="..\..\class\FORCE\FORCEPlasticity.h" />
+    <ClInclude Include="..\..\class\FORCE\TargetFunctionGenerator.h" />
     <ClInclude Include="..\..\class\gnuplotInterface\Gnuplot.h" />
     <ClInclude Include="..\..\class\Observer\Observer.h" />
     <ClInclude Include="..\..\class\Observer\Observer_private.h" />

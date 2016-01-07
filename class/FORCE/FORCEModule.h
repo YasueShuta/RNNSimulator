@@ -10,5 +10,7 @@ namespace RNNSimulator {
 		FORCEModule(Connectable* in, Connectable* out, int option);
 		FORCEModule(Connectable* in, Connectable* out, std::vector<double> w);
 		virtual ~FORCEModule();
+
+		void update();
 	};
 }

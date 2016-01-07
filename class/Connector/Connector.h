@@ -11,6 +11,7 @@ namespace RNNSimulator {
 		Connectable* out;
 		std::vector<double> w0;
 		Eigen::MatrixXd weight;
+		Eigen::MatrixXd flow;
 		int rows;
 		int cols;
 		double dt;

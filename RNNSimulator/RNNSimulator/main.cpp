@@ -11,8 +11,8 @@ int main(void) {
 	//  DebugMain::FigureViewerTest();
 	//  DebugMain::RecorderTest();
 	//  DebugMain::RNNTest();
-	DebugMain::TemporalObserverTest();
-
+	//  DebugMain::TemporalObserverTest();
+	DebugMain::FORCETest();
 	//  DebugMain::EigenTest();
 	//  DebugMain::RandomTest();
 
