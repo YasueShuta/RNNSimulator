@@ -13,7 +13,7 @@ namespace RNNSimulator {
 
 		double dt;
 
-		SimTime(double nsecs = 144.0, double dt = 0.1);
+		SimTime(double nsecs_ = 144.0, double dt_ = 0.1);
 		~SimTime();
 	};
 }
