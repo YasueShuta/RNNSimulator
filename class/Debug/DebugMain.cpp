@@ -323,6 +323,7 @@ int DebugMain::RNNTest() {
 	RNNSimulator::RNNNode* rnn = new RNNSimulator::RNNNode(1, "n", 8);
 	RNNSimulator::Observer* obs = new RNNSimulator::Observer(1, "target", rnn);
 	obs->viewTarget();
+	RNNSimulator::Connector* con = new RNNSimulator::Connector(rnn, rnn, 1);
 
 	/*
 	std::cout << "RNN: " << std::endl;
@@ -335,6 +336,7 @@ int DebugMain::RNNTest() {
 
 	while (1) {
 		rnn->update();
+		con->transmit(rnn->dt);
 		obs->viewTarget();
 		Sleep(100);
 		if (DebugConsole::WaitKey('q')) {
