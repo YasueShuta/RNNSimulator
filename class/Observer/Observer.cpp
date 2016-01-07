@@ -31,8 +31,10 @@ void Observer::setDefault() {
 }
 void Observer::reset() {
 	setId();
-	if(dataptr == NULL)
+	if (dataptr == NULL) {
 		setTargetData();
+		setXvec();
+	}
 	if (viewer == NULL)
 		setViewer();
 }
@@ -44,6 +46,8 @@ void Observer::setTargetData() {
 	if (target == NULL) return;
 	dataptr = &target->readout(0);
 	datalen = target->cellNum;
+}
+void Observer::setXvec() {
 	xvec.resize(datalen);
 	for (int i = 0;i < datalen;i++) {
 		xvec.at(i) = i;

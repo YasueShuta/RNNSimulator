@@ -5,10 +5,15 @@
 namespace RNNSimulator {
 	class TemporalObserver : public Observer {
 	public:
-		virtual void reset() override;
+		SimTime* time;
+		std::vector<double> datavec;
+
+		virtual void setTargetData() override;
+		virtual void setXvec() override;
+		virtual void viewTarget() override;
 
 		TemporalObserver() : TemporalObserver(0) {};
 		TemporalObserver(int varargnum, ...);
-		~TemporalObserver() {};
+		virtual ~TemporalObserver() {};
 	};
 }

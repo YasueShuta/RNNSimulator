@@ -38,10 +38,11 @@ namespace RNNSimulator {
 		virtual void reset();
 	
 		void setId();
-		void setTargetData();
-		void setViewer();
+		virtual void setTargetData();
+		virtual void setXvec();
+		virtual void setViewer();
 
-		void viewTarget();
+		virtual void viewTarget();
 
 		Observer() : Observer(0) {};
 		Observer(int setvarnum, ...);
