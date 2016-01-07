@@ -40,6 +40,17 @@ void DebugConsole::Wait()
 	std::cin.get();
 }
 
+bool DebugConsole::WaitKey(char c_)
+{
+//	std::cout << "Waiting " << c_ << std::endl;
+	char c;
+	if (_kbhit()) {
+		c = _getch();
+		return c == c_;
+	}
+	return false;
+}
+
 std::string DebugConsole::GetLine()
 {
 	std::string ret;

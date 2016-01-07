@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <conio.h>
 
 class DebugConsole
 {
@@ -12,6 +13,7 @@ public:
 	static void CloseConsole();
 
 	static void Wait();
+	static bool WaitKey(char c_);
 	static std::string GetLine();
 
 	static bool isOpen;

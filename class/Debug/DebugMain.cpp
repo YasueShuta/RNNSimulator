@@ -321,8 +321,8 @@ int DebugMain::RNNTest() {
 
 	std::cout << "RNNTest:" << std::endl;
 	RNNSimulator::RNNNode* rnn = new RNNSimulator::RNNNode(1, "n", 8);
-//	RNNSimulator::Observer* obs = new RNNSimulator::Observer(1, "target", rnn);
-//	obs->viewTarget();
+	RNNSimulator::Observer* obs = new RNNSimulator::Observer(1, "target", rnn);
+	obs->viewTarget();
 
 	/*
 	std::cout << "RNN: " << std::endl;
@@ -335,11 +335,14 @@ int DebugMain::RNNTest() {
 
 	while (1) {
 		rnn->update();
+		obs->viewTarget();
 		Sleep(100);
-		DebugConsole::Wait();
+		if (DebugConsole::WaitKey('q')) {
+			std::cout << "quit" << std::endl;
+			break;
+		}
 	}
 
-	//  std::cout << rnn->param->x0 << std::endl;
 	DebugConsole::Wait();
 	DebugConsole::CloseConsole();
 	return 0;

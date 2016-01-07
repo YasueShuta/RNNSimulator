@@ -38,12 +38,7 @@ void RNNNode::update() {
 		dt = 0.1;
 	}
 	potential += (-1 * potential + input + network * readout) * dt;
-	std::cout << "Update:" << std::endl;
-	std::cout << "Potential:" << std::endl;
-	std::cout << potential << std::endl;
 	tanh_read();
-	std::cout << "Readout" << std::endl;
-	std::cout << readout << std::endl;
 	output = readout;
 }
 
