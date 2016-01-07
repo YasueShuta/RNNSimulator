@@ -14,3 +14,21 @@ SimTime::SimTime(double nsecs_, double dt_) {
 	now = 0;
 }
 SimTime::~SimTime(){}
+
+SimTime* SimTime::getObject() {
+	SimTime* ret;
+	ret = findObject<SimTime>();
+	if (ret == NULL) {
+		ret = new SimTime();
+	}
+	return ret;
+}
+SimTime* SimTime::getObject(double nsecs_, double dt_) {
+	SimTime* ret;
+	ret = findObject<SimTime>();
+	if (ret == NULL || ret->nsecs != nsecs_ || ret->dt != dt_) {
+		delete ret;
+		ret = new SimTime(nsecs_, dt_);
+	}
+	return ret;
+}

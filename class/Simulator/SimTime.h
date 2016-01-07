@@ -15,5 +15,8 @@ namespace RNNSimulator {
 
 		SimTime(double nsecs_ = 144.0, double dt_ = 0.1);
 		~SimTime();
+
+		static SimTime* getObject();
+		static SimTime* getObject(double nsecs_, double dt_ = 0.1);
 	};
 }
