@@ -25,7 +25,7 @@ namespace RNNSimulator {
 		std::vector<double> to_vec(Eigen::VectorXd);
 
 		virtual void update();
-		void atanh_read();
+		void tanh_read();
 
 	protected:
 		virtual int set_inner(int argvnum, std::vector<std::string> argvstr, std::vector<std::string> argvdata) override;

@@ -26,6 +26,7 @@ void RNNNode::reset() {
 		cellNum = param->n;
 	}
 	ConnectableNode::reset();
+	tanh_read();
 	network = param->M0;
 	potential = param->x0;
 	scale = param->scale;
@@ -36,8 +37,13 @@ void RNNNode::update() {
 		std::cout << "Time Scale dt is not decided...: set 0.1" << std::endl;
 		dt = 0.1;
 	}
-	potential += (-1 * potential + input) * dt;
-	atanh_read();
+	potential += (-1 * potential + input + network * readout) * dt;
+	std::cout << "Update:" << std::endl;
+	std::cout << "Potential:" << std::endl;
+	std::cout << potential << std::endl;
+	tanh_read();
+	std::cout << "Readout" << std::endl;
+	std::cout << readout << std::endl;
 	output = readout;
 }
 

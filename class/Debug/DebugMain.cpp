@@ -17,6 +17,8 @@
 #include "../Recorder/IdManager.h"
 #include "../Recorder/DataRecorder.h"
 #include "../RNN/RNNNode.h"
+#include "../Observer/Observer.h"
+
 #include "../gnuplotInterface/Gnuplot.h"
 
 #include "../../RNNSimulator/RNNSimulator/MyPath.h"
@@ -319,6 +321,8 @@ int DebugMain::RNNTest() {
 
 	std::cout << "RNNTest:" << std::endl;
 	RNNSimulator::RNNNode* rnn = new RNNSimulator::RNNNode(1, "n", 8);
+//	RNNSimulator::Observer* obs = new RNNSimulator::Observer(1, "target", rnn);
+//	obs->viewTarget();
 
 	/*
 	std::cout << "RNN: " << std::endl;
@@ -328,7 +332,13 @@ int DebugMain::RNNTest() {
 	tmp = rnn->network;
 	std::cout << tmp << std::endl;
 	*/
-	rnn->update();
+
+	while (1) {
+		rnn->update();
+		Sleep(100);
+		DebugConsole::Wait();
+	}
+
 	//  std::cout << rnn->param->x0 << std::endl;
 	DebugConsole::Wait();
 	DebugConsole::CloseConsole();

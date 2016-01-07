@@ -43,11 +43,11 @@ void Node::update() {
 	readout = potential;
 }
 
-void Node::atanh_read(){
+void Node::tanh_read(){
 	Eigen::ArrayXd x = potential.array();
 	Eigen::ArrayXd r(x.size());
 	for (int i = 0; i < r.size(); i++) {
-		r[i] = atanh(x[i]);
+		r[i] = tanh(x[i]);
 	}
 	readout = r.matrix();
 }

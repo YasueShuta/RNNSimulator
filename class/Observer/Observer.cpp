@@ -33,6 +33,8 @@ void Observer::reset() {
 	setId();
 	if(dataptr == NULL)
 		setTargetData();
+	if (viewer == NULL)
+		setViewer();
 }
 void Observer::setId() {
 	id = Observer::NEXTOBJID;
@@ -40,14 +42,21 @@ void Observer::setId() {
 }
 void Observer::setTargetData() {
 	if (target == NULL) return;
-	std::string typeraw = typeid(*target).raw_name();
-	if (typeraw == typeid(Node).raw_name()) {
-		dataptr = &target->readout(0);
-		datalen = target->cellNum;
+	dataptr = &target->readout(0);
+	datalen = target->cellNum;
+	xvec.resize(datalen);
+	for (int i = 0;i < datalen;i++) {
+		xvec.at(i) = i;
 	}
-	else {
-		std::cout << "Failed to set target: " << typeid(*target).name() << std::endl;
-	}
+}
+void Observer::setViewer() {
+	if (target == NULL || datalen == 0) return;
+	viewer = new FigureViewer();
+}
+
+
+void Observer::viewTarget() {
+	viewer->fig->plotVec2(&xvec.at(0), (double*)dataptr, datalen, "title 'data'");
 }
 
 int Observer::set_inner(int argvnum, va_list argv) {

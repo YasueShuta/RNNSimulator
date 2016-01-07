@@ -32,11 +32,16 @@ namespace RNNSimulator {
 		int datalen;
 		template <typename T> T data();
 
+		std::vector<double> xvec;
+
 		virtual void setDefault();
 		virtual void reset();
 	
 		void setId();
 		void setTargetData();
+		void setViewer();
+
+		void viewTarget();
 
 		Observer() : Observer(0) {};
 		Observer(int setvarnum, ...);
