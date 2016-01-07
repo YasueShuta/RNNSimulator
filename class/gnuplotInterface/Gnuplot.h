@@ -52,8 +52,8 @@ namespace Gnuplot {
 		void plotFunc(std::string arg, int linewidth, int linecolor, std::string title_ = "");
 		void plotFunc(std::string arg, int linewidth = 3, std::string linecolor = "blue", std::string title_ = "");
 		//		void plotVec1();
-		void plotVec2(std::vector<double> xdata_, std::vector<double> ydata_, std::string option_ = "");
-		void plotVec2(std::vector<double> xdata_, std::vector<double> ydata_, int linewidth_ = 3, std::string linecolor_ = "");
+		void plotVec2(std::vector<double> xdata_, std::vector<double> ydata_, std::string option_);
+		void plotVec2(std::vector<double> xdata_, std::vector<double> ydata_, int linewidth_, std::string linecolor_);
 		void plotVec2(std::vector<double> xdata_, std::vector<double> ydata_, int linewidth_ = 3, int linecolor_ = 1);
 		void plotVec2Multi(std::vector<double> xdata_, std::vector<std::vector<double>> ydataarray_, std::vector<std::string> optionarray_ = std::vector<std::string>(0));
 		void plotVec2Multi(std::vector<double> xdata_,
@@ -61,8 +61,14 @@ namespace Gnuplot {
 			int linewidth_ = 1,
 			std::vector<std::string> linecolors_ = std::vector<std::string>(0),
 			std::vector<std::string> titles_ = std::vector<std::string>(0));
-		void plotVec2(double* xdata_, double* ydata_, int len_, std::string option = "");
-		void plotVec2Multi(double* xdata_, int len_, double* ydataarray_[], int ynum, std::string optionarray_[] = NULL);
+		void plotVec2(double* xdata_, double* ydata_, int len_, std::string option);
+		void plotVec2(double* xdata_, double* ydata_, int len_, int linewidth_, std::string linecolor_);
+		void plotVec2(double* xdata_, double* ydata_, int len_, int linewidth_ = 3, int linecolor_ = 1);
+		void plotVec2Multi(double* xdata_, int len_, double* ydataarray_[], int ynum, std::string optionarray_[]);
+		void plotVec2Multi(double* xdata_, int len_, double* ydataarray_[], int ynum,
+			int linewidth_ = 1,
+			std::vector<std::string> linecolors_ = std::vector<std::string>(0),
+			std::vector<std::string> titles_ = std::vector<std::string>(0));
 
 		void inputVec2(std::vector<double> xdata_, std::vector<double> ydata_);
 		void inputVec2(double* xdata_, double* ydata_, int len_);

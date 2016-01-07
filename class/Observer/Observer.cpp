@@ -60,7 +60,7 @@ void Observer::setViewer() {
 
 
 void Observer::viewTarget() {
-	viewer->fig->plotVec2(&xvec.at(0), (double*)dataptr, datalen, "title 'data'");
+	viewer->fig->plotVec2(&xvec.at(0), (double*)dataptr, datalen);
 }
 
 int Observer::set_inner(int argvnum, va_list argv) {

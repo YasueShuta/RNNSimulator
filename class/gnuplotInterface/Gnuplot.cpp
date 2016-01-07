@@ -195,6 +195,16 @@ void GP::plotVec2(double* xdata_, double* ydata_, int num, std::string option_) 
 	h->write();
 	inputVec2(xdata_, ydata_, num);
 }
+void GP::plotVec2(double* xdata_, double* ydata_, int num, int linewidth_, std::string linecolor_) {
+	h->buf << "plot '-' " << "with lines linewidth " << linewidth_ << " linecolor '" << linecolor_ << "'";
+	h->write();
+	inputVec2(xdata_, ydata_, num);
+}
+void GP::plotVec2(double* xdata_, double* ydata_, int num, int linewidth_, int linecolor_) {
+	h->buf << "plot '-' " << "with lines linewidth " << linewidth_ << " linecolor " << linecolor_;
+	h->write();
+	inputVec2(xdata_, ydata_, num);
+}
 void GP::plotVec2Multi(double* xdata_, int len_, double* ydataarray_[], int ynum_, std::string optionarray_[]) {
 	h->buf << "plot";
 	for (int i = 0;i < ynum_;i++) {
@@ -206,6 +216,21 @@ void GP::plotVec2Multi(double* xdata_, int len_, double* ydataarray_[], int ynum
 	h->write();
 	inputVec2Multi(xdata_, len_, ydataarray_, ynum_);
 }
+void GP::plotVec2Multi(double* xdata_, int len_, double* ydataarray_[], int ynum_, int linewidth_,
+	std::vector<std::string> linecolors_, std::vector<std::string> titles_) {
+	h->buf << "plot ";
+	for (int i = 0;i < ynum_;i++) {
+		h->buf << "'-' with lines linewidth " << linewidth_;
+		if (linecolors_.size() >= i && linecolors_.at(i).length() > 0)
+			h->buf << " linecolor '" << linecolors_.at(i) << "'";
+		if (titles_.size() >= i && titles_.at(i).length() > 0)
+			h->buf << " title '" << titles_.at(i) << "'";
+		if (i < ynum_ - 1) h->buf << ", ";
+	}
+	h->write();
+	inputVec2Multi(xdata_, len_, ydataarray_, ynum_);
+}
+
 
 void GP::inputVec2(std::vector<double> xdata_, std::vector<double> ydata_) {
 	for (int i = 0;i < xdata_.size(); i++) {
