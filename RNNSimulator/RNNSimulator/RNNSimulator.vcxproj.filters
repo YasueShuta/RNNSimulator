@@ -72,13 +72,13 @@
     <ClCompile Include="..\..\class\Observer\TemporalObserver.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\class\FORCE\FORCEParameter.cpp">
+    <ClCompile Include="..\..\class\FORCE\RLSParameter.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\class\FORCE\FORCEPlasticity.cpp">
+    <ClCompile Include="..\..\class\FORCE\RLSPlasticity.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\class\FORCE\FORCEModule.cpp">
+    <ClCompile Include="..\..\class\FORCE\RLSModule.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -137,15 +137,6 @@
     <ClInclude Include="..\..\class\Recorder\DataRecorder.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\class\FORCE\FORCEParameter.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\class\FORCE\FORCEPlasticity.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\class\FORCE\FORCEModule.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\class\RNN\RNNParameter.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -159,6 +150,15 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="..\..\class\FORCE\TargetFunctionGenerator.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\class\FORCE\RLSModule.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\class\FORCE\RLSParameter.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\class\FORCE\RLSPlasticity.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

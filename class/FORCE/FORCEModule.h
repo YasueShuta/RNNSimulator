@@ -1,16 +1,15 @@
 #pragma once
-#include "FORCEPlasticity.h"
+
 #include "../Connector/ConnectableNode.h"
-#include "../Connector/Connector.h"
+#include "RLSModule.h"
 
 namespace RNNSimulator {
-	class FORCEModule : public Connector, public FORCEPlasticity {
+	class FORCEModule : public ConnectableNode {
 	public:
-		FORCEModule(Connectable* in, Connectable* out);
-		FORCEModule(Connectable* in, Connectable* out, int option);
-		FORCEModule(Connectable* in, Connectable* out, std::vector<double> w);
-		virtual ~FORCEModule();
+		RLSModule* rls;
+		Connector* feedback;
 
-		void update();
+		FORCEModule(ConnectableNode* target_);
+		virtual ~FORCEModule();
 	};
 }

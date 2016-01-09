@@ -23,6 +23,7 @@ Connector::Connector(Connectable* in_, Connectable* out_, int option)
 	}
 	w0 = std::vector<double>(rows * cols);
 	Eigen::Map<Eigen::MatrixXd>(&w0[0], rows, cols) = weight;
+	dt = SimTime::getObject()->dt;
 }
 Connector::Connector(Connectable* in_, Connectable* out_, std::vector<double> w)
 	: Connector(in_, out_)
@@ -47,6 +48,7 @@ Eigen::VectorXd Connector::transmit() {
 	return flow;
 }
 Eigen::VectorXd Connector::transmit(double dt_) {
+	if (dt_ <= 0) dt_ = dt;
 	flow = weight * in->outflow() * dt_;
 	out->inflow(flow);
 	return flow;

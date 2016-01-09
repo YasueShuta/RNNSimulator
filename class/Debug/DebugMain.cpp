@@ -19,7 +19,7 @@
 #include "../RNN/RNNNode.h"
 #include "../Observer/Observer.h"
 #include "../Observer/TemporalObserver.h"
-#include "../FORCE/FORCEModule.h"
+#include "../FORCE/RLSModule.h"
 
 #include "../gnuplotInterface/Gnuplot.h"
 
@@ -380,13 +380,27 @@ int DebugMain::TemporalObserverTest() {
 }
 
 int DebugMain::FORCETest() {
-	DebugConsole::OpenConsole();
+	RNNSimulator::SimTime* simtime = new RNNSimulator::SimTime(100);
 
 	RNNSimulator::RNNNode* rnn = new RNNSimulator::RNNNode(1, "n", 8);
-	RNNSimulator::FORCEModule* fm = new RNNSimulator::FORCEModule(rnn, rnn);
+	RNNSimulator::ConnectableNode* output = new RNNSimulator::ConnectableNode(1, "n", 2);
+	RNNSimulator::RLSModule* fm = new RNNSimulator::RLSModule(1, rnn, output);
+	RNNSimulator::Connector* feedback = new RNNSimulator::Connector(output, rnn, 1);
+	RNNSimulator::TemporalObserver* obs = new RNNSimulator::TemporalObserver(1, "target", output);
 
-	rnn->update();
-	fm->update();
+	DebugConsole::OpenConsole();
+
+	while(simtime->ok()){
+		rnn->update();
+		fm->update();
+		std::cout << "e: " << fm->error << std::endl;
+		output->update();
+		feedback->transmit();
+
+		std::cout << simtime->ti << ": " << output->readout << std::endl;
+//		obs->viewTarget();
+		simtime->step();
+	}
 
 	DebugConsole::Wait();
 	DebugConsole::CloseConsole();
