@@ -267,6 +267,18 @@ void GP::inputVec2Multi(double* xdata_, int len_, double* ydataarray_[], int ynu
 	}
 }
 
+
+void GP::save(std::string filename_, std::string option_) {
+	std::string arg;
+	arg = "set terminal ";
+	if (option_ == "") option_ = "emf";
+	arg += option_;
+	h->write(arg);
+	arg = "set output " + filename_;
+	h->write(arg);
+	replot();
+	h->write("set terminal windows");
+}
 void GP::replot() {
 	h->write("replot");
 }

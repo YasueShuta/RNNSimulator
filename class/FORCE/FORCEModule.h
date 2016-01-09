@@ -9,6 +9,8 @@ namespace RNNSimulator {
 		RLSModule* rls;
 		Connector* feedback;
 
+		void updateFORCE();
+
 		FORCEModule(ConnectableNode* target_);
 		virtual ~FORCEModule();
 	};

@@ -22,6 +22,10 @@ void RLSPlasticity::bind(Connector* target_) {
 }
 
 void RLSPlasticity::init(int row_, int col_) {
+	if (isValid && row_ < 0) {
+		row_ = target->rows;
+		col_ = target->cols;
+	}
 	_r = Eigen::MatrixXd::Zero(col_, 1);
 	_rPr = Eigen::MatrixXd::Zero(1,1);
 	_k = Eigen::MatrixXd::Zero(col_, 1);
@@ -38,7 +42,7 @@ void RLSPlasticity::init(int row_, int col_) {
 }
 
 void RLSPlasticity::updateWeight(int ti) {
-	if (!isValid) return;
+	if (!isValid) return;	
 	if (ti < 0) ti = ti_count;
 	ti_count += 1;
 	updateError();

@@ -39,6 +39,7 @@ int RLSParameter::set_inner(int argvnum, std::vector<std::string> argvstr, std::
 		}
 		else if (str == "alpha" || str == "a") {
 			alpha = std::stod(argvdata.at(i));
+			r_alpha = 0;
 		}
 		else if (str == "learn_every" || str == "le") {
 			learn_every = std::stod(argvdata.at(i));
@@ -55,6 +56,7 @@ int RLSParameter::set_inner(int varargnum, va_list argv) {
 		}
 		else if (str == "alpha" || str == "a") {
 			alpha = va_arg(argv, double);
+			r_alpha = 0;
 		}
 		else if (str == "learn_every" || str == "le") {
 			learn_every = va_arg(argv, int);

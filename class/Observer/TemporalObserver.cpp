@@ -21,6 +21,6 @@ void TemporalObserver::setXvec() {
 }
 
 void TemporalObserver::viewTarget() {
-	datavec.at(time->ti) = sqrt(target->readout.norm());
+	datavec.at(time->ti) = target->readout.norm();//sqrt(target->readout.norm());
 	viewer->fig->plotVec2(xvec, datavec);
 }

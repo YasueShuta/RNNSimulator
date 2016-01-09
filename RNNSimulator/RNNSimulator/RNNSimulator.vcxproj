@@ -121,6 +121,7 @@
     <ClCompile Include="..\..\class\Debug\DebugConsole.cpp" />
     <ClCompile Include="..\..\class\Debug\DebugMain.cpp" />
     <ClCompile Include="..\..\class\Figure\FigureViewer.cpp" />
+    <ClCompile Include="..\..\class\FORCE\FORCEModule.cpp" />
     <ClCompile Include="..\..\class\FORCE\RLSModule.cpp" />
     <ClCompile Include="..\..\class\FORCE\RLSParameter.cpp" />
     <ClCompile Include="..\..\class\FORCE\RLSPlasticity.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="..\..\class\Debug\DebugConsole.h" />
     <ClInclude Include="..\..\class\Debug\DebugMain.h" />
     <ClInclude Include="..\..\class\Figure\FigureViewer.h" />
+    <ClInclude Include="..\..\class\FORCE\FORCEModule.h" />
     <ClInclude Include="..\..\class\FORCE\RLSModule.h" />
     <ClInclude Include="..\..\class\FORCE\RLSParameter.h" />
     <ClInclude Include="..\..\class\FORCE\RLSPlasticity.h" />

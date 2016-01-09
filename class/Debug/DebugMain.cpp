@@ -20,6 +20,7 @@
 #include "../Observer/Observer.h"
 #include "../Observer/TemporalObserver.h"
 #include "../FORCE/RLSModule.h"
+#include "../FORCE/FORCEModule.h"
 
 #include "../gnuplotInterface/Gnuplot.h"
 
@@ -382,25 +383,36 @@ int DebugMain::TemporalObserverTest() {
 int DebugMain::FORCETest() {
 	RNNSimulator::SimTime* simtime = new RNNSimulator::SimTime(100);
 
-	RNNSimulator::RNNNode* rnn = new RNNSimulator::RNNNode(1, "n", 8);
-	RNNSimulator::ConnectableNode* output = new RNNSimulator::ConnectableNode(1, "n", 2);
-	RNNSimulator::RLSModule* fm = new RNNSimulator::RLSModule(1, rnn, output);
-	RNNSimulator::Connector* feedback = new RNNSimulator::Connector(output, rnn, 1);
-	RNNSimulator::TemporalObserver* obs = new RNNSimulator::TemporalObserver(1, "target", output);
+	RNNSimulator::RNNNode* rnn = new RNNSimulator::RNNNode(1, "n", 32);
+//	RNNSimulator::ConnectableNode* output = new RNNSimulator::ConnectableNode(1, "n", 2);
+//	RNNSimulator::RLSModule* fm = new RNNSimulator::RLSModule(1, rnn, output);
+//	RNNSimulator::Connector* feedback = new RNNSimulator::Connector(output, rnn, 1);
+	RNNSimulator::FORCEModule* fm = new RNNSimulator::FORCEModule(rnn);
+	fm->rls->param->set(1, "alpha", 0.01); fm->rls->init();
+	RNNSimulator::TemporalObserver* obs = new RNNSimulator::TemporalObserver(1, "target", fm);
 
 	DebugConsole::OpenConsole();
 
+	std::cout << "n: " << fm->cellNum << std::endl;
+	std::cout << "a: " << fm->rls->param->alpha << std::endl;
+	std::cout << "wo:" << fm->rls->weight << std::endl;
+	std::cout << "P: " << fm->rls->P << std::endl;
+	std::cout << "wf:" << fm->feedback->weight << std::endl;
+
+	DebugConsole::Wait();
+	/**/
 	while(simtime->ok()){
 		rnn->update();
-		fm->update();
-		std::cout << "e: " << fm->error << std::endl;
-		output->update();
-		feedback->transmit();
+		fm->updateFORCE();
+		std::cout << "e: " << fm->rls->error << std::endl;
+//		std::cout << "wo:" << fm->rls->weight << std::endl;
+//		std::cout << "P: " << fm->rls->P << std::endl;
 
-		std::cout << simtime->ti << ": " << output->readout << std::endl;
-//		obs->viewTarget();
+		std::cout << simtime->ti << ": " << fm->readout << std::endl;
+		obs->viewTarget();
 		simtime->step();
 	}
+	/**/
 
 	DebugConsole::Wait();
 	DebugConsole::CloseConsole();

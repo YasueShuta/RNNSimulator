@@ -43,7 +43,7 @@ namespace RNNSimulator {
 		virtual void setViewer();
 
 		virtual void viewTarget();
-		virtual void viewTarget(int ti_);
+		virtual void viewTarget(int ti_) { viewTarget(); };
 
 		Observer() : Observer(0) {};
 		Observer(int setvarnum, ...);

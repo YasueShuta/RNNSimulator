@@ -29,7 +29,7 @@ namespace RNNSimulator {
 
 		void setMode(int mode_);
 		void bind(Connector* target_);
-		void init(int row_, int col_);
+		void init(int row_=-1, int col_=-1);
 
 		void updateWeight(int ti=-1);
 		void updateError();

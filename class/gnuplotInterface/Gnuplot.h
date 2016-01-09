@@ -75,6 +75,7 @@ namespace Gnuplot {
 		void inputVec2Multi(std::vector<double> xdata_, std::vector<std::vector<double>> ydataarray_);
 		void inputVec2Multi(double* xdata_, int len_, double* ydataarray_[], int ynum_);
 
+		void save(std::string filename, std::string option="");
 		void replot();
 
 		static void replotAll();
