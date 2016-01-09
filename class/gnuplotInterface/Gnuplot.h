@@ -38,6 +38,7 @@ namespace Gnuplot {
 	{
 	private:
 		Handle* h;
+		std::string termSetting = "";
 		bool isHold = false;
 
 	public:
@@ -53,8 +54,8 @@ namespace Gnuplot {
 		void plotFunc(std::string arg, int linewidth = 3, std::string linecolor = "blue", std::string title_ = "");
 		//		void plotVec1();
 		void plotVec2(std::vector<double> xdata_, std::vector<double> ydata_, std::string option_);
-		void plotVec2(std::vector<double> xdata_, std::vector<double> ydata_, int linewidth_, std::string linecolor_);
-		void plotVec2(std::vector<double> xdata_, std::vector<double> ydata_, int linewidth_ = 3, int linecolor_ = 1);
+		void plotVec2(std::vector<double> xdata_, std::vector<double> ydata_, std::string title_, int linewidth_, std::string linecolor_);
+		void plotVec2(std::vector<double> xdata_, std::vector<double> ydata_, std::string title_ = "data", int linewidth_ = 3, int linecolor_ = 1);
 		void plotVec2Multi(std::vector<double> xdata_, std::vector<std::vector<double>> ydataarray_, std::vector<std::string> optionarray_ = std::vector<std::string>(0));
 		void plotVec2Multi(std::vector<double> xdata_,
 			std::vector<std::vector<double>> ydataarray_,

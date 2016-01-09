@@ -101,23 +101,24 @@ GP::GP(bool isPOption_,
 	int woffset_y
 	)
 {
-	std::stringstream ss;
+	std::string ss = "";
 	if (isPOption_) {
-		ss << " --persist";
+		ss  += " --persist";
 	}
-	h = new Handle(ss.str().c_str());
+	h = new Handle(ss.c_str());
 
-	ss.str("");
-
-	ss << "set terminal " << terminal_;
+	ss = "";
+	
+	ss = "set terminal " + terminal_;
 	if (title_.length() > 0)
-		ss << " title \"" << title_ << "\"";
+		termSetting += " title \"" + title_ + "\"";
 	if (font_.length() > 0)
-		ss << " font '" << font_ << "," << fontsize_ << "'";
-	ss << " size " << wsize_x_ << "," << wsize_y_;
-	ss << " position " << woffset_x << "," << woffset_y;
+		termSetting += " font '" + font_ + "," + std::to_string(fontsize_) + "'";
+	termSetting += " size " + std::to_string(wsize_x_) + "," + std::to_string(wsize_y_);
 
-	h->write(ss.str());
+	ss += termSetting + " position " + std::to_string(woffset_x) + "," + std::to_string(woffset_y);
+
+	h->write(ss.c_str());
 }
 GP::~GP()
 {
@@ -272,12 +273,13 @@ void GP::save(std::string filename_, std::string option_) {
 	std::string arg;
 	arg = "set terminal ";
 	if (option_ == "") option_ = "emf";
-	arg += option_;
+	arg += "'" + option_ + "'";
 	h->write(arg);
-	arg = "set output " + filename_;
+	arg = "set output '" + filename_ + "'";
 	h->write(arg);
 	replot();
 	h->write("set terminal windows");
+	h->write("set output");
 }
 void GP::replot() {
 	h->write("replot");

@@ -413,6 +413,7 @@ int DebugMain::FORCETest() {
 		simtime->step();
 	}
 	/**/
+	obs->viewer->fig->save("testFile/debugFRC.emf");
 
 	DebugConsole::Wait();
 	DebugConsole::CloseConsole();
@@ -485,6 +486,8 @@ int DebugMain::GnuplotTest() {
 
 	gp4->hwrite(ss.str());
 	gp4->plotVec2Multi(xptr, num, yptrarray, 2, optptrarray);
+
+	gp1->save("testFile/debugGP.png", "png");
 
 	/*
 	std::string buf;
