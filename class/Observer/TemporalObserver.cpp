@@ -4,6 +4,8 @@ using namespace RNNSimulator;
 
 TemporalObserver::TemporalObserver(int varargnum, ...) {
 	setDefault();
+//	viewer->set(2, "x", "Time [s]", "y", "Value");
+	std::cout << viewer << std::endl;
 	time = SimTime::getObject();
 	va_list argv;
 	va_start(argv, varargnum);

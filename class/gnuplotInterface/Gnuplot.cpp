@@ -111,7 +111,7 @@ GP::GP(bool isPOption_,
 	
 	ss = "set terminal " + terminal_;
 	if (title_.length() > 0)
-		termSetting += " title \"" + title_ + "\"";
+		ss += " title \"" + title_ + "\"";
 	if (font_.length() > 0)
 		termSetting += " font '" + font_ + "," + std::to_string(fontsize_) + "'";
 	termSetting += " size " + std::to_string(wsize_x_) + "," + std::to_string(wsize_y_);
@@ -145,21 +145,21 @@ void GP::plotFunc(std::string arg, int linewidth_, std::string linecolor_, std::
 	h->write();
 }
 
-void GP::plotVec2(std::vector<double> xdata_, std::vector<double> ydata_, std::string option_) {
+void GP::plotVec2Raw(std::vector<double> xdata_, std::vector<double> ydata_, std::string option_) {
 	if (xdata_.size() != ydata_.size()) return;
 	h->buf << "plot '-' " << option_;
 	h->write();
 	inputVec2(xdata_, ydata_);
 }
-void GP::plotVec2(std::vector<double> xdata_, std::vector<double> ydata_, int linewidth_, std::string linecolor_) {
+void GP::plotVec2(std::vector<double> xdata_, std::vector<double> ydata_, std::string title_, int linewidth_, std::string linecolor_) {
 	if (xdata_.size() != ydata_.size()) return;
-	h->buf << "plot '-' " << "with lines linewidth " << linewidth_ << " linecolor '" << linecolor_ << "'";
+	h->buf << "plot '-' " << "with lines title '" << title_ << "' linewidth " << linewidth_ << " linecolor '" << linecolor_ << "'";
 	h->write();
 	inputVec2(xdata_, ydata_);
 }
-void GP::plotVec2(std::vector<double> xdata_, std::vector<double> ydata_, int linewidth_, int linecolor_) {
+void GP::plotVec2(std::vector<double> xdata_, std::vector<double> ydata_, std::string title_, int linewidth_, int linecolor_) {
 	if (xdata_.size() != ydata_.size()) return;
-	h->buf << "plot '-' " << "with lines linewidth " << linewidth_ << " linecolor " << linecolor_;
+	h->buf << "plot '-' " << "with lines title '" << title_ << "' linewidth " << linewidth_ << " linecolor " << linecolor_;
 	h->write();
 	inputVec2(xdata_, ydata_);
 }
@@ -273,7 +273,7 @@ void GP::save(std::string filename_, std::string option_) {
 	std::string arg;
 	arg = "set terminal ";
 	if (option_ == "") option_ = "emf";
-	arg += "'" + option_ + "'";
+	arg += "'" + option_ + "' " + termSetting;
 	h->write(arg);
 	arg = "set output '" + filename_ + "'";
 	h->write(arg);

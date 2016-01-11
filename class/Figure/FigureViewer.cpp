@@ -60,6 +60,9 @@ int FigureViewer::set_inner(int argvnum, std::vector<std::string> argvstr, std::
 		else if (tmp == "ylabel" || tmp == "y") {
 			ylabel = argvdata.at(i);
 		}
+		else if (tmp == "dataname" || tmp == "dname" || tmp == "d") {
+			dataname = argvdata.at(i);
+		}
 		else if (tmp == "linewidth" || tmp == "lw") {
 			linewidth = std::stod(argvdata.at(i));
 		}
@@ -115,6 +118,9 @@ int FigureViewer::set_inner(int argvnum, va_list argv) {
 		else if (tmp == "ylabel" || tmp == "y") {
 			ylabel = va_arg(argv, char*);
 		}
+		else if (tmp == "dataname" || tmp == "dname" || tmp == "dn") {
+			dataname = va_arg(argv, char*);
+		}
 		else if (tmp == "linewidth" || tmp == "lw") {
 			linewidth = va_arg(argv, int);
 		}
@@ -167,7 +173,7 @@ void FigureViewer::plot(std::string arg_, std::string linecolor_, std::string ti
 }
 
 void FigureViewer::plot_data(std::vector<double> xvec_, std::vector<double> yvec_, std::string linecolor_, std::string title_) {
-	fig->plotVec2(xvec_, yvec_, linewidth, linecolor_);
+	fig->plotVec2(xvec_, yvec_, dataname, linewidth, linecolor_);
 }
 void FigureViewer::plot_datavar(int datanum_, std::vector<std::string> linecolors_, std::vector<std::string> titles_, ...) {
 	va_list vl;
@@ -179,7 +185,7 @@ void FigureViewer::plot_datavar(int datanum_, std::vector<std::string> linecolor
 		yvec.at(i) = va_arg(vl, std::vector<double>);
 	}
 	if (datanum_ == 1) {
-		fig->plotVec2(xvec, yvec.at(1), linewidth, linecolors_.at(1));
+		fig->plotVec2(xvec, yvec.at(1), dataname, linewidth, linecolors_.at(1));
 	}
 	else {
 		fig->plotVec2Multi(xvec, yvec, linewidth, linecolors_, titles_);
@@ -217,6 +223,7 @@ void FigureViewer::setDefault(){
 
 	xlabel = "X";
 	ylabel = "Y";
+	dataname = "data";
 
 	linewidth = 3;
 	fontsize = 16;

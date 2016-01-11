@@ -381,7 +381,7 @@ int DebugMain::TemporalObserverTest() {
 }
 
 int DebugMain::FORCETest() {
-	RNNSimulator::SimTime* simtime = new RNNSimulator::SimTime(100);
+	RNNSimulator::SimTime* simtime = new RNNSimulator::SimTime(1,0.2);
 
 	RNNSimulator::RNNNode* rnn = new RNNSimulator::RNNNode(1, "n", 32);
 //	RNNSimulator::ConnectableNode* output = new RNNSimulator::ConnectableNode(1, "n", 2);
@@ -413,6 +413,7 @@ int DebugMain::FORCETest() {
 		simtime->step();
 	}
 	/**/
+	std::cout << "tt" << std::endl;
 	obs->viewer->fig->save("testFile/debugFRC.emf");
 
 	DebugConsole::Wait();
@@ -474,7 +475,7 @@ int DebugMain::GnuplotTest() {
 	ss << "set xlabel 'time'" << std::endl;
 	ss << "set ylabel 'value'";
 	gp2->hwrite(ss.str());
-	gp2->plotVec2(xvec, yvec1, "with lines linewidth 3 linecolor 'orange' title \"sin(x)\"");
+	gp2->plotVec2Raw(xvec, yvec1, "with lines linewidth 3 linecolor 'orange' title \"sin(x)\"");
 
 	std::vector<std::vector<double>> yvecarray{yvec1, yvec2};
 	std::vector<std::string> optionarray{ "with lines lw 3 lc 'cyan' title 'sin(x)'", "with lines lw 3 lc 'magenta' title 'cos(x)'"};

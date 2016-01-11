@@ -28,6 +28,7 @@ namespace RNNSimulator {
 
 		std::string xlabel;
 		std::string ylabel;
+		std::string dataname;
 
 		double linewidth;
 		double fontsize;
