@@ -23,6 +23,7 @@ namespace RNNSimulator {
 
 		void setDefault();
 		virtual void reset() override;
+
 	protected:
 		virtual int set_inner(int argvnum, std::vector<std::string> argvstr, std::vector<std::string> argvdata) override;
 		virtual int set_inner(int varargnum, va_list argv);

@@ -3,6 +3,7 @@
 using namespace RNNSimulator;
 
 SimTime::SimTime(double nsecs_, double dt_) {
+	std::cout << "New SimTime: " << nsecs_ << ", " << dt_ << std::endl;
 	dt = dt_;
 	nsecs = nsecs_;
 	len = round(nsecs / dt);

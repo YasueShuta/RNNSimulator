@@ -39,7 +39,6 @@ void RNNParameter::setNetwork() {
 	}
 	else {
 		// Sparse
-		std::cout << "Set Network(N: " << n << ")" << std::endl;
 		M0.resize(n, n);
 		M0 = nrand(n, p, 0, g*scale);
 	}
@@ -49,8 +48,8 @@ void RNNParameter::setPotential() {
 		// load potential from loadxname file
 	}
 	else {
-		x0 = 2.0 * Eigen::VectorXd::Random(n);
-		x0.array() - 1.0;
+		x0 = 0.5 * Eigen::VectorXd::Random(n, 1);
+		x0.array() += 0.5;
 	}
 }
 void RNNParameter::setPlastic() {
@@ -86,16 +85,17 @@ Eigen::SparseMatrix<double> RNNParameter::nrand(int n_, double p_, double mean, 
 
 	std::vector<Eigen::Triplet<double>> vec;
 
+	if (p_ > 0.9) p_ = 0.9;
 	double d;
 	for (int i = 0;i < n_;i++) {
 		for (int j = 0;j < n_;j++) {
 			d = ud(gen);
-			if (p_ < d) continue;
+			if (d < 0.1 || p_+0.1 < d) continue;
 			d = nd(gen);
 			vec.push_back(Eigen::Triplet<double>(i, j, d));
 		}
 	}
-
+	std::cout << "Sparse: p = " << (double)vec.size() / (n_*n_) << std::endl;
 	Eigen::SparseMatrix<double> s(n_, n_);
 	s.setFromTriplets(vec.begin(), vec.end());
 	return s;

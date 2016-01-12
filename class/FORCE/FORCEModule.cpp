@@ -3,13 +3,14 @@
 using namespace RNNSimulator;
 
 FORCEModule::FORCEModule(ConnectableNode* target_) {
-	rls = new RLSModule(1, target_, this);
-	feedback = new Connector(this, target_, 1);
+	node = new ConnectableNode();
+	wo = new RLSModule(1, target_, node);
+	wf = new Connector(node, target_, 2, 0.0, 1.0);
 }
 FORCEModule::~FORCEModule(){}
 
-void FORCEModule::updateFORCE() {
-	rls->update();
-//	ConnectableNode::update();
-	feedback->transmit();
+void FORCEModule::update() {
+	wo->update();
+	node->update();
+	wf->transmit();
 }

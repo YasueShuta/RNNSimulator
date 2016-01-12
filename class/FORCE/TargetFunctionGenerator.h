@@ -18,6 +18,10 @@ namespace RNNSimulator {
 				ret = gain;
 				break;
 			case 2:
+				ret = gain * sin(2 * M_PI*freq*t_);
+				t_ += dt;
+				break;
+			case 3:
 				ret = (2-freq*freq*dt*dt)*prev1 - prev2;
 				prev2 = prev1;
 				prev1 = ret;
@@ -31,12 +35,13 @@ namespace RNNSimulator {
 		TargetFunctionGenerator() {};
 		~TargetFunctionGenerator() {};
 
-	private:
 		double gain = 1.0;
 		double freq = 0.001;
 		double phase = 0.0;
 		double prev1 = 0;
 		double prev2 = 0;
+	private:
+		double t_ = 0;
 	};
 
 }

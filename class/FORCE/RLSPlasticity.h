@@ -5,19 +5,20 @@
 namespace RNNSimulator {
 	class RLSPlasticity {
 	private:
-		Eigen::MatrixXd _r;
 		Eigen::MatrixXd _rPr;
 		Eigen::MatrixXd _k;
 		Eigen::MatrixXd _c;
 		bool isValid = false;
-		TargetFunctionGenerator tf;
 		int ti_count=0;
 	public:
 		RLSParameter* param;
 
+		TargetFunctionGenerator tf;
+
 		Eigen::MatrixXd error;
 		Eigen::MatrixXd P;
 		Eigen::MatrixXd dw;
+		Eigen::MatrixXd r;
 
 		int target_mode;
 		Connector* target;

@@ -17,9 +17,6 @@ RLSModule::RLSModule(int mode_, Connectable* in_, Connectable* out_, std::vector
 RLSModule::~RLSModule() {};
 
 void RLSModule::update() {
-	std::cout << in->outflow_len() << ":" << weight.cols() << std::endl;
-	std::cout << out->inflow_len() << ":" << weight.rows() << std::endl;
-	
 	transmit();
 	updateWeight();
 }

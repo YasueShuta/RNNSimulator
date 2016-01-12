@@ -388,27 +388,27 @@ int DebugMain::FORCETest() {
 //	RNNSimulator::RLSModule* fm = new RNNSimulator::RLSModule(1, rnn, output);
 //	RNNSimulator::Connector* feedback = new RNNSimulator::Connector(output, rnn, 1);
 	RNNSimulator::FORCEModule* fm = new RNNSimulator::FORCEModule(rnn);
-	fm->rls->param->set(1, "alpha", 0.01); fm->rls->init();
+	fm->wo->param->set(1, "alpha", 0.01); fm->wo->init();
 	RNNSimulator::TemporalObserver* obs = new RNNSimulator::TemporalObserver(1, "target", fm);
 
 	DebugConsole::OpenConsole();
 
-	std::cout << "n: " << fm->cellNum << std::endl;
-	std::cout << "a: " << fm->rls->param->alpha << std::endl;
-	std::cout << "wo:" << fm->rls->weight << std::endl;
-	std::cout << "P: " << fm->rls->P << std::endl;
-	std::cout << "wf:" << fm->feedback->weight << std::endl;
+	std::cout << "n: " << fm->node->cellNum << std::endl;
+	std::cout << "a: " << fm->wo->param->alpha << std::endl;
+	std::cout << "wo:" << fm->wo->weight << std::endl;
+	std::cout << "P: " << fm->wo->P << std::endl;
+	std::cout << "wf:" << fm->wf->weight << std::endl;
 
 	DebugConsole::Wait();
 	/**/
 	while(simtime->ok()){
 		rnn->update();
-		fm->updateFORCE();
-		std::cout << "e: " << fm->rls->error << std::endl;
+		fm->update();
+		std::cout << "e: " << fm->wo->error << std::endl;
 //		std::cout << "wo:" << fm->rls->weight << std::endl;
 //		std::cout << "P: " << fm->rls->P << std::endl;
 
-		std::cout << simtime->ti << ": " << fm->readout << std::endl;
+		std::cout << simtime->ti << ": " << fm->node->readout << std::endl;
 		obs->viewTarget();
 		simtime->step();
 	}
@@ -564,15 +564,23 @@ int DebugMain::EigenTest() {
 int DebugMain::RandomTest() {
 	DebugConsole::OpenConsole();
 
+	std::vector<double> tmpvec(30000), hist(100);
+
+	/*
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::normal_distribution<> d(0, 1);
-
-	std::vector<double> tmpvec(30000), hist(100);
+	
 	for (int i = 0; i < 30000;i++) {
 		tmpvec.at(i) = d(gen);
 	}
+	*/
+	Eigen::VectorXd vec = Eigen::VectorXd::Random(30000);
+	for (int i = 0;i < 30000;i++) {
+		tmpvec.at(i) = vec(i);
+	}
 	std::sort(tmpvec.begin(), tmpvec.end());
+
 	int j = 0;
 	for (int i = 0;i < 30000;i++) {
 		if (j < 100 && tmpvec.at(i) >= -3 + 0.06*j) {

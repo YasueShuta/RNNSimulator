@@ -26,7 +26,7 @@ void RLSPlasticity::init(int row_, int col_) {
 		row_ = target->rows;
 		col_ = target->cols;
 	}
-	_r = Eigen::MatrixXd::Zero(col_, 1);
+	r = Eigen::MatrixXd::Zero(col_, 1);
 	_rPr = Eigen::MatrixXd::Zero(1,1);
 	_k = Eigen::MatrixXd::Zero(col_, 1);
 	_c = Eigen::MatrixXd::Zero(1, 1);
@@ -47,10 +47,10 @@ void RLSPlasticity::updateWeight(int ti) {
 	ti_count += 1;
 	updateError();
 	if (ti % param->learn_every) return;
-	_r = target->in->outflow();
-	_k = P * _r;
-	_rPr = _r.transpose() * _k;
-	_c.array() = 1.0 / (1.0 + _rPr.array());
+	r = target->input;
+	_k = P * r;
+	_rPr = r.transpose() * _k;
+	_c(0) = 1.0 / (1.0 + _rPr(0));
 	P = P - _k * (_c * _k.transpose());
 	dw = -1 * error * _c * _k.transpose();
 	target->weight += dw;
@@ -59,5 +59,5 @@ void RLSPlasticity::updateError() {
 	for (int i = 0;i < target_value.rows() ; i++) {
 		target_value(i) = tf.next(target->dt, target_mode);
 	}
-	error = target->flow - target_value;
+	error = target->output - target_value;
 }
