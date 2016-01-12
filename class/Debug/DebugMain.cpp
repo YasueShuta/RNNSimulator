@@ -244,8 +244,7 @@ int DebugMain::ConnectableNodeTest() {
 	std::cout << "flowIn: " << std::endl;
 	std::cout << sample->outflow() << std::endl;
 	std::cout << "flowOut: " << std::endl;
-	std::cout << con->transmit(1) << std::endl;
-	sample->inflow(con->transmit(1));
+	std::cout << con->transmit(1,0) << std::endl;
 
 	std::cout << "x: " << sample->potential << std::endl;
 	std::cout << "r: " << sample->readout << std::endl;
