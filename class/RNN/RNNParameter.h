@@ -13,7 +13,7 @@ namespace RNNSimulator {
 		double g;
 		double th;
 
-		Eigen::MatrixXd M0;
+		Eigen::SparseMatrix<double> M0;
 		Eigen::VectorXd x0;
 
 		double scale;

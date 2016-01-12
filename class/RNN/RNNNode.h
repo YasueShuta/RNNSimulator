@@ -10,7 +10,7 @@ namespace RNNSimulator {
 		double scale;
 		double dt=-1;
 
-		Eigen::MatrixXd network;
+		Eigen::SparseMatrix<double> network;
 
 		RNNNode();
 		RNNNode(std::string argv);
