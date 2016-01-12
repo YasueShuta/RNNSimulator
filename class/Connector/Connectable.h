@@ -13,8 +13,8 @@ namespace RNNSimulator {
 		virtual int inflow_len();
 //		virtual std::vector<double> outflow();
 		virtual Eigen::VectorXd outflow();
-		virtual void inflow(std::vector<double> flow);
-		virtual void inflow(Eigen::VectorXd flow);
+		virtual void inflow(std::vector<double> flow, int option=0);
+		virtual void inflow(Eigen::VectorXd flow, int option=0);
 
 		Connectable() {};
 		~Connectable() {};
@@ -50,9 +50,9 @@ namespace RNNSimulator {
 			Eigen::VectorXd ret = Eigen::VectorXd::Random(outflow_len());
 			return ret;
 		}
-		virtual void inflow(std::vector<double> flow) override {
+		virtual void inflow(std::vector<double> flow, int option=0) override {
 		}
-		virtual void inflow(Eigen::VectorXd flow) override {
+		virtual void inflow(Eigen::VectorXd flow, int option=0) override {
 		}
 	};
 }

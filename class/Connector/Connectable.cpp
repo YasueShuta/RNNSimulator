@@ -20,8 +20,8 @@ Eigen::VectorXd RNNSimulator::Connectable::outflow() {
 	return ret;
 }
 
-void RNNSimulator::Connectable::inflow(std::vector<double> flow) {
+void RNNSimulator::Connectable::inflow(std::vector<double> flow, int option) {
 }
 
-void RNNSimulator::Connectable::inflow(Eigen::VectorXd flow) {
+void RNNSimulator::Connectable::inflow(Eigen::VectorXd flow, int option) {
 }

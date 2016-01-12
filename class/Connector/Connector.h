@@ -29,7 +29,7 @@ namespace RNNSimulator {
 		static Eigen::MatrixXd randn(int rows_, int cols_, double mu=0, double sigma=1);
 
 //		std::vector<double> transmit(double dt);
-		virtual Eigen::VectorXd transmit();
-		virtual Eigen::VectorXd transmit(double dt_);
+		virtual Eigen::VectorXd transmit(int option = 0);
+		virtual Eigen::VectorXd transmit(double dt_, int option = 0);
 	};
 }

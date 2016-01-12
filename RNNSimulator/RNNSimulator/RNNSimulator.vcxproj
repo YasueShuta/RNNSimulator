@@ -135,6 +135,7 @@
     <ClCompile Include="..\..\class\Observer\TemporalObserver.cpp" />
     <ClCompile Include="..\..\class\Recorder\DataRecorder.cpp" />
     <ClCompile Include="..\..\class\Recorder\IdManager.cpp" />
+    <ClCompile Include="..\..\class\RNN\InputNode.cpp" />
     <ClCompile Include="..\..\class\RNN\RNNNode.cpp" />
     <ClCompile Include="..\..\class\RNN\RNNParameter.cpp" />
     <ClCompile Include="..\..\class\Simulator\SimTime.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="..\..\class\Observer\TemporalObserver.h" />
     <ClInclude Include="..\..\class\Recorder\DataRecorder.h" />
     <ClInclude Include="..\..\class\Recorder\IdManager.h" />
+    <ClInclude Include="..\..\class\RNN\InputNode.h" />
     <ClInclude Include="..\..\class\RNN\RNNNode.h" />
     <ClInclude Include="..\..\class\RNN\RNNParameter.h" />
     <ClInclude Include="..\..\class\Simulator\SimTime.h" />

@@ -29,9 +29,15 @@ Eigen::VectorXd ConnectableNode::outflow()
 {
 	return output;
 }
-void ConnectableNode::inflow(Eigen::VectorXd flow)
+void ConnectableNode::inflow(Eigen::VectorXd flow, int option)
 {
-	input = flow;
+	switch (option) {
+	case 1:
+		input += flow;
+		break;
+	default:
+		input = flow;
+	}
 	update();
 }
 void ConnectableNode::update()

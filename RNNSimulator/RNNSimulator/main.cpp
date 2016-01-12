@@ -2,19 +2,20 @@
 //#include "MyInclude.h"
 //#include "../../class/Debug/DebugMain.h"
 #include "../../class/Debug/DebugConsole.h"
-#include "../../class/Abstract/Findable.h"
-#include "../../class/Abstract/ObjectInitializer.h"
-#include "../../class/Connector/Connectable.h"
+//#include "../../class/Abstract/Findable.h"
+//#include "../../class/Abstract/ObjectInitializer.h"
+//#include "../../class/Connector/Connectable.h"
 #include "../../class/Connector/Connector.h"
 #include "../../class/Connector/ConnectableNode.h"
-#include "../../class/Figure/FigureViewer.h"
-#include "../../class/Recorder/IdManager.h"
-#include "../../class/Recorder/DataRecorder.h"
+//#include "../../class/Figure/FigureViewer.h"
+//#include "../../class/Recorder/IdManager.h"
+//#include "../../class/Recorder/DataRecorder.h"
 #include "../../class/RNN/RNNNode.h"
 #include "../../class/Observer/Observer.h"
 #include "../../class/Observer/TemporalObserver.h"
-#include "../../class/FORCE/RLSModule.h"
+//#include "../../class/FORCE/RLSModule.h"
 #include "../../class/FORCE/FORCEModule.h"
+#include "../../class/RNN/InputNode.h"
 
 #include "../../class/gnuplotInterface/Gnuplot.h"
 
@@ -49,20 +50,28 @@ int main(void) {
 
 	SimTime* time = SimTime::getObject(1000, 0.05);//(nsecs, dt)
 
-	/*[Option]Default value:
-	[-n]64
-	[-p]0.1
-	[-g]1.5
+	//RNN Initialize
+	/*
+	* [Option]Default value:
+	* [-n]64
+	* [-p]0.1
+	* [-g]1.5
 	*/
 	RNNNode* rnn = new RNNNode("-n 256 -p 0.1");
+
+	//FORCE Learning Initialize
 	/*[Option]Default value: if change call set(varargnum, ...)
 	[-a]r_alpha * cellNum
 	[-r]0.001
 	*/
 	FORCEModule* force = new FORCEModule(rnn);
 	force->wo->target_mode = 2;
-	force->wo->tf.gain = 2.3;
+	force->wo->tf.gain = 1.0;
 	force->wo->tf.freq = 0.002;
+
+	//Input Initialize
+	InputNode* input = new InputNode(0, 1, 1.0);
+	Connector* wi = new Connector(input, rnn, 2, 0, 1);
 
 	int xlen = round(200/time->dt);
 	std::vector<double> xvec(xlen);
@@ -87,6 +96,8 @@ int main(void) {
 		}
 		{
 			//Main Loop
+			input->update();
+			wi->transmit(1);
 			rnn->update();
 			force->update();
 //			std::cout << force->node->potential << "|" << force->wf->input << std::endl;

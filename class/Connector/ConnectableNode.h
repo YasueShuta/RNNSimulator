@@ -19,7 +19,7 @@ namespace RNNSimulator {
 		virtual int outflow_len() override;
 		virtual int inflow_len() override;
 		virtual Eigen::VectorXd outflow() override;
-		virtual void inflow(Eigen::VectorXd flow) override;
+		virtual void inflow(Eigen::VectorXd flow, int option) override;
 		virtual void update() override;
 	};
 

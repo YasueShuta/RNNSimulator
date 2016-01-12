@@ -61,21 +61,20 @@ Eigen::MatrixXd Connector::randn(int rows_, int cols_, double mu_, double sigma_
 	for (int i = 0;i < ret.size();i++) {
 		ret(i) = nd(gen);
 	}
-	std::cout << mu_ << ", " << sigma_ << std::endl;
 	return ret;
 }
 
-Eigen::VectorXd Connector::transmit() {
+Eigen::VectorXd Connector::transmit(int option) {
 	input = in->outflow();
 	output = weight * input * dt;
-	out->inflow(output);
+	out->inflow(output, option);
 	return output;
 }
-Eigen::VectorXd Connector::transmit(double dt_) {
+Eigen::VectorXd Connector::transmit(double dt_, int option) {
 	if (dt_ <= 0) dt_ = dt;
 	input = in->outflow();
 	output = weight * input * dt_;
-	out->inflow(output);
+	out->inflow(output, option);
 	return output;
 }
 
